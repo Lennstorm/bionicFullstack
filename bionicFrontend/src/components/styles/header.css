@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Lexend+Mega:wght@100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.header-container {
+    width: 100%;
+    min-height: 250px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, white 30%, rgba(255, 255, 255, 0) 70%),
+        url('./bionicFrontend/src/assets/headerImg.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.header-h1 {
+    font-family: "Annie Use Your Telescope", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 160px;
+    color: #161515;
+    -webkit-text-stroke: 3px white;
+}
+
+.kundkorg {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.login-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
