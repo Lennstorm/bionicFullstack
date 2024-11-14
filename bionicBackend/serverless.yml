@@ -1,6 +1,5 @@
 # "org" ensures this Service is used with the correct Serverless Framework Access Key.
-# org: ${file(./local.yml):organisation}
-org: lennstorm
+org: ${file(./local.yml):organisation}
 # "service" is the name of this project. This will also be added to your AWS resource names.
 service: bionicBackend
 frameworkVersion: "4"
@@ -11,8 +10,7 @@ provider:
   region: eu-north-1
   deploymentMethod: direct
   iam:
-    role: arn:aws:iam::442042551476:role/LambdaDynamo
-    #role: ${file(./local.yml):iamRole}
+    role: ${file(./local.yml):iamRole}
 
 build:
   esbuild:
