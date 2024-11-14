@@ -7,8 +7,18 @@ const AboutPage = () => {
     return (
         <div className='aboutPage--wrapper'>
             <Header />
-            <main className='content-container'>
+            <main className='aboutPage--main'>
+                <article className='aboutPage--infoArticle'>
+                    <img src="./src/assets/logo.svg" alt="company logo" />
+                        <span>
+                        <h1> Ursäkta röran!</h1>
+                        <h3> (Vi bygger upp.)</h3>
+                        <p>Här öppnar snart det senaste inom modern gammaldags husmanskost - Hemkocken!</p>
+                        <p>Från och med fredag 6/12 kommer du här kunna beställa stans bästa hemburna käk.</p>
+                        <p>Snabbt och enkelt, med bara några klick, levererar vi förstklassig husmanskost.</p>
+                        </span>
 
+                </article>
             </main>
             <Footer />
         </div>
@@ -16,3 +26,13 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
+
+
+
+/* Författare: Andreas
+*
+* 
+* 
+* 
+* 
+*/

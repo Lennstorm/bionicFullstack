@@ -1,9 +1,17 @@
-.aboutPage--wrapper {
-    display: flex;
-    flex-direction: column;
-}
+/* .aboutPage--wrapper {    
+    
+} */
 
 main {
     min-height: 30rem;
     background-color: beige;
+    padding-top: 6rem;    
+}
+
+.aboutPage--infoArticle {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
