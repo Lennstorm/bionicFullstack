@@ -1,6 +1,6 @@
-import './styles/homePage.css';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
+import './styles/homePage.css';
 
 const HomePage = () => {
     return (

@@ -1,0 +1,15 @@
+.footer-container {
+    max-width: 100%;
+    min-height: 98px;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.footer-text {
+    color: white;
+}
+
