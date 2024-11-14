@@ -23,3 +23,15 @@ function Header() {
 }
 
 export default Header
+
+
+
+
+
+/* Författare: Ally
+*
+* 
+* 
+* 
+* 
+*/

@@ -3,15 +3,28 @@ import Header from '../components/Header';
 import './styles/homePage.css';
 
 const HomePage = () => {
-    return <div className='homepage--wrapper'>
-        <Header />
-        <main>
-            <h1>Hemkocken MAT!</h1>
-            <h1>This is HomePage</h1>
-        </main>
+    return (
+        <div className='homePage--wrapper'>
+            <Header />
+            <main className='content-container'>
 
-        <Footer />
-    </div>;
+            </main>
+            <Footer />
+        </div>
+    );
 };
 
 export default HomePage;
+
+
+
+
+
+
+/* Författare: Andreas
+*
+* 
+* 
+* 
+* 
+*/
