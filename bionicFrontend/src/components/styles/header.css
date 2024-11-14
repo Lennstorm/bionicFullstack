@@ -2,18 +2,21 @@
 
 .header-container {
     width: 100%;
-    min-height: 250px;
+    height: 250px;
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(to right, white 30%, rgba(255, 255, 255, 0) 70%),
-        url('./src/assets/headerImg.png');
     background-size: cover;
     background-position: center;
 }
 
+.header-logo {
+    position: absolute;
+}
+
 .header-h1 {
+    position: absolute;
+    left: 33%;
     font-family: "Annie Use Your Telescope", cursive;
     font-weight: 400;
     font-style: normal;
@@ -30,6 +33,6 @@
 
 .login-btn {
     position: absolute;
-    top: 10rem;
+    top: 13rem;
     right: 1rem;
 }
