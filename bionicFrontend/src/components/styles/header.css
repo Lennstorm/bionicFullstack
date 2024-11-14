@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(to right, white 30%, rgba(255, 255, 255, 0) 70%),
-        url('./bionicFrontend/src/assets/headerImg.png');
+        url('./src/assets/headerImg.png');
     background-size: cover;
     background-position: center;
 }
@@ -30,6 +30,6 @@
 
 .login-btn {
     position: absolute;
-    bottom: 1rem;
+    top: 10rem;
     right: 1rem;
 }
