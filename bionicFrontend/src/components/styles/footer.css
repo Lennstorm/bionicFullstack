@@ -1,6 +1,6 @@
 .footer-container {
     max-width: 100%;
-    min-height: 98px;
+    height: 70px;
     background-color: black;
     display: flex;
     flex-direction: row;
@@ -11,5 +11,26 @@
 
 .footer-text {
     color: white;
+    text-align: center;
+}
+
+.left-section {
+    height: 100%;
+}
+
+.socials-section {
+    display: flex;
+    justify-content: space-around;
+    width: 33%;
+}
+
+.right-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.footer-icon {
+    width: 40px;
 }
 
