@@ -1,12 +1,17 @@
 import './styles/homePage.css';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const HomePage = () => {
-    return <div className='homepage--wrapper'>
-        
-        <h1>Hemkocken MAT!</h1>
-        <h1>This is HomePage</h1>
+    return (
+        <div className='homePage--wrapper'>
+            <Header />
+            <main className='content-container'>
 
-    </div>;
+            </main>
+            <Footer />
+        </div>
+    );
 };
 
 export default HomePage;
