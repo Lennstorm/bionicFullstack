@@ -12,3 +12,13 @@ function App() {
 }
 
 export default App
+
+
+
+/* Författare: Andreas
+*
+* 
+* 
+* 
+* 
+*/
