@@ -1,4 +1,8 @@
 import '../components/styles/footer.css'
+import facebookLogo from '../assets/facebook.svg';
+import instaLogo from '../assets/insta.svg';
+import emailLogo from '../assets/e-post.svg';
+import handset from '../assets/telefon.svg';
 
 function Footer() {
     return (
@@ -9,12 +13,12 @@ function Footer() {
                 </h3>
             </section>
             <section className='socials-section'>
-                <img className='footer-icon' src="./src/assets/facebook.svg" alt="" />
-                <img className='footer-icon' src="./src/assets/insta.svg" alt="" />
-                <img className='footer-icon' src="./src/assets/e-post.svg" alt="" />
+                <img className='footer-icon' src={facebookLogo} alt="Facebook logo" />
+                <img className='footer-icon' src={instaLogo} alt="Instagram logo" />
+                <img className='footer-icon' src={emailLogo} alt="E-mail logo" />
             </section>
             <section className='right-section'>
-                <img className='footer-icon telefonAdjust-right' src="./src/assets/telefon.svg" alt="" />
+                <img className='footer-icon telefonAdjust-right' src={handset} alt="Phone-handset" />
                 <h3 className="footer-text">
                     010-4983020
                 </h3>
