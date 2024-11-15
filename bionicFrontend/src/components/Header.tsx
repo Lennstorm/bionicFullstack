@@ -1,5 +1,7 @@
 import '../components/styles/header.css';
 import headerImg from '../assets/headerImg.png';
+import companyLogo from '../assets/logo.svg';
+import basketLogo from '../assets/kundkorg.svg';
 
 function Header() {
     return (
@@ -9,11 +11,11 @@ function Header() {
             backgroundPosition: 'center',
         }} className='header-container'>
 
-            <img className='header-logo' src="./src/assets/logo.svg" alt="company logo" />
+            <img className='header-logo' src={companyLogo} alt="company logo" />
 
             <h1 className="header-h1">TakeAway</h1>
 
-            <img src="./src/assets/kundkorg.svg" alt="basket symbol" className="kundkorg" />
+            <img src={basketLogo} alt="basket symbol" className="kundkorg" />
             <button className='login-btn'>login btn</button>
 
 
