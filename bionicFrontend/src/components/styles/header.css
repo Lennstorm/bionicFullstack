@@ -22,13 +22,14 @@
     font-style: normal;
     font-size: 160px;
     color: #161515;
-    -webkit-text-stroke: 3px white;
+    -webkit-text-stroke: 2px white;
 }
 
 .kundkorg {
     position: absolute;
     top: 1rem;
     right: 1rem;
+    width: 30px;
 }
 
 .login-btn {
