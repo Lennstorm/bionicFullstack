@@ -13,8 +13,8 @@ function Footer() {
                 <img className='footer-icon' src="./src/assets/insta.svg" alt="" />
                 <img className='footer-icon' src="./src/assets/e-post.svg" alt="" />
             </section>
-            <section className='rightSection'>
-                <img className='footer-telephone' src="./src/assets/telefon.svg" alt="" />
+            <section className='right-section'>
+                <img className='footer-icon telefonAdjust-right' src="./src/assets/telefon.svg" alt="" />
                 <h3 className="footer-text">
                     010-4983020
                 </h3>
