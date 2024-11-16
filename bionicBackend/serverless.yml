@@ -27,6 +27,28 @@ functions:
           path: /api/create-menu
           method: post
 
+
+  AddOrderToDb:
+    handler: src/functions/AddOrderToDb/index.handler
+    events:
+      - httpApi:
+          path: /api/create-order
+          method: post
+  
+  GetMenu:
+    handler: src/functions/GetMenu/index.handler
+    events:
+      - httpApi:
+          path: /api/get-menu
+          method: get
+
+  AddUser:
+    handler: src/functions/AddUser/index.handler
+    events:
+      - httpApi:
+          path: /api/add-user
+          method: post
+
 resources:
   Resources:
     TestMenuTable: # Första tabellen (menu-db)
@@ -42,4 +64,30 @@ resources:
             KeyType: HASH # Detta är din PK (Partition Key)
         BillingMode: PAY_PER_REQUEST # Betalning per användning       
 
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "user-db"
+        AttributeDefinitions:
+          - AttributeName: "userid"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "userid"
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
     
+    OrdersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "orders-db"
+        AttributeDefinitions:
+          - AttributeName: "orderItemID"
+            AttributeType: "S"
+          - AttributeName: "customerID" # Definiera attribut för din sort key (om du vill ha en)
+            AttributeType: "S" # S för sträng
+        KeySchema:
+          - AttributeName: "orderItemID"
+            KeyType: HASH
+          - AttributeName: "customerID"
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
