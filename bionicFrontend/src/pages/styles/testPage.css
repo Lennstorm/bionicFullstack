@@ -1,0 +1,9 @@
+.testPage--wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    min-height: 30rem;
+    background-color: beige;
+}
