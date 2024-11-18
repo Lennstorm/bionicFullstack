@@ -1,3 +1,4 @@
+import Counter from '../components/Counter';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import './styles/homePage.css';
@@ -7,7 +8,7 @@ const HomePage = () => {
         <div className='homePage--wrapper'>
             <Header />
             <main className='content-container'>
-
+<Counter />
             </main>
             <Footer />
         </div>
