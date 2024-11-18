@@ -30,6 +30,8 @@ exports.handler = async (event) => {
         item.quantity == null ||
         item.inStock == null ||
         item.toDaysSpecial == null ||
+        item.healthyIndex == null ||
+        item.popularIndex == null ||
         item.image == null
       ) {
         return sendError(400, "Please enter all required information (quantity, description, price, name)");
@@ -46,6 +48,8 @@ exports.handler = async (event) => {
         item.quantity,
         item.inStock,
         item.toDaysSpecial,
+        item.healthyIndex,
+        item.popularIndex,
         item.image
       );
 
