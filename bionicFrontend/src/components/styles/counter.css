@@ -18,6 +18,8 @@
     font-size: var(--counter-text-size);
     background-color: white;
     border: none;
+    margin: auto;
+    padding: 0;
 }
 
 .count {
@@ -25,3 +27,7 @@
     font-size: 25px;
     font-weight: 700;
 }
+
+/*
+Alistair
+*/
