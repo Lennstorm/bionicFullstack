@@ -1,0 +1,18 @@
+.testPage--wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    min-height: 30rem;
+    background-color: beige;
+}
+
+.test-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    margin: 2rem;
+}
