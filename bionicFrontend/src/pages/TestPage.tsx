@@ -19,6 +19,7 @@ const TestPage = () => {
             <BigButton text="BigButton" onClick={() => console.log('Big Button!')} />
             <BigButton text="Till Kassan" onClick={() => console.log('Big Button!')} />
             <RoundedButton
+                
                 text="Ordern Tillagad!"
                 onClick={() => console.log('Rounded Button!')}
                 color="green"
