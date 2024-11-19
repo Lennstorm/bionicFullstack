@@ -42,6 +42,14 @@ functions:
           path: /api/get-menu
           method: get
 
+
+  SortMenu:
+    handler: src/functions/SortMenu/index.handler
+    events:
+      - httpApi:
+          path: /api/sort-menu
+          method: post       
+
   AddUser:
     handler: src/functions/AddUser/index.handler
     events:

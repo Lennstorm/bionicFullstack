@@ -19,8 +19,9 @@
   --h2-large-size: 48px;
 
   /* Inter */
-  --footer-text-font: "Inter", sans-serif;
+  --font-inter: "Inter", sans-serif;
   --footer-text-size: 32px;
+  --counter-text-size: 35px;
   --menuItem-text-font: "Inter", sans-serif;
   --menuItem-text-size: 12px;
 
