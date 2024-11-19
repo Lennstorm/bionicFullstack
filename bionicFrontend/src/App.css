@@ -26,9 +26,7 @@
   --footer-text-size: 32px;
   --menuItem-text-font: "Inter", sans-serif;
   --menuItem-text-size: 12px;
-  --bigButton-text-font: "Inter SemiBold", sans-serif;
-  --rounded-button-text-font: "Inter Bold", sans-serif;
-  --rounded-button-text-extraboldfont: "Inter ExtraBold", sans-serif;
+  --button-text-fontBold: "Inter Bold", sans-serif;
   --login-button-textfont: "Inteer Medium", sans-serif;
 
   /* Jaini Purva */

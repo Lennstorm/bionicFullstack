@@ -5,7 +5,8 @@ interface ButtonProps {
     onClick: () => void;
     disabled?: boolean;
     color?: 'blue' | 'green';
-    fontStyle?: 'bold' | 'extra-bold';    
+    fontStyle?: 'bold' | 'extra-bold';
+    className?: string;
 }
 
 const RoundedButton = ({
@@ -14,10 +15,11 @@ const RoundedButton = ({
     disabled = false,
     color = 'blue',
     fontStyle = 'bold',
+    className,
 }: ButtonProps) => {
     return (
         <button
-        className={`button rounded-button button--${color} rounded-button--${fontStyle}`}
+        className={`button rounded-button button--${color} rounded-button--${fontStyle} ${className || ''}`.trim()}
         onClick={onClick}
         disabled={disabled}
         >

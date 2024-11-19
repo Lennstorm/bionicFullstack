@@ -4,12 +4,13 @@ interface ButtonProps {
     text: string;
     onClick: () => void;
     disabled?: boolean;
+    className?: string;
 }
 
-const BigButton = ({ text, onClick, disabled = false }: ButtonProps) => {
+const BigButton = ({ text, onClick, disabled = false, className }: ButtonProps) => {
     return (
         <button
-        className='button big-button button--blue'
+        className={`button big-button button--blue ${className || ''}`.trim()}
         onClick={onClick}
         disabled={disabled}
         >
