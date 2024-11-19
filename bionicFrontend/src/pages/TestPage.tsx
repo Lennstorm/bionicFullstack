@@ -13,16 +13,31 @@ const TestPage = () => {
         <div className='testPage--wrapper'>
             <Header />
             <main className='content-container'>
-            <div>
-            <BigButton text="Big Button" onClick={() => console.log('Big Button!')} />
+            <div className='test-wrapper'>
+            <BigButton text="BigButton" onClick={() => console.log('Big Button!')} />
+            <BigButton text="Betala" onClick={() => console.log('Big Button!')} />
+            <BigButton text="BigButton" onClick={() => console.log('Big Button!')} />
+            <BigButton text="Till Kassan" onClick={() => console.log('Big Button!')} />
             <RoundedButton
-                text="Rounded Button"
+                text="Ordern Tillagad!"
                 onClick={() => console.log('Rounded Button!')}
                 color="green"
                 fontStyle="extra-bold"
             />
-            <OrderButton text="Order Now" onClick={() => console.log('Order Button!')} />
-            <LoginButton text="Log In" onClick={() => console.log('Login Button!')} />
+            <RoundedButton
+                text="Läst!"
+                onClick={() => console.log('Rounded Button!')}
+                color="blue"
+                fontStyle="extra-bold"
+            />
+            <RoundedButton
+                text="Lägg i varukorgen!"
+                onClick={() => console.log('Rounded Button!')}
+                color="blue"
+                fontStyle="extra-bold"
+            />
+            <OrderButton text="Beställ" onClick={() => console.log('Order Button!')} />
+            <LoginButton text="logga in" onClick={() => console.log('Login Button!')} />
         </div>
                 
 
