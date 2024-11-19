@@ -2,6 +2,8 @@ import Counter from './Counter';
 import './styles/basketItem.css';
 import Bin from '../assets/bin.svg';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { log } from 'console';
 
 interface BasketItemProps {
     id: number;
@@ -17,23 +19,40 @@ function BasketItem() {
     useEffect(() => {
         const fetchItemsData = async () => {
             try {
-                const response = await fetch('/data.json');
-                const data = await response.json();
+                const response = await axios.get('/data.json');
+                const data = response.data;
 
-                if(data.cartItems && Array.isArray(data.cartItems)) {
+                if (data.cartItems && Array.isArray(data.cartItems)) {
                     setItems(data.cartItems);
                 }
             } catch (error) {
-                console.error('Fel vid hämtning av korgartikel', error);               
+                console.error('Fel vid hämtning av korgartikel', error);
             }
         }
 
         fetchItemsData();
     }, []);
 
-    if (items.length === 0) {
-        return <div>Laddar....</div>
+    const handleRemoveItem = (id: number) => {
+        const itemToDelete = items.find((item) => item.id === id);
+        if (!itemToDelete) return;
+
+        const confirmDelete = window.confirm(
+            `Är du säker på att du vill ta bort "${itemToDelete.name}" från korgen?`
+        );
+
+        if (confirmDelete) {
+            setItems((prevItems) => prevItems.filter((item) => item.id !==id));
+            console.log(`Item med id ${id} rederat från kundkorgen.`);
+            
+        }
     }
+
+    if (items.length === 0) {
+        return <div className='cartEmpty-message'>Din kundkorg är tom.</div>
+    }
+
+
 
     return (
         <div className="basketItems-container">
@@ -62,7 +81,12 @@ function BasketItem() {
                         />
                     </section>
 
-                    <img className="bin" src={Bin} alt="bin image" />
+                    <img
+                        className="bin"
+                        src={Bin}
+                        alt="bin image"
+                        onClick={() => handleRemoveItem(item.id)}
+                    />
                 </div>
             ))}
         </div>
