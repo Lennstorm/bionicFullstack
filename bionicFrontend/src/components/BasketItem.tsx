@@ -3,37 +3,39 @@ import './styles/basketItem.css';
 import Bin from '../assets/bin.svg';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { log } from 'console';
 
 interface BasketItemProps {
     id: number;
     name: string;
     price: number;
     image: string;
+    count: number;
 }
 
-
-function BasketItem() {
+const BasketItem = () => {
     const [items, setItems] = useState<BasketItemProps[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const fetchItemsData = async () => {
+        const fetchCartItems = async (): Promise<void> => {
+            setIsLoading(true);
             try {
                 const response = await axios.get('/data.json');
                 const data = response.data;
-
                 if (data.cartItems && Array.isArray(data.cartItems)) {
                     setItems(data.cartItems);
                 }
             } catch (error) {
-                console.error('Fel vid hämtning av korgartikel', error);
+                console.error('Error fetching cart items', error);
+            } finally {
+                setIsLoading(false);
             }
-        }
+        };
 
-        fetchItemsData();
+        fetchCartItems();
     }, []);
 
-    const handleRemoveItem = (id: number) => {
+    const handleRemoveItem = (id: number): void => {
         const itemToDelete = items.find((item) => item.id === id);
         if (!itemToDelete) return;
 
@@ -42,17 +44,21 @@ function BasketItem() {
         );
 
         if (confirmDelete) {
-            setItems((prevItems) => prevItems.filter((item) => item.id !==id));
-            console.log(`Item med id ${id} rederat från kundkorgen.`);
-            
+            setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+            console.log(`Item with id ${id} removed.`);
         }
-    }
+    };
 
-    if (items.length === 0) {
-        return <div className='cartEmpty-message'>Din kundkorg är tom.</div>
-    }
+    const updateItemCount = (id: number, newCount: number): void => {
+        setItems((prevItems) =>
+            prevItems.map((item) =>
+                item.id === id ? { ...item, count: newCount } : item
+            )
+        );
+    };
 
-
+    if (isLoading) return <div>Laddar....</div>;
+    if (items.length === 0) return <div className="cartEmpty-message">Din kundkorg är tom.</div>;
 
     return (
         <div className="basketItems-container">
@@ -67,10 +73,14 @@ function BasketItem() {
                             </article>
                             <article className="counter-article basketItem-text">
                                 <p>antal</p>
-                                <Counter />
+                                <Counter
+                                    count={item.count}
+                                    onIncrement={() => updateItemCount(item.id, item.count + 1)}
+                                    onDecrement={() => updateItemCount(item.id, Math.max(0, item.count - 1))}
+                                />
                             </article>
                             <article className="price-article basketItem-text">
-                                Pris: {item.price} SEK
+                                Totalpris: {item.price * item.count} SEK
                             </article>
                         </section>
 
@@ -90,7 +100,11 @@ function BasketItem() {
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
 
-export default BasketItem
+export default BasketItem;
+
+/*
+Alistair
+*/
