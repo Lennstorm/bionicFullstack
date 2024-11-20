@@ -5,6 +5,7 @@
 
 main {
     min-height: 30rem;
+    min-width: 100%;
     background-color: beige;
 }
 
