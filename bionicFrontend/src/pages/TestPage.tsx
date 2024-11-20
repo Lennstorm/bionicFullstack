@@ -1,18 +1,19 @@
 /* Denna sida är skapad för att testa komponenter. Ska tas bort i slutlig version!! */
 
 import Footer from '../components/Footer';
-import Header from '../components/Header';
+/* import Header from '../components/Header'; */
 import './styles/testPage.css';
 import BigButton from '../components/BigButton';
 import RoundedButton from '../components/RoundedButton';
 import OrderButton from '../components/OrderButton';
 import LoginButton from '../components/LoginButton';
+import HeaderMini from '../components/HeaderMini';
 // import MenuSortComponent from '../components/MenuSortComponent';
 
 const TestPage = () => {
     return (
         <div className='testPage--wrapper'>
-            <Header />
+            <HeaderMini />
             <main className='content-container'>
                 <div className='test-wrapper'>
                     
