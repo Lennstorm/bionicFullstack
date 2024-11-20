@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import Counter from './Counter';
 import './styles/basketItem.css';
 import Bin from '../assets/bin.svg';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 interface BasketItem {
     basketItemID: string;
@@ -20,11 +20,16 @@ interface BasketProps {
     basketItems: BasketItem[];
 }
 
-const BasketItem = () => {
+interface BasketItemProps {
+    onTotalPriceChange: (total: number) => void;
+    onBasketItemsChange: (items: BasketItem[]) => void;
+}
+
+const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
     const [items, setItems] = useState<BasketItem[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const userID = 'AB124'; // userID's: AB123, AB124, AB125
+    const userID = 'AB123'; // userID's: AB123, AB124, AB125
 
     useEffect(() => {
         const fetchBasketItems = async (): Promise<void> => {
@@ -48,6 +53,10 @@ const BasketItem = () => {
 
         fetchBasketItems();
     }, [userID]);
+
+    const calculateTotalPrice = (items: BasketItem[]): number => {
+        return items.reduce((acc, item) => acc + item.price * item.count, 0);
+    };
 
     const updateItemCount = async (id: string, newCount: number): Promise<void> => {
         setItems((prevItems) =>
@@ -78,6 +87,11 @@ const BasketItem = () => {
             console.log(`Item with id ${id} removed.`);
         }
     };
+
+    useEffect(() => {
+        const total = calculateTotalPrice(items);
+        onTotalPriceChange(total);
+    }, [items, onTotalPriceChange]);
 
     if (isLoading) return <div>Laddar....</div>;
     if (items.length === 0) return <div className="cartEmpty-message">Din kundkorg är tom.</div>;
