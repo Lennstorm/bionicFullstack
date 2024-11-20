@@ -2,10 +2,11 @@ import React from "react";
 import ReactDOM  from "react-dom/client";
 import App from './App';
 import './index.css';
+import MenuItem from "./components/MenuItem"
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-        <App />
+        <MenuItem />
     </React.StrictMode>
 )
 
