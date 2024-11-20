@@ -1,27 +1,41 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BasketItem from "../components/BasketItem";
 import BigButton from "../components/BigButton";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import './styles/basketPage.css';
-import { useState } from "react";
 
 const BasketPage = () => {
     const [totalPrice, setTotalPrice] = useState<number>(0);
-
+    const [basketItems, setBasketItems] = useState<any[]>([]);
+    const userID = 'AB123';
+    const navigate = useNavigate();
 
     const updateTotalPrice = (newTotalPrice: number) => {
         setTotalPrice(newTotalPrice);
     };
 
     const handleClick = () => {
+        navigate("/checkout", {
+            state: {
+                userID,
+                basketItems,
+                totalPrice,
+            },
+        });
     };
 
     return (
         <div className="basketPage--wrapper">
             <Header />
             <main className="content-container">
-                <h2>Din Kundkorg</h2>
-                <BasketItem onTotalPriceChange={updateTotalPrice} />
+                <h2 className="h2-basketPage">Din Kundkorg</h2>
+
+                <BasketItem
+                    onTotalPriceChange={updateTotalPrice}
+                    onBasketItemsChange={setBasketItems}
+                />
 
                 {totalPrice > 0 && (
                     <section className="totalPrice-section">
@@ -29,12 +43,14 @@ const BasketPage = () => {
                     </section>
                 )}
 
-                <BigButton
-                    text="Till Kassan"
-                    onClick={handleClick}
-                    disabled={false}
-                    className="tillKassan-btn"
-                />
+                {totalPrice > 0 && (
+                    <BigButton
+                        text="Till Kassan"
+                        onClick={handleClick}
+                        disabled={false}
+                        className="tillKassan-btn"
+                    />
+                )}
             </main>
             <Footer />
         </div>
@@ -43,44 +59,6 @@ const BasketPage = () => {
 
 export default BasketPage;
 
-
-
-
-
-
-
-
-/*import BasketItem from "../components/BasketItem"
-import BigButton from "../components/BigButton"
-import Footer from "../components/Footer"
-import Header from "../components/Header"
-import './styles/basketPage.css'
-
-
-function BasketPage() {
-    return (
-        <div className="basketPage--wrapper">
-            <Header />
-            <main className='content-container'>
-                <h2 className="">Din Kundkorg</h2>
-                <BasketItem />
-                <section className="totalPrice-section">
-                    TotalPris: 
-                </section>
-                <BigButton
-                text='Till Kassan'
-                onClick={handleClick}
-                disabled={false}
-                className="tillKassan-btn"
-                />
-
-            </main>
-            <Footer />
-        </div>
-    )
-}
-
-export default BasketPage
 
 /*
 Alistair
