@@ -7,7 +7,7 @@ import BigButton from '../components/BigButton';
 import RoundedButton from '../components/RoundedButton';
 import OrderButton from '../components/OrderButton';
 import LoginButton from '../components/LoginButton';
-import MenuSortComponent from '../components/MenuSortComponent';
+// import MenuSortComponent from '../components/MenuSortComponent';
 
 const TestPage = () => {
     return (
@@ -15,12 +15,7 @@ const TestPage = () => {
             <Header />
             <main className='content-container'>
                 <div className='test-wrapper'>
-                    <MenuSortComponent
-                        /* onSortByCheapest={sortByCheapest}
-                        onSortByPopular={sortByPopular}
-                        onSortByHealthiest={sortByHealthiest}
-                        onSortByMostExpensive={sortByMostExpensive} */
-                    />
+                    
                     <BigButton text="BigButton" onClick={() => console.log('Big Button!')} />
                     <BigButton text="Betala" onClick={() => console.log('Big Button!')} />
                     <BigButton text="BigButton" onClick={() => console.log('Big Button!')} />
