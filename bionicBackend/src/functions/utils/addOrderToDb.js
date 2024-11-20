@@ -39,3 +39,5 @@ async function addOrderToDb(customerID,orderContents,orderStatus,orderLocked,ext
 }
 
 module.exports = { addOrderToDb }
+
+// ******** koden skriven av Peter ***********

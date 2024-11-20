@@ -7,3 +7,14 @@ main {
     min-height: 30rem;
     background-color: beige;
 }
+
+.content-container{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.content-container img{
+    width:350px;
+    height: auto;
+    
+}

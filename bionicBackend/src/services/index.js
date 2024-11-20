@@ -5,3 +5,5 @@ const client = new DynamoDB();
 const db = DynamoDBDocument.from(client);
 
 module.exports = { db };
+
+// ******** koden skriven av Peter ***********

@@ -5,7 +5,7 @@ const { db } = require("../../services/index.js");
     try{
    const data = await db.scan({
 
-            TableName: 'menu-db'
+            TableName: 'menus-to-db'
         })
 
         if(!data.Items || data.Items.length == 0){
@@ -47,3 +47,5 @@ const { db } = require("../../services/index.js");
 }
 
 module.exports = { sortMenuPrice }
+
+// ******** koden skriven av Peter ***********

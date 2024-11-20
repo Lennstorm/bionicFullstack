@@ -26,3 +26,5 @@ exports.handler = async (event) =>{
     }
      
 }
+
+// ******** koden skriven av Peter ***********
