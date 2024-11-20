@@ -1,0 +1,32 @@
+.menu-sort {
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+    gap: 10%;
+}
+
+.menu-sort--btn {
+    flex-grow: 1;
+    min-width: 20%;
+    padding: .5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: var(--dark-grey);
+    color: #F3F3F3;
+    transition: background-color .3s ease;
+    font-family: var(--menuItem-btn-font);
+    font-weight: 500;
+}
+
+.menu-sort--btn:hover {
+    background-color: #2C2A2A;
+    color: var(--button-blue);
+}
+
+.menu-sort--btn:active {
+    transform: scale(.95);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

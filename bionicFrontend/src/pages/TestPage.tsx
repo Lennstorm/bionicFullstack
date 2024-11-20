@@ -7,40 +7,47 @@ import BigButton from '../components/BigButton';
 import RoundedButton from '../components/RoundedButton';
 import OrderButton from '../components/OrderButton';
 import LoginButton from '../components/LoginButton';
+import MenuSortComponent from '../components/MenuSortComponent';
 
 const TestPage = () => {
     return (
         <div className='testPage--wrapper'>
             <Header />
             <main className='content-container'>
-            <div className='test-wrapper'>
-            <BigButton text="BigButton" onClick={() => console.log('Big Button!')} />
-            <BigButton text="Betala" onClick={() => console.log('Big Button!')} />
-            <BigButton text="BigButton" onClick={() => console.log('Big Button!')} />
-            <BigButton text="Till Kassan" onClick={() => console.log('Big Button!')} />
-            <RoundedButton
-                
-                text="Ordern Tillagad!"
-                onClick={() => console.log('Rounded Button!')}
-                color="green"
-                fontStyle="extra-bold"
-            />
-            <RoundedButton
-                text="Läst!"
-                onClick={() => console.log('Rounded Button!')}
-                color="blue"
-                fontStyle="extra-bold"
-            />
-            <RoundedButton
-                text="Lägg i varukorgen!"
-                onClick={() => console.log('Rounded Button!')}
-                color="blue"
-                fontStyle="extra-bold"
-            />
-            <OrderButton text="Beställ" onClick={() => console.log('Order Button!')} />
-            <LoginButton text="logga in" onClick={() => console.log('Login Button!')} />
-        </div>
-                
+                <div className='test-wrapper'>
+                    <MenuSortComponent
+                        /* onSortByCheapest={sortByCheapest}
+                        onSortByPopular={sortByPopular}
+                        onSortByHealthiest={sortByHealthiest}
+                        onSortByMostExpensive={sortByMostExpensive} */
+                    />
+                    <BigButton text="BigButton" onClick={() => console.log('Big Button!')} />
+                    <BigButton text="Betala" onClick={() => console.log('Big Button!')} />
+                    <BigButton text="BigButton" onClick={() => console.log('Big Button!')} />
+                    <BigButton text="Till Kassan" onClick={() => console.log('Big Button!')} />
+                    <RoundedButton
+
+                        text="Ordern Tillagad!"
+                        onClick={() => console.log('Rounded Button!')}
+                        color="green"
+                        fontStyle="extra-bold"
+                    />
+                    <RoundedButton
+                        text="Läst!"
+                        onClick={() => console.log('Rounded Button!')}
+                        color="blue"
+                        fontStyle="extra-bold"
+                    />
+                    <RoundedButton
+                        text="Lägg i varukorgen!"
+                        onClick={() => console.log('Rounded Button!')}
+                        color="blue"
+                        fontStyle="extra-bold"
+                    />
+                    <OrderButton text="Beställ" onClick={() => console.log('Order Button!')} />
+                    <LoginButton text="logga in" onClick={() => console.log('Login Button!')} />
+                </div>
+
 
             </main>
             <Footer />
