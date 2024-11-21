@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import axios from 'axios';
 import './styles/homePage.css';
+import MenuItem from '../components/MenuItem.tsx';
 const url:string  = 'https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/get-menu'
 
 const HomePage = () => {
@@ -28,31 +29,21 @@ const HomePage = () => {
     },[])
     
       
-    
-   
-    
-    
-    
-    return (
-       <>
+        return (
+      
         <div className='homePage--wrapper'>
             <Header />
             <main className='content-container'>
-             {menuItems.map(item =>(
-              <div key={item.popularIndex}>
-              <img src={item.image}/>
-               
-              </div>
-             
-            ))}
-            
+             {menuItems.map((item) => (
+              
+              <MenuItem key={item.popularIndex} item={item} />
+               ))}
             </main>
-            </div>
             <Footer />
-       
-            </> 
-   );
-};
+            </div>
+           
+   )
+}
 
 export default HomePage;
 

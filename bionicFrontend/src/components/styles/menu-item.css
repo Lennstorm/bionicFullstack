@@ -1,70 +1,107 @@
-*{
-    padding:0;
-    margin:0;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
-body{
-    width:100vw;
-    height: 100vh;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+.menu-container {
+    width: 320px;
+    background-color: #D9D9D9;
+    margin-bottom: 3rem;
 }
 
-.menu-container{
-    width:350px;
-    height: 420px;
-    background-color:#D9D9D9;
+.menu-container img {
+    width: 100%;
+
 }
 
-.menu-container img{
-    width:100%;
-    height:200px;
-}
-
-.menu-image image{
-    width:100%;
+.menu-image img {
+    width: 100%;
+    height: 200px;
+    max-height: 100%;
 }
 
 .menu-header-text {
-    display:flex;
-    justify-content: space-around;
-    margin-top:8px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    align-items: center;
+    gap: 1rem;
+    
+    min-height: 3rem;
+    max-height: 3rem;
+    white-space: nowrap;
 }
 
-.menu-header-text h1{
-    font-size:1.5rem;
-    font-weight: 900;
+.header-article-name{
+    max-width:200px;
 }
 
-.menu-description h2{
-    font-size:1rem;
+
+
+.menu-header-text h1 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-left: 23px;
 }
 
-.menu-header-text h1{
-    margin-left:-12px;
+.menu-header-text h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-right: 12px;
 }
 
-.menu-description{
-    margin-left:1.3rem;
-    margin-top:10px;
+.menu-description h3 {
+    font-size: 1rem;
+    text-align: left;
 }
 
-.menu-description h3{
+.menu-description {
+    margin-left: 1.3rem;
+    margin-top: 10px;
+}
+
+.menu-description h3 {
     font-weight: 500;
+
 }
 
-.menu-container button{
-    padding:0.3rem 1.4rem;
+.menu-container button {
+    padding: 0.1rem 1.2rem;
     border-radius: 15px;
     background-color: #FFF;
     font-weight: 500;
     font-size: 1.2rem;
-    margin-top:12px;
+    margin-top: 12px;
     margin-left: 10px;
 }
 
-.menu-order-buttons .menu-option-button{
-    padding:0.5rem 2.8rem
+.menu-information-btn {
+    margin-right: 10rem;
+}
+
+.menu-order-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px
+}
+
+.menu-order-buttons .menu-option-button {
+    padding: 0.2rem 2.8rem;
+    margin-top: 15px;
+}
+
+.menu-order-buttons .menu-order-button {
+    padding: 0.3rem 1rem;
+    background-color: #3F9610;
+    color: #FFF;
+    margin-right: 1.2rem;
+    border-radius: 20px;
+    font-weight: 700;
+
 }

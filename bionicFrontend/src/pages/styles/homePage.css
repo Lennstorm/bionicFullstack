@@ -11,10 +11,6 @@ main {
 .content-container{
     display:flex;
     flex-wrap: wrap;
+    gap:10px;
 }
 
-.content-container img{
-    width:350px;
-    height: auto;
-    
-}

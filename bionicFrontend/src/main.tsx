@@ -6,7 +6,7 @@ import MenuItem from "./components/MenuItem"
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-        <MenuItem />
+        <App />
     </React.StrictMode>
 )
 
