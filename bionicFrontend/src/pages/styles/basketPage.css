@@ -1,0 +1,26 @@
+.basketPage--wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    width: 100%;
+    min-height: 30rem;
+    background-color: white;
+    padding-top: 2rem;
+}
+
+.h2-basketPage {
+    font-family: var(--font-inter);
+    margin-bottom: 1rem;
+}
+
+.totalPrice-section {
+    font-family: var(--font-inter);
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+/*
+Alistair
+*/

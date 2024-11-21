@@ -35,3 +35,5 @@ function MenuItem({ item }: MenuItemProps) {
 }
 
 export default MenuItem
+
+// *********koden skriven av Peter**********

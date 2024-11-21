@@ -4,15 +4,16 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: "Poppins", serif;
+    font-family: var(--font-inter);
     font-weight: 400;
     font-style: normal;
 }
 
 .menu-container {
-    width: 320px;
+    width: 330px;
     background-color: #D9D9D9;
     margin-bottom: 3rem;
+    padding-bottom:1rem
 }
 
 .menu-container img {
@@ -29,31 +30,25 @@
 .menu-header-text {
     display: flex;
     justify-content: space-between;
-    margin-top: 8px;
+    margin-top: 1px;
+    padding-bottom: 10px;
     align-items: center;
     gap: 1rem;
-    
     min-height: 3rem;
     max-height: 3rem;
     white-space: nowrap;
 }
 
-.header-article-name{
-    max-width:200px;
-}
-
-
-
 .menu-header-text h1 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-left: 23px;
 }
 
 .menu-header-text h2 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    margin-right: 12px;
+    margin-right: 15px;
 }
 
 .menu-description h3 {
@@ -63,7 +58,7 @@
 
 .menu-description {
     margin-left: 1.3rem;
-    margin-top: 10px;
+    margin-top: -3px;
 }
 
 .menu-description h3 {
@@ -77,31 +72,40 @@
     background-color: #FFF;
     font-weight: 500;
     font-size: 1.2rem;
-    margin-top: 12px;
+    margin-top: 8px;
     margin-left: 10px;
+    font-family: var(--menuItem-h3-font);
 }
 
 .menu-information-btn {
-    margin-right: 10rem;
+    margin-right: 10.5rem;
+    margin-top:1rem;
+    font-family: var(--menuItem-h3-font);
 }
 
 .menu-order-buttons {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px
+    margin-bottom: -1px;
+
 }
 
 .menu-order-buttons .menu-option-button {
-    padding: 0.2rem 2.8rem;
+    padding: 0.2rem 2.5rem;
     margin-top: 15px;
+    margin-left:1.2rem;
+    font-family: var(--menuItem-h3-font);
 }
 
 .menu-order-buttons .menu-order-button {
-    padding: 0.3rem 1rem;
+    padding:0.3rem 1rem 0.3rem 1.5rem;
     background-color: #3F9610;
     color: #FFF;
     margin-right: 1.2rem;
     border-radius: 20px;
     font-weight: 700;
+    font-family: var(--menuItem-h3-font);
 
 }
+
+/* // *********koden skriven av Peter********** */
