@@ -18,7 +18,7 @@ exports.handler = async (event) => {
     }
 
     for (let item of menu) {
-      // Check for undefined or null values
+      
       if (
         item.articleName == null ||
         item.allergies == null ||
@@ -34,24 +34,25 @@ exports.handler = async (event) => {
         item.popularIndex == null ||
         item.image == null
       ) {
-        return sendError(400, "Please enter all required information (quantity, description, price, name)");
+        return sendError(400, "Please enter all required information (quantity, description, price, name,healthyIndex,popularIndex)");
       }
 
-      const result = await addMenuToDb(
-        item.articleName,
-        item.allergies,
-        item.description,
-        item.ingredience,
-        item.visible,
-        item.timeToCook,
-        item.price,
-        item.quantity,
-        item.inStock,
-        item.toDaysSpecial,
-        item.healthyIndex,
-        item.popularIndex,
-        item.image
-      );
+      const result = await addMenuToDb({
+        articleName: item.articleName,
+        allergies: item.allergies,
+        description: item.description,
+        ingredience: item.ingredience,
+        visible: item.visible,
+        timeToCook: item.timeToCook,
+        price: item.price,
+        quantity: item.quantity,
+        inStock: item.inStock,
+        toDaysSpecial: item.toDaysSpecial,
+        healthyIndex: item.healthyIndex,
+        popularIndex: item.popularIndex,
+        image: item.image
+      
+    });
 
       if (!result.success) {
         console.log(result)
@@ -65,3 +66,6 @@ exports.handler = async (event) => {
     return sendError(500, "Internal server error.");
   }
 };
+
+
+// ******** koden skriven av Peter ***********
