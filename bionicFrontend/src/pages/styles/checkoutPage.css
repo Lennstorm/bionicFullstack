@@ -2,3 +2,15 @@
     display: flex;
     flex-direction: column;
 }
+
+.basket-item {
+list-style-type: none;
+}
+
+.totalPrice-section {
+    margin-top: 2rem;
+}
+
+.checkout-actions {
+    gap: 1rem;
+}
