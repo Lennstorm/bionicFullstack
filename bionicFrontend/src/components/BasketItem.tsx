@@ -116,7 +116,7 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
                                 />
                             </article>
                             <article className="price-article basketItem-text">
-                                Totalpris: {item.price * item.count} SEK
+                                Pris: {item.price * item.count} SEK
                             </article>
                         </section>
 

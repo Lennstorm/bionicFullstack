@@ -3,6 +3,10 @@
     flex-direction: column;
 }
 
+.basket-main {
+    padding-top: 2rem
+}
+
 .h2-basketPage {
     font-family: var(--font-inter);
     margin-bottom: 1rem;
@@ -12,6 +16,7 @@
     font-family: var(--font-inter);
     font-weight: 600;
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 /*
