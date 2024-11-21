@@ -3,9 +3,7 @@
     flex-direction: column;
 }
 
-.basket-main {
-    padding-top: 2rem
-}
+
 
 .h2-basketPage {
     font-family: var(--font-inter);

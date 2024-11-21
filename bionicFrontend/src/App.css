@@ -8,8 +8,8 @@ main {
   padding: 5rem 3rem 3rem 3rem;
   max-width: 100%;  
   transition: padding .3s ease;
-  /* background-color: white; */
-  background-color: beige; /* ändras till white när vi inte behöver beige längre!! */
+  background-color: white;
+  
 }
 
 .header-container.mini + main {  
