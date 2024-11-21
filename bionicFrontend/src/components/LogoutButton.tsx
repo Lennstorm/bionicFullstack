@@ -7,10 +7,10 @@ interface ButtonProps {
     className?: string;
 }
 
-const LoginButton = ({ text, onClick, disabled = false, className }: ButtonProps ) => {
+const LogoutButton = ({ text, onClick, disabled = false, className }: ButtonProps ) => {
     return (
     <button
-    className={`login-btn button button--green ${className || ''}`.trim()}
+    className={`logout-btn button button--green ${className || ''}`.trim()}
     onClick={onClick}
     disabled={disabled}
     >
@@ -19,7 +19,7 @@ const LoginButton = ({ text, onClick, disabled = false, className }: ButtonProps
 );
 };
 
-export default LoginButton;
+export default LogoutButton;
 
 
 /* Författare: Andreas

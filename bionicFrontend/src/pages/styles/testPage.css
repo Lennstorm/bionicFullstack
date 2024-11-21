@@ -3,8 +3,9 @@
     flex-direction: column;
 }
 
-main {
+.testPage--wrapper main {
     min-height: 30rem;
+    min-width: 100%;
     background-color: beige;
 }
 
@@ -13,6 +14,6 @@ main {
     flex-direction: column;
 }
 
-.button {
+.test-wrapper .button {
     margin: 2rem;
 }
