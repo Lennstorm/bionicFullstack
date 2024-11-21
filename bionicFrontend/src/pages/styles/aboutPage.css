@@ -2,12 +2,6 @@
     
 } */
 
-main {
-    min-height: 30rem;
-    background-color: white;
-    padding-top: 6rem;    
-}
-
 .aboutPage--infoArticle {
     margin: auto;
     display: flex;
@@ -15,3 +9,11 @@ main {
     align-items: center;
     justify-content: center;
 }
+
+
+/* Författare: Andreas(?)
+*
+* Ändrad av Andreas - tog bort main som istället läggs i app.css
+*
+*
+*/

@@ -3,13 +3,6 @@
     flex-direction: column;
 }
 
-main {
-    width: 100%;
-    min-height: 30rem;
-    background-color: white;
-    padding-top: 2rem;
-}
-
 .h2-basketPage {
     font-family: var(--font-inter);
     margin-bottom: 1rem;
@@ -22,5 +15,7 @@ main {
 }
 
 /*
-Alistair
+* Författare Alistair
+*
+* Ändrad av Andreas - tog bort main som istället läggs i app.css
 */
