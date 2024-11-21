@@ -4,13 +4,48 @@
 }
 
 .basket-item {
-list-style-type: none;
+    list-style-type: none;
 }
 
 .totalPrice-section {
     margin-top: 2rem;
 }
 
+.goBack-btn {
+    width: 13em;
+    height: 7em;
+}
+
+.confirmOrder-btn {
+    width: 11em;
+    height: 2em;
+    margin-bottom: 2rem;
+    background-color: var(--button-green);
+}
+
 .checkout-actions {
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.confirmation-modal {
+    margin-top: 2rem;
+}
+
+.confirmation-h2 {
+    font-family: var(--h2-medium-font);
+    font-weight: 400;
+}
+
+p {
+    font-family: var(--font-inter);
+}
+
+.close-btn {
+    width: 4em;
+    height: 2em;
+    background-color: var(--important-red);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }

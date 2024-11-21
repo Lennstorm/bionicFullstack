@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import './styles/basketItem.css';
+import './styles/checkoutBasketItem.css';
 
 interface BasketItem {
     basketItemID: string;
@@ -16,6 +16,8 @@ interface BasketItem {
 interface CheckoutBasketProps {
     userID: string;
 }
+
+//--- OBS! funtionalitet för delete av basket när en order har skapat måste läggas till. ---//
 
 const CheckoutBasketItem = ({ userID }: CheckoutBasketProps) => {
     const [items, setItems] = useState<BasketItem[]>([]);

@@ -39,7 +39,7 @@ const BasketPage = () => {
 
                 {totalPrice > 0 && (
                     <section className="totalPrice-section">
-                        <p>Pris: {totalPrice} SEK</p>
+                        <p>Totalpris: {totalPrice} SEK</p>
                     </section>
                 )}
 

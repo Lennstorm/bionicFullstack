@@ -18,6 +18,8 @@ interface BasketItem {
     addedAt: string;
 }
 
+//--- OBS! funktionalitet för delete av basket när en order har skapat måste läggas till. ---//
+
 const CheckoutPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -25,9 +27,9 @@ const CheckoutPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [orderConfirmed, setOrderConfirmed] = useState(false);
+    const [orderID, setOrderID] = useState<string | null>(null); // Store the order ID
 
     const userID = location.state?.userID || "AB123";
-
 
     useEffect(() => {
         const fetchBasketData = async () => {
@@ -65,7 +67,7 @@ const CheckoutPage = () => {
         fetchBasketData();
     }, [userID]);
 
-    //reduce används när totalpriset för items i en array ska räknas ut. acc: accumulated total
+    // Calculate total price of all items in the basket
     const totalPrice = basketItems.reduce(
         (acc, item) => acc + item.price * item.count,
         0
@@ -73,8 +75,10 @@ const CheckoutPage = () => {
     console.log("Current total price:", totalPrice);
 
     const handleConfirmOrder = () => {
+        const orderItemID = uuidv4().substring(0, 5).toUpperCase(); // Generate a 5-character order ID
+        
         const orderDetails = {
-            orderItem: uuidv4().substring(0, 5).toUpperCase(), // Genererar en uuid med 5 tecken som skickas till backend MEN ska id't skapas här eller i backend?? Någon skillnad??
+            orderItem: orderItemID,
             userID,
             orderContents: basketItems,
             totalPrice,
@@ -87,9 +91,11 @@ const CheckoutPage = () => {
         console.log("Order confirmation initiated.");
         console.log("Order details:", orderDetails);
 
-        console.log("Sending order details to server...");
-        setOrderConfirmed(true);
+        // Store the generated order ID in the state
+        setOrderID(orderItemID);
+
         console.log("Order confirmed successfully.");
+        setOrderConfirmed(true); // Mark the order as confirmed
     };
 
     const handleGoBackToBasket = () => {
@@ -115,10 +121,9 @@ const CheckoutPage = () => {
         <div className="checkoutPage--wrapper">
             <Header />
             <main className="checkout-main">
-                <h2>Orderöversikt</h2>
+                <h2>Din Beställning</h2>
 
                 <section className="order-summary">
-                    <h3>Dina Varor</h3>
                     {basketItems.length ? (
                         <ul>
                             {basketItems.map((item) => (
@@ -164,24 +169,34 @@ const CheckoutPage = () => {
 
                 <section className="checkout-actions">
                     <BigButton
-                        text="Bekräfta & Betala"
-                        onClick={handleConfirmOrder}
-                        disabled={!basketItems.length}
-                        className="confirm-order-btn"
-                    />
-                    <BigButton
-                    text="Tillbaka till Varukorgen"
-                    onClick={handleGoBackToBasket} className="go-back-btn"/>
+                        text="Tillbaka till Varukorgen"
+                        onClick={handleGoBackToBasket} className="goBack-btn" />
                 </section>
+
+                <BigButton
+                    text="Bekräfta & Betala"
+                    onClick={handleConfirmOrder}
+                    disabled={!basketItems.length}
+                    className="confirmOrder-btn"
+                />
 
                 {orderConfirmed && (
                     <div className="confirmation-modal">
                         <div className="modal-content">
-                            <h2>Beställning Bekräftad!</h2>
+                            <h2 className="confirmation-h2">Beställning Bekräftad!</h2>
                             <p>
-                                Tack för din beställning. Din order är nu {`"väntande"`}.
+                                Tack för din beställning. Din order är nu <strong>{`"väntande"`}</strong>.
                             </p>
-                            <button onClick={handleCloseConfirmation}>Stäng</button>
+                            {orderID && (
+                                <p className="confirmation-text">
+                                    Din beställningsnr: <strong>{orderID}</strong>
+                                </p>
+                            )}
+                            <BigButton
+                                text="Stäng"
+                                onClick={handleCloseConfirmation}
+                                className="close-btn"
+                            />
                         </div>
                     </div>
                 )}
@@ -189,10 +204,10 @@ const CheckoutPage = () => {
             </main>
 
             <Footer />
-
         </div>
     );
 };
 
 export default CheckoutPage;
+
 
