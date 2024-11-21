@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../components/styles/header.css';
 import headerImg from '../assets/headerImg.png';
 import companyLogo from '../assets/logo.svg';
@@ -37,7 +37,7 @@ function Header() {
             <LoginButton                 
                 text="logga in" 
                 onClick={() => console.log('Login Button!')} />
-                
+
             <img src={basketLogo} alt="basket symbol" className="kundkorg" />                
         </div>
     )
