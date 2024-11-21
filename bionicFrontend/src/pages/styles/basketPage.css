@@ -3,11 +3,8 @@
     flex-direction: column;
 }
 
-main {
-    width: 100%;
-    min-height: 30rem;
-    background-color: white;
-    padding-top: 2rem;
+.basket-main {
+    padding-top: 2rem
 }
 
 .h2-basketPage {
@@ -19,6 +16,7 @@ main {
     font-family: var(--font-inter);
     font-weight: 600;
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 /*
