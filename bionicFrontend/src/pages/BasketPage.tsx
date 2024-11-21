@@ -29,8 +29,8 @@ const BasketPage = () => {
     return (
         <div className="basketPage--wrapper">
             <Header />
-            <main className="content-container">
-                <h2 className="h2-basketPage">Din Kundkorg</h2>
+            <main className="basket-main">
+                <h2 className="h2-basketPage">Din Varukorg</h2>
 
                 <BasketItem
                     onTotalPriceChange={updateTotalPrice}
@@ -39,7 +39,7 @@ const BasketPage = () => {
 
                 {totalPrice > 0 && (
                     <section className="totalPrice-section">
-                        <p>Totalpris: {totalPrice} SEK</p>
+                        <p>Pris: {totalPrice} SEK</p>
                     </section>
                 )}
 
