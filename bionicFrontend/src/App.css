@@ -5,16 +5,17 @@
 }
 
 main {
-  padding-top: 17rem;
-  transition: padding-top .3s ease;
-  width: 100%;
-  min-height: 30rem;
+  padding: 5rem 3rem 3rem 3rem;
+  max-width: 100%;  
+  transition: padding .3s ease;
   /* background-color: white; */
   background-color: beige; /* ändras till white när vi inte behöver beige längre!! */
 }
 
-.header-container.mini + main {
-  padding-top: 5rem;
+.header-container.mini + main {  
+  padding: 15rem 3rem 3rem 3rem;
+  /* transition: padding .3s ease; */
+  /* min-height: calc(100vh - 5rem); */
 }
 
 

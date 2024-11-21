@@ -8,6 +8,23 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    padding: 0 3rem;
+}
+
+.aboutPage--infoArticle h1 {
+    font-size: 2rem;
+}    
+.aboutPage--infoArticle h3 {
+    font-size: .8rem;
+    margin-bottom: 1rem;
+}
+
+.aboutPage--infoArticle p {
+    margin-bottom: 1rem;
+}
+
+span {
+    padding: 0 13rem 0 7rem;
 }
 
 
