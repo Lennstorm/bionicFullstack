@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import "./styles/checkoutPage.css";
 import { v4 as uuidv4 } from 'uuid';
+import BigButton from "../components/BigButton";
 
 interface BasketItem {
     basketItemID: string;
@@ -162,16 +163,15 @@ const CheckoutPage = () => {
                 </section>
 
                 <section className="checkout-actions">
-                    <button
+                    <BigButton
+                        text="Bekräfta & Betala"
                         onClick={handleConfirmOrder}
                         disabled={!basketItems.length}
                         className="confirm-order-btn"
-                    >
-                        Bekräfta och betala
-                    </button>
-                    <button onClick={handleGoBackToBasket} className="go-back-btn">
-                        Tillbaka till varukorgen
-                    </button>
+                    />
+                    <BigButton
+                    text="Tillbaka till Varukorgen"
+                    onClick={handleGoBackToBasket} className="go-back-btn"/>
                 </section>
 
                 {orderConfirmed && (
@@ -189,7 +189,7 @@ const CheckoutPage = () => {
             </main>
 
             <Footer />
-            
+
         </div>
     );
 };
