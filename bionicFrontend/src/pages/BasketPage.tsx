@@ -27,7 +27,7 @@ const BasketPage = () => {
     };
 
     return (
-        <div className="basketPage--wrapper">
+        <div className="page basketPage--wrapper">
             <Header />
             <main className="basket-main">
                 <h2 className="h2-basketPage">Din Varukorg</h2>

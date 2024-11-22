@@ -6,7 +6,7 @@ import companyLogo from '../assets/logo.svg';
 
 const AboutPage = () => {
     return (
-        <div className='aboutPage--wrapper'>
+        <div className='page aboutPage--wrapper'>
             <Header />
             <main className='aboutPage--main'>
                 <article className='aboutPage--infoArticle'>

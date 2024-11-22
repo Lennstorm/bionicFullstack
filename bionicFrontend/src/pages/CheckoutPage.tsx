@@ -118,7 +118,7 @@ const CheckoutPage = () => {
     }
 
     return (
-        <div className="checkoutPage--wrapper">
+        <div className="page checkoutPage--wrapper">
             <Header />
             <main className="checkout-main">
                 <h2>Din Beställning</h2>
