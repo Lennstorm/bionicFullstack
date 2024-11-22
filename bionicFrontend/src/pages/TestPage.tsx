@@ -7,17 +7,24 @@ import BigButton from '../components/BigButton';
 import RoundedButton from '../components/RoundedButton';
 import OrderButton from '../components/OrderButton';
 import LoginButton from '../components/LoginButton';
-import HeaderMini from '../components/HeaderMini';
+import Header from '../components/Header';
 // import MenuSortComponent from '../components/MenuSortComponent';
 
 const TestPage = () => {
     return (
-        <div className='testPage--wrapper'>
-            <HeaderMini />
+        <div className='page testPage--wrapper'>
+            <Header />
             <main className='content-container'>
                 <div className='test-wrapper'>
                     
-                    <BigButton text="BigButton" onClick={() => console.log('Big Button!')} />
+                    <BigButton 
+                        text="fulknapp" 
+                        onClick={() => console.log('Big Button!')} 
+                        disabled={true}
+                        className='fulknapp'
+                        />
+
+
                     <BigButton text="Betala" onClick={() => console.log('Big Button!')} />
                     <BigButton text="BigButton" onClick={() => console.log('Big Button!')} />
                     <BigButton text="Till Kassan" onClick={() => console.log('Big Button!')} />
