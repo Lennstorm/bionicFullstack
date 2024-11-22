@@ -4,12 +4,16 @@
   text-align: center;
 }
 
+.page {
+  min-height: 100vh;
+}
+
 main {
   padding: 5rem 3rem 3rem 3rem;
   max-width: 100%;  
   transition: padding .3s ease;
   background-color: white;
-  
+  flex-grow: 1;
 }
 
 .header-container.mini + main {  
