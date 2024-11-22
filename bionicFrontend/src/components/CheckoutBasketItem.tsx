@@ -17,8 +17,6 @@ interface CheckoutBasketProps {
     userID: string;
 }
 
-//--- OBS! funtionalitet för delete av basket när en order har skapat måste läggas till. ---//
-
 const CheckoutBasketItem = ({ userID }: CheckoutBasketProps) => {
     const [items, setItems] = useState<BasketItem[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -84,3 +82,7 @@ const CheckoutBasketItem = ({ userID }: CheckoutBasketProps) => {
 };
 
 export default CheckoutBasketItem;
+
+/*
+Alistair
+*/
