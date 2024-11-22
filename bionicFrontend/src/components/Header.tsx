@@ -51,7 +51,7 @@ export default Header
 
 /* Författare: Ally
 *
-* Små ändringar av Andreas för implementering av knapp-komponent 
+* Ändrad av Andreas för implementering av knapp-komponent, lagt till mini-header vid scroll nedåt. 
 * 
 * 
 * 

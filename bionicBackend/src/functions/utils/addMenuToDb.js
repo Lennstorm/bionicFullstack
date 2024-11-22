@@ -6,9 +6,9 @@ async function addMenuToDb(articleName, allergies, description,ingredience,visib
     
 
     try {
-
+        
         await db.put({
-            TableName: "menu-db",
+            TableName: "menus-to-db",
             Item: {
 
                 MenuItemID,
@@ -28,6 +28,7 @@ async function addMenuToDb(articleName, allergies, description,ingredience,visib
             }
 
         })
+        
         return {
             success: true,
             message: "menu added successfully",
@@ -43,3 +44,5 @@ async function addMenuToDb(articleName, allergies, description,ingredience,visib
 }
 
 module.exports = { addMenuToDb }
+
+// ******** koden skriven av Peter ***********

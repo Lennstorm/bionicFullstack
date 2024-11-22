@@ -1,10 +1,13 @@
 :root {
   --button-green: #3F9610;
+  --button-green-hover: #2e750b;
   --button-blue: #1B71D3;
+  --button-blue-hover: #145aa1;
   --dark-grey: #161515;
   --text--medium-grey: #484646;
   --light-grey: #D9D9D9;
   --important-red: #F21919;
+  --button-text-color: #FFFFFF;
 
   /*Annie USe Your Telescope*/
   --header-text: "Annie Use Your Telescope", cursive;
@@ -24,6 +27,8 @@
   --counter-text-size: 35px;
   --menuItem-text-font: "Inter", sans-serif;
   --menuItem-text-size: 12px;
+  --button-text-fontBold: "Inter Bold", sans-serif;
+  --login-button-textfont: "Inteer Medium", sans-serif;
 
   /* Jaini Purva */
   --menuItem-h3-font: "Jaini Purva", serif;
@@ -35,5 +40,7 @@
 }
 
 /*
-Alistair
+* Författare Alistair
+*
+* Tillägg av Andreas hover-färger och knapp-fonter
 */

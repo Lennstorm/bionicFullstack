@@ -8,7 +8,7 @@ async function addUserToDb(name,password,email,role) {
     try {
 
         await db.put({
-            TableName: "user-db",
+            TableName: "user-to-db",
             Item: {
 
                 userid,
@@ -34,3 +34,5 @@ async function addUserToDb(name,password,email,role) {
 }
 
 module.exports = { addUserToDb }
+
+// ******** koden skriven av Peter ***********

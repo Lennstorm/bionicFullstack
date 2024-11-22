@@ -38,3 +38,5 @@ exports.handler = async (event) => {
     return sendError(500, "Internal server error.");
   }
 };
+
+// ******** koden skriven av Peter ***********

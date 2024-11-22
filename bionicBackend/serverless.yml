@@ -11,6 +11,8 @@ provider:
   deploymentMethod: direct
   iam:
     role: ${file(./local.yml):iamRole}
+  httpApi:
+    cors: true 
 
 build:
   esbuild:
@@ -62,7 +64,7 @@ resources:
     TestMenuTable: # Första tabellen (menu-db)
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: "menu-db" # Namnet på din tabell
+        TableName: "menus-to-db" # Namnet på din tabell
         AttributeDefinitions:
           - AttributeName: "MenuItemID" # Definiera attribut för din partition key
             AttributeType: "S" # S för sträng
@@ -75,7 +77,7 @@ resources:
     UsersTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: "user-db"
+        TableName: "user-to-db"
         AttributeDefinitions:
           - AttributeName: "userid"
             AttributeType: "S"

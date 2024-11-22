@@ -20,3 +20,5 @@ function sendResponse(status, data) {
   
   module.exports = { sendResponse, sendError };
   
+
+  // ******** koden skriven av Peter ***********
