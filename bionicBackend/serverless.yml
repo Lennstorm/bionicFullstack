@@ -12,7 +12,9 @@ provider:
   iam:
     role: ${file(./local.yml):iamRole}
   httpApi:
-    cors: true 
+    cors: true
+  environment:
+    MY_ENV_VAR: "value"
 
 build:
   esbuild:
@@ -58,6 +60,12 @@ functions:
       - httpApi:
           path: /api/add-user
           method: post
+  AddBasket:
+    handler: src/functions/AddBasketToDb/index.handler
+    events:
+      - httpApi:
+          path: /api/basket
+          method: post
 
 resources:
   Resources:
@@ -68,7 +76,6 @@ resources:
         AttributeDefinitions:
           - AttributeName: "MenuItemID" # Definiera attribut för din partition key
             AttributeType: "S" # S för sträng
-           
         KeySchema:
           - AttributeName: "MenuItemID" # Partition key
             KeyType: HASH # Detta är din PK (Partition Key)
@@ -99,5 +106,21 @@ resources:
           - AttributeName: "orderItemID"
             KeyType: HASH
           - AttributeName: "customerID"
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+
+    BasketTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "basket-db"
+        AttributeDefinitions:
+          - AttributeName: "basketItemID"
+            AttributeType: "S"
+          - AttributeName: "userID"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "basketItemID"
+            KeyType: HASH
+          - AttributeName: "userID"
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
