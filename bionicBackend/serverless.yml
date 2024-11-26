@@ -14,9 +14,8 @@ provider:
   httpApi:
     cors: true
 
-# build:
-#   esbuild:
-#     minify: true
+plugins:
+  - serverless-offline
 
 package:
   individually: true

@@ -1,6 +1,6 @@
-const joi = require('joi');
+const Joi = require('joi');
 
-const userSchema = joi.object({
+const userSchema = Joi.object({
     name: Joi.string().required().messages({
         'string.empty': "Name is required",
     }),

@@ -1,13 +1,18 @@
 const middy = require('@middy/core');
-const { jsonBodyParser } = require('@middy/http-json-body-parser');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { sendError, sendResponse } = require('../../responses/index.js');
 const { addUserToDb } = require('../utils/addUsersToDb.js');
-const { validateRequest } = require('../../middleware/validateRequest.js');
+const { validateUser } = require('../../middleware/validateAddUser.js');
 const userSchema = require('../../schemas/userSchema.js');
 
-const baseHandler = async (event) => {
+let jsonBodyParser;
 
+(async () => {
+  const module = await import('@middy/http-json-body-parser');
+  jsonBodyParser = module.default;
+})();
+
+const baseHandler = async (event) => {
   try {
     const user = event.body;
 
@@ -24,20 +29,28 @@ const baseHandler = async (event) => {
 
     return sendResponse(200, 'User added successfully!');
   } catch (error) {
-    console.error('Handler error', error.message);
+    console.error('Handler error:', error.message);
     return sendError(500, error.message || 'Internal server error.');
   }
 };
 
-module.exports.handler = middy(baseHandler)
-  .use(jsonBodyParser())
-  .use(validateRequest(userSchema))
-  .onError((handler) => {
-    const { error } = handler;
-    console.error('Error in handler:', error.message);
-    handler.response = sendError(400, error.message);
-    return handler.callback(null, handler.response);
-  });
+// För att säkerställa att jsonBodyParser laddas korrekt
+module.exports.handler = async (event, context) => {
+  if (!jsonBodyParser) {
+    const module = await import('@middy/http-json-body-parser');
+    jsonBodyParser = module.default;
+  }
+
+  const handler = middy(baseHandler)
+    .use(jsonBodyParser())
+    .use(validateUser(userSchema));
+
+  return handler(event, context);
+};
+
+
+
+
 
 
 /* 
