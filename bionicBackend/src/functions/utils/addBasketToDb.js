@@ -1,101 +1,93 @@
 const { db } = require("../../services/index.js");
-const { v4: uuid } = require("uuid");
 
 async function addBasketToDb(userID, basketItems) {
-  try {
-    const basketItemID = `basket-${userID}`; // Partition Key
+    try {
+        const basketItemID = `basket-${userID}`;
 
-    // Check if the basket already exists
-    const getParams = {
-      TableName: "basket-db",
-      Key: {
-        basketItemID,
-        userID, // Sort Key
-      },
-    };
+        const getParams = {
+            TableName: "basket-db",
+            Key: {
+                basketItemID,
+                userID,
+            },
+        };
 
-    const existingBasket = await db.get(getParams);
+        //finns det redan en korg?
+        const existingBasket = await db.get(getParams);
 
-    if (existingBasket.Item) {
-      // If basket exists, update the basketItems
-      const existingItems = existingBasket.Item.basketItems;
+        if (existingBasket.Item) {
+            const existingItems = existingBasket.Item.basketItems;
 
-      // Merge and update basketItems
-      const updatedBasketItems = existingItems.map(existingItem => {
-        const matchingNewItem = basketItems.find(
-          newItem => newItem.menuItem === existingItem.menuItem
-        );
+            const updatedBasketItems = existingItems.map(existingItem => {
+                const matchingNewItem = basketItems.find(
+                    newItem => newItem.menuItem === existingItem.menuItem
+                );
 
-        if (matchingNewItem) {
-          return {
-            ...existingItem,
-            count: existingItem.count + matchingNewItem.count,
-            specialRequests: matchingNewItem.specialRequests || existingItem.specialRequests,
-          };
+                if (matchingNewItem) {
+                    return {
+                        ...existingItem,
+                        count: existingItem.count + matchingNewItem.count,
+                        specialRequests: matchingNewItem.specialRequests || existingItem.specialRequests,
+                    };
+                }
+                return existingItem;
+            });
+
+            const newItems = basketItems.filter(
+                newItem => !existingItems.some(existingItem => existingItem.menuItem === newItem.menuItem)
+            );
+
+            const finalBasketItems = [...updatedBasketItems, ...newItems];
+
+            const updateParams = {
+                TableName: "basket-db",
+                Key: {
+                    basketItemID,
+                    userID,
+                },
+                UpdateExpression: "SET basketItems = :basketItems",
+                ExpressionAttributeValues: {
+                    ":basketItems": finalBasketItems,
+                },
+            };
+            //befintlig db uppdateas
+            await db.update(updateParams);
+
+            return {
+                success: true,
+                message: "Basket updated successfully",
+            };
+        } else {
+            //annars skapas en ny varukorg för kunden
+            const newBasket = {
+                basketItemID,
+                userID,
+                basketItems,
+                createdAt: new Date().toISOString(),
+            };
+
+            const putParams = {
+                TableName: "basket-db",
+                Item: newBasket,
+            };
+
+            await db.put(putParams);
+
+            return {
+                success: true,
+                message: "Basket created successfully",
+            };
         }
-        return existingItem;
-      });
-
-      // Add new items not in the existing basket
-      const newItems = basketItems.filter(
-        newItem => !existingItems.some(existingItem => existingItem.menuItem === newItem.menuItem)
-      );
-
-      const finalBasketItems = [...updatedBasketItems, ...newItems];
-
-      // Update the basket in the DB
-      const updateParams = {
-        TableName: "basket-db",
-        Key: {
-          basketItemID,
-          userID,
-        },
-        UpdateExpression: "SET basketItems = :basketItems",
-        ExpressionAttributeValues: {
-          ":basketItems": finalBasketItems,
-        },
-      };
-
-      await db.update(updateParams);
-
-      return {
-        success: true,
-        message: "Basket updated successfully",
-      };
-    } else {
-      // If no existing basket, create a new one
-      const newBasket = {
-        basketItemID,
-        userID,
-        basketItems,
-        createdAt: new Date().toISOString(),
-      };
-
-      const putParams = {
-        TableName: "basket-db",
-        Item: newBasket,
-      };
-
-      await db.put(putParams);
-
-      return {
-        success: true,
-        message: "Basket created successfully",
-      };
+    } catch (error) {
+        console.error("Error in addBasketToDb:", error.message);
+        return {
+            success: false,
+            message: error.message,
+        };
     }
-  } catch (error) {
-    console.error("Error in addBasketToDb:", error.message);
-    return {
-      success: false,
-      message: error.message,
-    };
-  }
 }
 
 module.exports = { addBasketToDb };
-
-
-
 
 
 /*

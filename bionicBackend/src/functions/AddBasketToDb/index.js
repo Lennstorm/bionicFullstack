@@ -9,7 +9,6 @@ exports.handler = async (event) => {
 
         const basket = JSON.parse(event.body);
 
-
         const result = await addBasketToDb(basket.userID, basket.basketItems);
 
         if (!result.success) {
@@ -22,6 +21,10 @@ exports.handler = async (event) => {
         return sendError(500, "Internal server error.");
     }
 };
+
+/*
+Alistair
+*/
 
 
 
