@@ -1,5 +1,47 @@
-const { sendError, sendResponse } = require("../../responses/index.js");
-const { addUserToDb } = require("../utils/addUsersToDb.js");
+const middy = require('@middy/core');
+const { jsonBodyParser } = require('@middy/http-json-body-parser');
+const bcrypt = require('bcrypt');
+const { sendError, sendResponse } = require('../../responses/index.js');
+const { addUserToDb } = require('../utils/addUsersToDb.js');
+const { validateRequest } = require('../../middleware/validateRequest.js');
+const userSchema = require('../../schemas/userSchema.js');
+
+const baseHandler = async (event) => {
+
+  try {
+    const user = event.body;
+
+    user.role = 'kund';
+
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    user.password = hashedPassword;
+
+    const result = await addUserToDb(user);
+
+    if (!result.success) {
+      return sendError(500, result.message || 'Failed to add user');
+    }
+
+    return sendResponse(200, 'User added successfully!');
+  } catch (error) {
+    console.error('Handler error', error.message);
+    return sendError(500, error.message || 'Internal server error.');
+  }
+};
+
+module.exports.handler = middy(baseHandler)
+  .use(jsonBodyParser())
+  .use(validateRequest(userSchema))
+  .onError((handler) => {
+    const { error } = handler;
+    console.error('Error in handler:', error.message);
+    handler.response = sendError(400, error.message);
+    return handler.callback(null, handler.response);
+  });
+
+
+/* 
+GAMLA KODEN:
 
 exports.handler = async (event) => {
   try {
@@ -37,6 +79,6 @@ exports.handler = async (event) => {
     console.error("Handler error:", error.message);
     return sendError(500, "Internal server error.");
   }
-};
+}; */
 
 // ******** koden skriven av Peter ***********

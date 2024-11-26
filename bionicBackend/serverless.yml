@@ -14,9 +14,9 @@ provider:
   httpApi:
     cors: true 
 
-build:
-  esbuild:
-    minify: true
+# build:
+#   esbuild:
+#     minify: true
 
 package:
   individually: true
