@@ -1,21 +1,43 @@
-const addBasketHandler = async (event) => {
-    const { userID, basketItems } = JSON.parse(event.body);
+const { sendError, sendResponse } = require("../../responses/index.js");
+const { addBasketToDb } = require("../utils/addBasketToDb.js");
 
+exports.handler = async (event) => {
     try {
-        for (const item of basketItems) {
-            const { menuItem, count, specialRequest, orderStatus } = item;
-
-            const response = await addBasketToDb(userID, menuItem, count, specialRequest, orderStatus);
-            if (response.statusCode !== 200) {
-                throw new Error("Failed to add basket item.");
-            }
+        if (!event.body) {
+            return sendError(400, "Request body saknas");
         }
 
-        return sendResponse(200, { success: true, message: "All items added to basket successfully." });
+        const basket = JSON.parse(event.body);
 
+
+        const result = await addBasketToDb(basket.userID, basket.basketItems);
+
+        if (!result.success) {
+            return sendError(500, result.message || "Lyckades inte uppdatera varukorgen");
+        }
+
+        return sendResponse(200, "Varukorgen uppdaterad!");
     } catch (error) {
-        console.error("Handler error:", error);
-        return sendError(500, { message: "An error occurred while processing the data." });
+        console.error("Handler error:", error.message);
+        return sendError(500, "Internal server error.");
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

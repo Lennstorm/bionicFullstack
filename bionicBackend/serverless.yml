@@ -13,8 +13,6 @@ provider:
     role: ${file(./local.yml):iamRole}
   httpApi:
     cors: true
-  environment:
-    MY_ENV_VAR: "value"
 
 build:
   esbuild:
@@ -60,21 +58,23 @@ functions:
       - httpApi:
           path: /api/add-user
           method: post
-  AddBasket:
+
+  AddBasketToDb:
     handler: src/functions/AddBasketToDb/index.handler
     events:
       - httpApi:
           path: /api/basket
           method: post
 
+
 resources:
   Resources:
-    TestMenuTable: # Första tabellen (menu-db)
+    TestMenuTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: "menus-to-db" # Namnet på din tabell
+        TableName: "menus-to-db"
         AttributeDefinitions:
-          - AttributeName: "MenuItemID" # Definiera attribut för din partition key
+          - AttributeName: "MenuItemID"
             AttributeType: "S" # S för sträng
         KeySchema:
           - AttributeName: "MenuItemID" # Partition key

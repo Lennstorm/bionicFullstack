@@ -1,19 +1,54 @@
-import Joi from 'joi';
+const Joi = require('joi');
+
+const itemSchema = Joi.object({
+    menuItem: Joi.string().required().messages({
+        'string.empty': 'Menyartikel behövs',
+    }),
+    count: Joi.number().integer().min(1).required().messages({
+        'number.base': 'Måste vara ett nummer',
+        'number.min': 'Måste vara minst 1',
+    }),
+    specialRequests: Joi.string().optional().allow('').messages({
+        'string.base': 'Specialrequest måste vara en text',
+    }),
+    orderStatus: Joi.string().optional().allow('').messages({
+        'string.base': 'Orderstatus måste vara en text',
+    }),
+});
 
 const schema = Joi.object({
     userID: Joi.string().required().messages({
-        'string.empty': 'User ID is required',
+        'string.empty': 'AnvändarId behövs',
     }),
-    menuItem: Joi.string().required().messages({
-        'string.empty': 'Menu item is required',
+    basketItems: Joi.array().items(itemSchema).min(1).required().messages({
+        'array.base': 'En lista av artiklar behövs',
+        'array.min': 'Minst en artikel måste finnas',
     }),
-    count: Joi.number().integer().min(1).required().messages({
-        'number.base': 'Count must be a number',
-        'number.min': 'Count must be at least 1',
-    }),
-    specialRequest: Joi.string().optional(),
-    orderStatus: Joi.string().optional(),
 });
 
-export default schema;
+const validateAddBasket = () => {
+    return {
+        before: async (handler) => {
+            try {
+                const { error } = schema.validate(JSON.parse(handler.event.body));
+                if (error) {
+                    throw new Error(error.details[0].message);
+                }
+            } catch (err) {
+                console.error('Validation error:', err.message);
+                handler.response = {
+                    statusCode: 400,
+                    body: JSON.stringify({ message: err.message || 'Invalid request data' }),
+                };
+                throw err;
+            }
+        },
+    };
+};
+
+module.exports = validateAddBasket;
+
+
+
+
 
