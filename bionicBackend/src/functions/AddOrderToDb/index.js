@@ -2,6 +2,42 @@ const { sendError, sendResponse } = require("../../responses/index.js");
 const { addOrderToDb } = require("../utils/addOrderToDb.js");
 
 exports.handler = async (event) => {
+    try {
+        if (!event.body) {
+            console.error("Request body is missing");
+            return sendError(400, "Request body is missing");
+        }
+
+        const orderData = JSON.parse(event.body);
+
+        if (!orderData.basketItemID || !orderData.userID) {
+            console.error("Missing required fields in request body");
+            return sendError(400, "Please enter all required information (basketItemID, userID)");
+        }
+
+        const result = await addOrderToDb(orderData.basketItemID, orderData.userID);
+
+        if (!result.success) {
+            console.error("Failed to add order:", result.message);
+            return sendError(500, result.message || "Failed to add order");
+        }
+
+        console.log("Order added successfully:", result.orderItemID);
+        return sendResponse(200, "Order added successfully!", result.orderItemID);
+        
+    } catch (error) {
+        console.error("Handler error:", error.message);
+        return sendError(500, "Internal server error.");
+    }
+};
+
+
+
+
+/*const { sendError, sendResponse } = require("../../responses/index.js");
+const { addOrderToDb } = require("../utils/addOrderToDb.js");
+
+exports.handler = async (event) => {
   try {
     if (!event.body) {
       return sendError(400, "Request body is missing");
@@ -41,6 +77,6 @@ exports.handler = async (event) => {
     console.error("Handler error:", error.message);
     return sendError(500, "Internal server error.");
   }
-};
+};*/
 
-// ******** koden skriven av Peter ***********
+// ******** koden skriven av Peter ***********//

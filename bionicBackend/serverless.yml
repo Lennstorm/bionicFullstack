@@ -29,13 +29,6 @@ functions:
           path: /api/create-menu
           method: post
 
-
-  AddOrderToDb:
-    handler: src/functions/AddOrderToDb/index.handler
-    events:
-      - httpApi:
-          path: /api/create-order
-          method: post
   
   GetMenu:
     handler: src/functions/GetMenu/index.handler
@@ -57,6 +50,12 @@ functions:
     events:
       - httpApi:
           path: /api/add-user
+          method: post
+  AddOrderToDb:
+    handler: src/functions/AddOrderToDb/index.handler
+    events:
+      - httpApi:
+          path: /api/orders
           method: post
 
 resources:
@@ -85,19 +84,35 @@ resources:
           - AttributeName: "userid"
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
+
+    BasketTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "basket-db"
+        AttributeDefinitions:
+          - AttributeName: "basketItemID"
+            AttributeType: "S"
+          - AttributeName: "userID"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "basketItemID"
+            KeyType: "HASH"
+          - AttributeName: "userID"
+            KeyType: "RANGE"
+        BillingMode: PAY_PER_REQUEST
     
     OrdersTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: "orders-db"
+        TableName: "orders-db-v2"
         AttributeDefinitions:
           - AttributeName: "orderItemID"
             AttributeType: "S"
-          - AttributeName: "customerID" # Definiera attribut för din sort key (om du vill ha en)
-            AttributeType: "S" # S för sträng
+          - AttributeName: "userid"
+            AttributeType: "S"
         KeySchema:
           - AttributeName: "orderItemID"
             KeyType: HASH
-          - AttributeName: "customerID"
+          - AttributeName: "userid"
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
