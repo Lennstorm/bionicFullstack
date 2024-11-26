@@ -48,4 +48,5 @@ const { db } = require("../../services/index.js");
 
 module.exports = { sortMenuPrice }
 
+
 // ******** koden skriven av Peter ***********
