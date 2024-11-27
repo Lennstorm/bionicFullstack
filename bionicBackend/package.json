@@ -23,6 +23,7 @@
     "joi": "^17.13.3"
   },
   "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.40",
     "serverless-offline": "^14.3.4"
   }
 }
