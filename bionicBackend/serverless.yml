@@ -123,19 +123,3 @@ resources:
           - AttributeName: "userid"
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
-
-    BasketTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: "basket-db"
-        AttributeDefinitions:
-          - AttributeName: "basketItemID"
-            AttributeType: "S"
-          - AttributeName: "userID"
-            AttributeType: "S"
-        KeySchema:
-          - AttributeName: "basketItemID"
-            KeyType: HASH
-          - AttributeName: "userID"
-            KeyType: RANGE
-        BillingMode: PAY_PER_REQUEST

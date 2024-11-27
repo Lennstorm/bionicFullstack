@@ -1,55 +1,98 @@
-async function addOrderToDb(basketItemID, userID) {
+const { v4: uuidv4 } = require("uuid");
+const { db } = require("../../services/index.js");
+
+async function createOrUpdateOrder(userID, basketItems) {
+    const orderItemID = uuidv4();
+    const timestamp = new Date().toISOString();
+
+    const getParams = {
+        TableName: "orders-db-v2",
+        Key: { pk: orderItemID, sk: userID },
+    };
+
+    console.log('Getting existing order with params:', JSON.stringify(getParams, null, 2));
+
     try {
-        // Mocked data for testing
-        const mockBasketItems = [
-            { menuItem: "Burger", count: 2, specialRequests: "No onions" },
-            { menuItem: "Pizza", count: 1, specialRequests: "Extra cheese" }
-        ];
+        const existingOrder = await db.get(getParams);
 
-        const orderItemID = uuid();
+        if (existingOrder.Item) {
+            const existingItems = existingOrder.Item.orderContent;
 
-        // Simulate creating order contents from mock data
-        const orderContents = mockBasketItems.map(item => ({
-            menuItem: item.menuItem,
-            count: item.count,
-            specialRequest: item.specialRequests,
-        }));
+            const updatedOrderItems = existingItems.map(existingItem => {
+                const matchingNewItem = basketItems.find(
+                    newItem => newItem.menuItem === existingItem.menuItem
+                );
 
-        const orderStatus = "väntande";
-        const orderLocked = false;
-        const specialRequest = "";
-        const createdAt = new Date().toISOString();
-        const editedAt = new Date().toISOString();
+                if (matchingNewItem) {
+                    return {
+                        ...existingItem,
+                        count: existingItem.count + matchingNewItem.count,
+                        specialRequests: matchingNewItem.specialRequests || existingItem.specialRequests,
+                    };
+                }
+                return existingItem;
+            });
 
+            const newItems = basketItems.filter(
+                newItem => !existingItems.some(existingItem => existingItem.menuItem === newItem.menuItem)
+            );
 
-        await db.put({
-            TableName: "orders-db",
-            Item: {
-                orderItemID,
-                userID,
-                orderContents,
-                orderStatus,
-                orderLocked,
-                specialRequest,
-                createdAt,
-                editedAt,
-            },
-        });
+            const finalOrderItems = [...updatedOrderItems, ...newItems];
 
-        return {
-            success: true,
-            message: "Order added successfully",
-            orderItemID,
-        };
+            const updateParams = {
+                TableName: "orders-db-v2",
+                Key: { pk: orderItemID, sk: userID },
+                UpdateExpression: "SET orderContent = :orderContent, editedAt = :editedAt",
+                ExpressionAttributeValues: {
+                    ":orderContent": finalOrderItems,
+                    ":editedAt": timestamp,
+                },
+            };
 
+            console.log('Updating order with params:', JSON.stringify(updateParams, null, 2));
+
+            await db.update(updateParams);
+
+            return {
+                success: true,
+                message: "Order updated successfully",
+            };
+        } else {
+            const newOrder = {
+                pk: orderItemID,
+                sk: userID,
+                orderContent: basketItems,
+                orderStatus: "väntande",
+                orderLocked: false,
+                createdAt: timestamp,
+                editedAt: timestamp,
+            };
+
+            const putParams = {
+                TableName: "orders-db-v2",
+                Item: newOrder,
+            };
+
+            console.log('Creating new order with params:', JSON.stringify(putParams, null, 2));
+
+            await db.put(putParams);
+
+            return {
+                success: true,
+                message: "Order created successfully",
+            };
+        }
     } catch (error) {
-        console.error("Error in addOrderToDb:", error.message);
+        console.error("Error in createOrUpdateOrder:", error.message);
         return {
             success: false,
             message: error.message,
         };
     }
 }
+
+module.exports = { createOrUpdateOrder };
+
 
 
 
