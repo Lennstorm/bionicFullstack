@@ -8,3 +8,11 @@ const validateUser = (schema) => ({
 });
 
 module.exports = { validateUser };
+
+/* 
+* Författare Andreas
+*
+*
+*
+*
+ */
