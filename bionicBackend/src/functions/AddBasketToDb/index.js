@@ -1,13 +1,12 @@
+
+const middy = require('@middy/core');
 const { sendError, sendResponse } = require("../../responses/index.js");
 const { addBasketToDb } = require("../utils/addBasketToDb.js");
+const { validateAddBasket } = require("../../middleware/validateAddBasket.js");
 
-exports.handler = async (event) => {
+const handler = async (event) => {
     try {
-        if (!event.body) {
-            return sendError(400, "Request body saknas");
-        }
-
-        const basket = JSON.parse(event.body);
+        const { basket } = event;
 
         const result = await addBasketToDb(basket.userID, basket.basketItems);
 
@@ -18,9 +17,12 @@ exports.handler = async (event) => {
         return sendResponse(200, "Varukorgen uppdaterad!");
     } catch (error) {
         console.error("Handler error:", error.message);
-        return sendError(500, "Internal server error.");
+        return sendError(500, error.message || "Internal server error.");
     }
 };
+
+exports.handler = middy(handler).use(validateAddBasket());
+
 
 /*
 Alistair
