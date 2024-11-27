@@ -14,9 +14,9 @@ provider:
   httpApi:
     cors: true
 
-build:
-  esbuild:
-    minify: true
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
 
 package:
   individually: true
@@ -81,17 +81,29 @@ resources:
             KeyType: HASH # Detta är din PK (Partition Key)
         BillingMode: PAY_PER_REQUEST # Betalning per användning       
 
-    UsersTable:
+    UserDbTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: "user-to-db"
+        TableName: "user-db"
         AttributeDefinitions:
           - AttributeName: "userid"
+            AttributeType: "S"
+          - AttributeName: "email"
             AttributeType: "S"
         KeySchema:
           - AttributeName: "userid"
             KeyType: HASH
+          - AttributeName: "email"
+            KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
+        GlobalSecondaryIndexes:
+          - IndexName: "email-index"
+            KeySchema:
+              - AttributeName: "email"
+                KeyType: HASH
+            Projection:
+              ProjectionType: "ALL"
+        
     
     OrdersTable:
       Type: AWS::DynamoDB::Table
