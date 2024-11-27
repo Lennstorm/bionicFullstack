@@ -1,12 +1,39 @@
 import './styles/menu-item.css'
 import { MenuItems } from '../interfaces.ts';
+import { useState, useEffect} from 'react';
+import ModalInfo from './ModalInfo.tsx';
 
 interface MenuItemProps {
   item: MenuItems
-}
+ }
+
 
 function MenuItem({ item }: MenuItemProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden'; // Förhindra skrollning
+    } else {
+      document.body.style.overflow = 'auto'; // Tillåt skrollning
+    }
+
+    // Rensa upp när komponenten avmonteras
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isModalOpen]);
+
+
+  const showInfo = () => {
+    setIsModalOpen(true);
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  }
+   
+  
   return (
     <>
       <section className="menu-container">
@@ -22,14 +49,16 @@ function MenuItem({ item }: MenuItemProps) {
 
         </article>
         <section className='menu-information-btn'>
-          <button>Information</button>
+          <button onClick={showInfo}>Information</button>
         </section>
         <section className='menu-order-buttons'>
           <button className="menu-option-button"> V    G     Ä</button>
           <button className="menu-order-button">Beställ</button>
         </section>
       </section>
-
+      {isModalOpen && (
+        <ModalInfo item={item} closeModal={closeModal} />
+      )}
     </>
   )
 }

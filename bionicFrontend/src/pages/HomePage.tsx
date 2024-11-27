@@ -28,7 +28,7 @@ useEffect(() => {
   }, [])
 
   return (
-
+    
     <div className='homePage--wrapper'>
       <Header />
       <main className='content-container'>
