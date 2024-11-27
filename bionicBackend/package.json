@@ -14,9 +14,7 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.687.0",
     "@aws-sdk/lib-dynamodb": "^3.689.0",
-    "@middy/core": "^3.5.0",
-    "@middy/validator": "^6.0.0",
-    "@sideway/address": "^5.0.0",
+    "@middy/core": "^3.6.2",
     "aws-sdk": "^2.1692.0",
     "joi": "^17.13.3",
     "middy": "^0.36.0"
