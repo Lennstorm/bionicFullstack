@@ -1,8 +1,8 @@
 const middy = require('@middy/core');
-const { checkIfOrderExists, createOrUpdateOrder } = require("../utils/addOrderToDb.js");
+const { createOrUpdateOrder } = require("../utils/addOrderToDb.js");
 const { validateOrder } = require("../../middleware/validateAddOrder.js");
 
-// Local sendError function
+//local error o response
 const sendError = (statusCode, errorMessage) => {
     return {
         statusCode,
@@ -20,46 +20,41 @@ const sendResponse = (statusCode, responseBody) => {
     };
 };
 
-const orderHandler = async (event) => {
-    try {
-        // Parse incoming body if it's a raw string
-        const body = typeof event.body === "string" ? JSON.parse(event.body) : event.body;
 
+const orderHandler = async (event) => {
+    console.log("Event body:", event.body);
+    console.log("Handler event:", event);
+
+    try {
+        const body = typeof event.body === "string" ? JSON.parse(event.body) : event.body;
         const { userID, basketItems, orderStatus, orderLocked, createdAt, editedAt } = body;
 
-        // Ensure userID is present
         if (!userID) {
             return sendError(400, "AnvändarID saknas");
         }
 
-        // Validate if the order already exists for this user
-        const orderExists = await checkIfOrderExists(userID);
-        if (orderExists) {
-            return sendError(400, "En order med detta användarID existerar redan");
-        }
-
-        // Ensure basketItems is provided and not empty
         if (!Array.isArray(basketItems) || basketItems.length === 0) {
             return sendError(400, "Varukorgen är tom.");
         }
 
-        // Create or update the order
         const result = await createOrUpdateOrder(userID, basketItems, { orderStatus, orderLocked, createdAt, editedAt });
 
         if (!result.success) {
             return sendError(500, result.message || "Lyckades inte skapa ordern");
         }
 
-        // Return success response
         return sendResponse(200, { message: result.message });
 
     } catch (error) {
-        console.error("Fel i order handler:", error.message);
+        console.error("Error in order handler:", error);
         return sendError(500, error.message || "Internal server error.");
     }
 };
 
 exports.handler = middy(orderHandler).use(validateOrder());
+
+
+
 
 
 

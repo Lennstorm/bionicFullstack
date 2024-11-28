@@ -1,87 +1,41 @@
-const { v4: uuidv4 } = require("uuid");
+const { v4: uuidv4 } = require('uuid');
 const { db } = require("../../services/index.js");
 
-async function createOrUpdateOrder(userID, basketItems) {
+async function createOrUpdateOrder(userID, basketItems, { orderStatus, orderLocked }) {
     const orderItemID = uuidv4();
     const timestamp = new Date().toISOString();
 
-    const getParams = {
-        TableName: "orders-db-v2",
-        Key: { pk: orderItemID, sk: userID },
-    };
 
-    console.log('Getting existing order with params:', JSON.stringify(getParams, null, 2));
+    const newOrder = {
+        orderItemID,
+        pk: orderItemID,
+        sk: userID.toLowerCase(),
+        orderContent: basketItems,
+        orderStatus: orderStatus || "väntande",
+        orderLocked: orderLocked || false,
+        specialRequests: basketItems
+        .map(item => item.specialRequest)
+        .filter(request => request)
+        .join(', '),
+        createdAt: timestamp,
+        editedAt: timestamp,
+    };
+    console.log("New Order to be inserted:", JSON.stringify(newOrder, null, 2));
+
+
+    const putParams = {
+        TableName: "orders-db-v3",
+        Item: newOrder,
+    };
+    console.log("New Order Object:", newOrder);
 
     try {
-        const existingOrder = await db.get(getParams);
+        await db.put(putParams);
 
-        if (existingOrder.Item) {
-            const existingItems = existingOrder.Item.orderContent;
-
-            const updatedOrderItems = existingItems.map(existingItem => {
-                const matchingNewItem = basketItems.find(
-                    newItem => newItem.menuItem === existingItem.menuItem
-                );
-
-                if (matchingNewItem) {
-                    return {
-                        ...existingItem,
-                        count: existingItem.count + matchingNewItem.count,
-                        specialRequests: matchingNewItem.specialRequests || existingItem.specialRequests,
-                    };
-                }
-                return existingItem;
-            });
-
-            const newItems = basketItems.filter(
-                newItem => !existingItems.some(existingItem => existingItem.menuItem === newItem.menuItem)
-            );
-
-            const finalOrderItems = [...updatedOrderItems, ...newItems];
-
-            const updateParams = {
-                TableName: "orders-db-v2",
-                Key: { pk: orderItemID, sk: userID },
-                UpdateExpression: "SET orderContent = :orderContent, editedAt = :editedAt",
-                ExpressionAttributeValues: {
-                    ":orderContent": finalOrderItems,
-                    ":editedAt": timestamp,
-                },
-            };
-
-            console.log('Updating order with params:', JSON.stringify(updateParams, null, 2));
-
-            await db.update(updateParams);
-
-            return {
-                success: true,
-                message: "Order updated successfully",
-            };
-        } else {
-            const newOrder = {
-                pk: orderItemID,
-                sk: userID,
-                orderContent: basketItems,
-                orderStatus: "väntande",
-                orderLocked: false,
-                createdAt: timestamp,
-                editedAt: timestamp,
-            };
-
-            const putParams = {
-                TableName: "orders-db-v2",
-                Item: newOrder,
-            };
-
-            console.log('Creating new order with params:', JSON.stringify(putParams, null, 2));
-
-            await db.put(putParams);
-
-            return {
-                success: true,
-                message: "Order created successfully",
-            };
-        }
+        return {
+            success: true,
+            message: "Order created successfully",
+        };
     } catch (error) {
         console.error("Error in createOrUpdateOrder:", error.message);
         return {
@@ -92,6 +46,9 @@ async function createOrUpdateOrder(userID, basketItems) {
 }
 
 module.exports = { createOrUpdateOrder };
+
+
+
 
 
 

@@ -111,7 +111,7 @@ resources:
     OrdersTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: "orders-db-v2"
+        TableName: "orders-db-v3"
         AttributeDefinitions:
           - AttributeName: "orderItemID"
             AttributeType: "S"
