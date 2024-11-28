@@ -71,7 +71,7 @@ resources:
     TestMenuTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: "menus-to-db"
+        TableName: "menu-db"
         AttributeDefinitions:
           - AttributeName: "MenuItemID"
             AttributeType: "S" # S för sträng
