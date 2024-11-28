@@ -5,17 +5,22 @@ import Counter from './Counter.tsx'
 import OrderButton from './OrderButton.tsx';
 import './styles/modal-info.css'
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 interface ModalInfoProps {
   item: MenuItems;
   closeModal: () => void;
+  userID: string,
+  count:number
 }
 
 
-function ModalInfo({item, closeModal}: ModalInfoProps) {
+function ModalInfo({item, closeModal, userID}: ModalInfoProps) {
+ 
   const [count, setCount] = useState(0);
   const [btndisabled, setBtnDisabled] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     setCount(0);
     setBtnDisabled(false);
@@ -34,6 +39,29 @@ function ModalInfo({item, closeModal}: ModalInfoProps) {
     console.log('så här många har beställts',count)
   }
 
+ const addToBasket = async () =>{
+
+  try{
+  const basketItem ={
+    menuItem: item.MenuItemID,
+    item:{
+
+      ...item,
+    },
+    count: count
+   }
+  console.log('det här är menuItem', item.MenuItemID)
+  await axios.post('https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/basket',
+  {userID,
+   basketItems: [basketItem]
+  })
+  navigate('/basket')
+ }catch(error){
+    console.error('Error when adding item to the basket',error)
+  }
+ }
+ 
+ 
   return (
     <div className="modal-wrapper">
     <section className="modal-container">
@@ -75,6 +103,7 @@ function ModalInfo({item, closeModal}: ModalInfoProps) {
               onClick={() => {
                 orderFromModal();
                 setBtnDisabled(true);
+                addToBasket()
               }}
               text="Lägg i Varukorgen"
               disabled={btndisabled}

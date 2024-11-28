@@ -14,9 +14,16 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.687.0",
     "@aws-sdk/lib-dynamodb": "^3.689.0",
-    "@middy/core": "^5.5.1"
+    "@middy/core": "^4.0.2",
+    "@middy/http-json-body-parser": "^6.0.0",
+    "@middy/validator": "^4.0.2",
+    "@sideway/address": "^5.0.0",
+    "aws-sdk": "^2.1692.0",
+    "bcryptjs": "^2.4.3",
+    "joi": "^17.13.3"
   },
   "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.40",
     "serverless-offline": "^14.3.4"
   }
 }

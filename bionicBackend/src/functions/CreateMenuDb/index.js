@@ -3,6 +3,8 @@ const { addMenuToDb } = require("../utils/addMenuToDb.js");
 
 exports.handler = async (event) => {
   try {
+    
+    
     if (!event.body) {
       return sendError(400, "Request body is missing");
     }

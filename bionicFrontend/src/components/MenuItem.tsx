@@ -42,7 +42,7 @@ function MenuItem({ item }: MenuItemProps) {
         </section>
         <article className="menu-header-text">
           <h1>{item.articleName}</h1>
-          <h2>Pris : {item.price}</h2>
+          <h2>Pris : {item.price} Sek</h2>
         </article>
         <article className="menu-description">
           <h3>{item.description}</h3>

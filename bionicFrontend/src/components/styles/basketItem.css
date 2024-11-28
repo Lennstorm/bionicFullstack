@@ -16,8 +16,8 @@
 }
 
 .item-img {
-    width: 85px;
-    height: 85px;
+    width: 70px;
+    height: 70px;
     background-color: white;
     border-radius: 10px;
 }
@@ -42,6 +42,7 @@ height: 40px;
 background-color: white;
 border-radius: 3px;
 border: 1px solid black;
+align-content: center;
 }
 
 .basketItem-text {
@@ -80,5 +81,8 @@ border: 1px solid black;
 }
 
 /*
-Alistair
+* Författare Alistair
+*
+*
+*
 */

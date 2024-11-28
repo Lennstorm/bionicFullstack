@@ -3,15 +3,17 @@
     flex-direction: column;
 }
 
-main {
-    width: 100%;
-    min-height: 30rem;
-    background-color: beige;
-}
-
 .content-container{
     display:flex;
     flex-wrap: wrap;
     gap:10px;
 }
+
+
+/* Författare:
+*
+* Ändrad av Andreas - tog bort main som istället läggs i app.css
+*
+*
+*/
 

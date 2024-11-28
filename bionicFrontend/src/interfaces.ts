@@ -1,4 +1,5 @@
 export interface MenuItems {
+   MenuItemID : string
    articleName: string,
    allergies:string,
    description: string,

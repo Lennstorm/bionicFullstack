@@ -4,6 +4,10 @@ import Counter from './Counter';
 import './styles/basketItem.css';
 import Bin from '../assets/bin.svg';
 
+
+
+
+
 interface BasketItem {
     basketItemID: string;
     menuItem: string;
@@ -28,6 +32,8 @@ interface BasketItemProps {
 const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
     const [items, setItems] = useState<BasketItem[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    
+    
 
     const userID = 'AB123'; // userID's: AB123, AB124, AB125
 
@@ -100,12 +106,12 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
         <div className="basketItems-container">
             {items.map((item) => (
                 <div key={item.basketItemID} className="basketItem-container">
-                    <img className="item-img" src={item.image} alt="menu item image" />
+                    <img className="item-img" src={selectedItem.image} alt="menu item image" />
 
                     <section className="mainContent-container">
                         <section className="top-section">
                             <article className="item-article basketItem-text">
-                                {item.menuItemName}
+                                {selectedItem.articleName}
                             </article>
                             <article className="counter-article basketItem-text">
                                 <p>antal</p>
@@ -116,7 +122,7 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
                                 />
                             </article>
                             <article className="price-article basketItem-text">
-                                Totalpris: {item.price * item.count} SEK
+                                Pris: {item.price * item.count} SEK
                             </article>
                         </section>
 

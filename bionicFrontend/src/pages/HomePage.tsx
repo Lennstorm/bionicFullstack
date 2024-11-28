@@ -28,8 +28,13 @@ useEffect(() => {
   }, [])
 
   return (
+ 
     
     <div className='homePage--wrapper'>
+
+
+    <div className='page homePage--wrapper'>
+
       <Header />
       <main className='content-container'>
         {menuItems.map((item) => (
@@ -39,7 +44,7 @@ useEffect(() => {
       </main>
       <Footer />
     </div>
-
+    </div>
   )
 }
 

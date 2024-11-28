@@ -74,8 +74,8 @@ font-weight:300
 .modal-text .modal-ingredience{
     display:flex;
     flex-direction: column;
-    border:2px solid red;
-    height: 140px;
+    
+   
     
 }
 .modal-text h4{

@@ -27,10 +27,10 @@ const BasketPage = () => {
     };
 
     return (
-        <div className="basketPage--wrapper">
+        <div className="page basketPage--wrapper">
             <Header />
-            <main className="content-container">
-                <h2 className="h2-basketPage">Din Kundkorg</h2>
+            <main className="basket-main">
+                <h2 className="h2-basketPage">Din Varukorg</h2>
 
                 <BasketItem
                     onTotalPriceChange={updateTotalPrice}
