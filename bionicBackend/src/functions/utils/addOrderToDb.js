@@ -8,7 +8,6 @@ async function createOrUpdateOrder(userID, basketItems, { orderStatus, orderLock
 
     const newOrder = {
         orderItemID,
-        /*pk: orderItemID,*/
         userid: userID.toLowerCase(),
         orderContent: basketItems,
         orderStatus: orderStatus || "väntande",
