@@ -102,23 +102,6 @@ resources:
                 KeyType: HASH
             Projection:
               ProjectionType: "ALL"
-        
-    
-    OrdersTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: "orders-db"
-        AttributeDefinitions:
-          - AttributeName: "orderItemID"
-            AttributeType: "S"
-          - AttributeName: "customerID" # Definiera attribut för din sort key (om du vill ha en)
-            AttributeType: "S" # S för sträng
-        KeySchema:
-          - AttributeName: "orderItemID"
-            KeyType: HASH
-          - AttributeName: "customerID"
-            KeyType: RANGE
-        BillingMode: PAY_PER_REQUEST
 
     BasketTable:
       Type: AWS::DynamoDB::Table
