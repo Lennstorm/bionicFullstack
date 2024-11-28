@@ -6,7 +6,7 @@ exports.handler = async (event) =>{
 
       const { Items } = await db.scan({
 
-        TableName: "menus-to-db",
+        TableName: "menu-db",
         
       })
       return sendResponse(200,Items)
