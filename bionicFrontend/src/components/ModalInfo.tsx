@@ -86,7 +86,7 @@ function ModalInfo({item, closeModal, userID}: ModalInfoProps) {
       </section>
       <section className='modal-description-container'>
         <article className='modal-description-text'>
-          <p>{item.description}</p>
+          <p>{item.fullDescripton}</p>
 
         </article>
         <figure className=' modal-buttons'>

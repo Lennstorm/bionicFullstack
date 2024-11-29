@@ -3,6 +3,7 @@ export interface MenuItems {
    articleName: string,
    allergies:string,
    description: string,
+   fullDescripton:string,
    ingredience: string,
    visible: boolean,
    timeToCook: number,

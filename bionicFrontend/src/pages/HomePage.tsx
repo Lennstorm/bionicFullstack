@@ -15,6 +15,7 @@ useEffect(() => {
     const fetchMenuItems = async () => {
       try {
         const response = await axios.get(url)
+        console.log('här är responsen från fetchMenus',response.data)
         console.log(response.data)
         setMenuItems(response.data.data)
       } catch (error) {
@@ -38,7 +39,7 @@ useEffect(() => {
       <Header />
       <main className='content-container'>
         {menuItems.map((item) => (
-
+        
           <MenuItem key={item.popularIndex} item={item} />
         ))}
       </main>

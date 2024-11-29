@@ -2,6 +2,7 @@ import './styles/menu-item.css'
 import { MenuItems } from '../interfaces.ts';
 import { useState, useEffect} from 'react';
 import ModalInfo from './ModalInfo.tsx';
+import { userInfo } from 'os';
 
 interface MenuItemProps {
   item: MenuItems
@@ -56,9 +57,9 @@ function MenuItem({ item }: MenuItemProps) {
           <button className="menu-order-button">Beställ</button>
         </section>
       </section>
-      {isModalOpen && (
-        <ModalInfo item={item} closeModal={closeModal} />
-      )}
+      {/* {isModalOpen && (
+        // <ModalInfo item={item} userID={userID}  count={count}closeModal={closeModal} />
+      )} */}
     </>
   )
 }
