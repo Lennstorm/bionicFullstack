@@ -18,6 +18,24 @@ plugins:
   - serverless-dynamodb-local
   - serverless-offline
 
+custom:
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      heapInitial: 200m
+      heapMax: 1g
+      migrate: true
+    seed:
+      userdb: # Seed namn
+        sources:
+          - table: user-db
+            data: ./seed/users.json
+    convertEmptyValues: true
+    debug: true
+    stages:
+      -dev
+
 package:
   individually: true
 
@@ -64,6 +82,13 @@ functions:
       - httpApi:
           path: /api/basket
           method: post
+  
+  login:
+    handler: src/functions/Login/index.handler
+    events:
+      - httpApi:
+          path: /login
+          method: post
 
 
 resources:
@@ -71,7 +96,7 @@ resources:
     TestMenuTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: "menus-to-db"
+        TableName: "menu-db"
         AttributeDefinitions:
           - AttributeName: "MenuItemID"
             AttributeType: "S" # S för sträng

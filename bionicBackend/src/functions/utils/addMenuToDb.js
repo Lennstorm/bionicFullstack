@@ -8,7 +8,7 @@ async function addMenuToDb(articleName, allergies, description,ingredience,visib
     try {
         
         await db.put({
-            TableName: "menus-to-db",
+            TableName: "menu-db",
             Item: {
 
                 MenuItemID,

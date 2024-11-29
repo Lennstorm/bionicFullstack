@@ -5,7 +5,7 @@ const { db } = require("../../services/index.js");
     try{
    const data = await db.scan({
 
-            TableName: 'menus-to-db'
+            TableName: 'menu-db'
         })
 
         if(!data.Items || data.Items.length == 0){
