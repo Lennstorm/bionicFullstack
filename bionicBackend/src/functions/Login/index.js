@@ -10,7 +10,7 @@ const handler = async (event) => {
         const user = event.user;
 
         const token = generateJWT(user);
-        console.log('Generated token:', token);
+        console.log('Generated token:', token);//bör inte loggas i slutprodukt! Känslig info!
 
         return sendResponseWithHeaders(200, {
             message: 'Login successful!'
