@@ -1,19 +1,20 @@
-const { getUser } = require("../services/getUser.js");
-const { comparePasswords } = require("../functions/utils/loginUtils")
+//bionicBackend/src/middleware/validateLogin.js:
+const { getUserByEmail } = require("../services/getUserByEmail.js");
+const { comparePasswords } = require("../functions/utils/loginUtils.js")
 
 const validateLogin = () => ({
-    before : async (handler) => {
-        const reqUser = JSON.parse(handler.event.body);
+    before : async (request) => {
+        const reqUser = JSON.parse(request.event.body);
 
-        if (!reqUser.userid || !reqUser.password) {
-            const error = new Error("Användar-id och lösenord erfordras!");
+        if (!reqUser.email || !reqUser.password) {
+            const error = new Error("E-post och lösenord erfordras!");
             error.statusCode = 400;
             throw error;
         }
         
-        const user = await getUser(reqUser.userid);        
+        const user = await getUserByEmail(reqUser.email);        
         if (!user) {            
-            const error = new Error("Användar-id finns inte registrerat.");
+            const error = new Error("E-posten finns inte registrerad.");
             error.statusCode = 404;
             throw error;
         }
@@ -24,7 +25,7 @@ const validateLogin = () => ({
             error.statusCode = 401;
             throw error;         
         }
-        handler.event.user = user;
+        request.event.user = user;
     },
 });
 

@@ -5,8 +5,10 @@ import Header from '../components/Header';
 import axios from 'axios';
 import './styles/homePage.css';
 import MenuItem from '../components/MenuItem.tsx';
-const url: string = 'https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/get-menu' 
-//Peters url. Det här skulle behöva importeras från en separat fil istället så vi enkelt kan ändra när man byter stack-adress!!
+
+const url: string = 'https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/get-menu' //Peters url. 
+// Det här skulle behöva importeras från en separat fil istället så vi enkelt kan ändra när man byter stack-adress!!
+
 /* const url: string = 'https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/get-menu' */
 
 const HomePage = () => {

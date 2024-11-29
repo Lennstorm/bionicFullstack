@@ -1,6 +1,8 @@
+//bionicBackend/src/functions/utils/loginUtils.js
+
 //const { sendResponse } = require("../../responses/index.js");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const saltRounds = 10;
@@ -17,17 +19,17 @@ const comparePasswords = async (password, storedPassword) => {
 
 const generateJWT = (user) => {
     const payload = {
-        user : user.userid,
-        isAdmin : user.role === "admin" || false,
+        userid: user.userid,
+        isAdmin: user.role === "admin" || false,
     };
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn : '1h'});
+    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
     return token;
 };
 
 const verifyJWT = (token) => {
     try {
-        const decoded = jwt.verify(token, process.env.SECRET_ACCESS_KEY);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         return decoded;
     } catch (error) {
         console.error("Invalid token:", error.message);
