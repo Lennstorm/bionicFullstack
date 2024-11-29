@@ -25,6 +25,7 @@ exports.handler = async (event) => {
         item.articleName == null ||
         item.allergies == null ||
         item.description == null ||
+        item.fullDescription == null ||
         item.ingredience == null ||
         item.visible == null ||
         item.timeToCook == null ||
@@ -36,13 +37,14 @@ exports.handler = async (event) => {
         item.popularIndex == null ||
         item.image == null
       ) {
-        return sendError(400, "Please enter all required information (quantity, description, price, name,healthyIndex,popularIndex)");
+        return sendError(400, "Please enter all required information (quantity, description, fullDescription, price, name,healthyIndex,popularIndex)");
       }
 
       const result = await addMenuToDb({
         articleName: item.articleName,
         allergies: item.allergies,
         description: item.description,
+        fullDescription: item.fullDescription,
         ingredience: item.ingredience,
         visible: item.visible,
         timeToCook: item.timeToCook,
@@ -69,5 +71,9 @@ exports.handler = async (event) => {
   }
 };
 
-
-// ******** koden skriven av Peter ***********
+/* 
+* Författare Peter
+*
+* Ändrad av Andreas: lagt till fullDescription.
+*
+*/

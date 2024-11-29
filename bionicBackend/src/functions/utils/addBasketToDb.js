@@ -1,3 +1,4 @@
+
 const { db } = require("../../services/index.js");
 
 async function addBasketToDb(userID, basketItems) {
@@ -50,7 +51,6 @@ async function addBasketToDb(userID, basketItems) {
                     ":basketItems": finalBasketItems,
                 },
             };
-            //befintlig db uppdateas
             await db.update(updateParams);
 
             return {
@@ -58,7 +58,6 @@ async function addBasketToDb(userID, basketItems) {
                 message: "Basket updated successfully",
             };
         } else {
-            //annars skapas en ny varukorg för kunden
             const newBasket = {
                 basketItemID,
                 userID,

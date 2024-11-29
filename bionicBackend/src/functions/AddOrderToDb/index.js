@@ -1,4 +1,109 @@
-const { sendError, sendResponse } = require("../../responses/index.js");
+const middy = require('@middy/core');
+const { createOrUpdateOrder } = require("../utils/addOrderToDb.js");
+const { validateOrder } = require("../../middleware/validateAddOrder.js");
+
+//local error o response
+const sendError = (statusCode, errorMessage) => {
+    return {
+        statusCode,
+        body: JSON.stringify({
+            success: false,
+            error: errorMessage,
+        }),
+    };
+};
+
+const sendResponse = (statusCode, responseBody) => {
+    return {
+        statusCode,
+        body: JSON.stringify(responseBody),
+    };
+};
+
+
+const orderHandler = async (event) => {
+    console.log("Event body:", event.body);
+    console.log("Handler event:", event);
+
+    try {
+        const body = typeof event.body === "string" ? JSON.parse(event.body) : event.body;
+        const { userID, basketItems, orderStatus, orderLocked, createdAt, editedAt } = body;
+
+        if (!userID) {
+            return sendError(400, "AnvändarID saknas");
+        }
+
+        if (!Array.isArray(basketItems) || basketItems.length === 0) {
+            return sendError(400, "Varukorgen är tom.");
+        }
+
+        const result = await createOrUpdateOrder(userID, basketItems, { orderStatus, orderLocked, createdAt, editedAt });
+
+        if (!result.success) {
+            return sendError(500, result.message || "Lyckades inte skapa ordern");
+        }
+
+        return sendResponse(200, { message: result.message });
+
+    } catch (error) {
+        console.error("Error in order handler:", error);
+        return sendError(500, error.message || "Internal server error.");
+    }
+};
+
+exports.handler = middy(orderHandler).use(validateOrder());
+
+
+
+
+
+
+/*const middy = require('@middy/core');
+const { sendResponse, sendError } = require("../../services/index.js");
+const { checkIfOrderExists, createOrUpdateOrder } = require("../utils/addOrderToDb.js");
+const { validateOrder } = require("../../middleware/validateAddOrder.js");
+
+const orderHandler = async (event) => {
+    const { userID } = event;
+
+    try {
+        const orderExists = await checkIfOrderExists(userID);
+        if (orderExists) {
+            return sendError(400, "En order med existerar redan");
+        }
+
+        const basketItems = await fetchBasketItems(userID);
+        if (basketItems.length === 0) {
+            return sendError(400, "Vaurkorgen är tom.");
+        }
+
+        const result = await createOrUpdateOrder(userID, basketItems);
+
+        if (!result.success) {
+            return sendError(500, result.message || "Lyckades inte skapa ordern");
+        }
+
+        return sendResponse(200, {
+            message: result.message,
+        });
+    } catch (error) {
+        console.error("Fel i order handler:", error.message);
+        return sendError(500, error.message || "Internal server error.");
+    }
+};
+
+exports.handler = middy(orderHandler).use(validateOrder());*/
+
+
+
+
+
+
+
+
+
+
+/*const { sendError, sendResponse } = require("../../responses/index.js");
 const { addOrderToDb } = require("../utils/addOrderToDb.js");
 
 exports.handler = async (event) => {
@@ -41,6 +146,6 @@ exports.handler = async (event) => {
     console.error("Handler error:", error.message);
     return sendError(500, "Internal server error.");
   }
-};
+};*/
 
-// ******** koden skriven av Peter ***********
+// ******** koden skriven av Peter ***********//

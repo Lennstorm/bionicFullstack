@@ -28,13 +28,6 @@ functions:
           path: /api/create-menu
           method: post
 
-
-  AddOrderToDb:
-    handler: src/functions/AddOrderToDb/index.handler
-    events:
-      - httpApi:
-          path: /api/create-order
-          method: post
   
   GetMenu:
     handler: src/functions/GetMenu/index.handler
@@ -57,6 +50,12 @@ functions:
       - httpApi:
           path: /api/add-user
           method: post
+  AddOrderToDb:
+    handler: src/functions/AddOrderToDb/index.handler
+    events:
+      - httpApi:
+          path: /api/orders
+          method: post
 
   AddBasketToDb:
     handler: src/functions/AddBasketToDb/index.handler
@@ -71,7 +70,7 @@ resources:
     TestMenuTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: "menus-to-db"
+        TableName: "menu-db"
         AttributeDefinitions:
           - AttributeName: "MenuItemID"
             AttributeType: "S" # S för sträng
@@ -102,23 +101,6 @@ resources:
                 KeyType: HASH
             Projection:
               ProjectionType: "ALL"
-        
-    
-    OrdersTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: "orders-db"
-        AttributeDefinitions:
-          - AttributeName: "orderItemID"
-            AttributeType: "S"
-          - AttributeName: "customerID" # Definiera attribut för din sort key (om du vill ha en)
-            AttributeType: "S" # S för sträng
-        KeySchema:
-          - AttributeName: "orderItemID"
-            KeyType: HASH
-          - AttributeName: "customerID"
-            KeyType: RANGE
-        BillingMode: PAY_PER_REQUEST
 
     BasketTable:
       Type: AWS::DynamoDB::Table
@@ -131,7 +113,23 @@ resources:
             AttributeType: "S"
         KeySchema:
           - AttributeName: "basketItemID"
-            KeyType: HASH
+            KeyType: "HASH"
           - AttributeName: "userID"
+            KeyType: "RANGE"
+        BillingMode: PAY_PER_REQUEST
+    
+    OrdersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "orders-db-v3"
+        AttributeDefinitions:
+          - AttributeName: "orderItemID"
+            AttributeType: "S"
+          - AttributeName: "userid"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "orderItemID"
+            KeyType: HASH
+          - AttributeName: "userid"
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
