@@ -106,12 +106,12 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
         <div className="basketItems-container">
             {items.map((item) => (
                 <div key={item.basketItemID} className="basketItem-container">
-                    <img className="item-img" src={selectedItem.image} alt="menu item image" />
+                    <img className="item-img" src={item.image} alt="menu item image" />
 
                     <section className="mainContent-container">
                         <section className="top-section">
                             <article className="item-article basketItem-text">
-                                {selectedItem.articleName}
+                                {item.menuItemName}
                             </article>
                             <article className="counter-article basketItem-text">
                                 <p>antal</p>

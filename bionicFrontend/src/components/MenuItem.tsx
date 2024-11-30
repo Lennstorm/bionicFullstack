@@ -57,9 +57,9 @@ function MenuItem({ item }: MenuItemProps) {
           <button className="menu-order-button">Beställ</button>
         </section>
       </section>
-      {/* {isModalOpen && (
-        // <ModalInfo item={item} userID={userID}  count={count}closeModal={closeModal} />
-      )} */}
+      {isModalOpen && (
+         <ModalInfo item={item} closeModal={closeModal} userID={'peter'} />
+      )}
     </>
   )
 }

@@ -39,25 +39,35 @@ function ModalInfo({item, closeModal, userID}: ModalInfoProps) {
     console.log('så här många har beställts',count)
   }
 
- const addToBasket = async () =>{
-
+  
+const addToBasket = async () =>{
+  if (count <= 0) {
+    alert('Välj antal varor att lägga till');
+    return;
+  }
+  
   try{
-  const basketItem ={
-    menuItem: item.MenuItemID,
-    item:{
-
-      ...item,
+   const basketItemID = `basket-${userID}`
+   const basketItem = {
+    basketItemID: basketItemID, // Lägg till detta
+    userID: userID,                   // Lägg till detta
+    menuItem: item.MenuItemID, // Använd MenuItemID som skickas till backend
+    item: {
+      price: item.price,
+      quantity: item.quantity,
+      image: item.image,
+      articleName: item.articleName,
     },
-    count: count
-   }
-  console.log('det här är menuItem', item.MenuItemID)
+    count: count,
+  };
+  console.log('det här är basketitem', basketItem)
   await axios.post('https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/basket',
   {userID,
    basketItems: [basketItem]
   })
   navigate('/basket')
  }catch(error){
-    console.error('Error when adding item to the basket',error)
+  console.log('det blev fel när varorna skall läggas i varukorgen')
   }
  }
  
@@ -86,7 +96,7 @@ function ModalInfo({item, closeModal, userID}: ModalInfoProps) {
       </section>
       <section className='modal-description-container'>
         <article className='modal-description-text'>
-          <p>{item.fullDescripton}</p>
+          <p>{item.fullDescription}</p>
 
         </article>
         <figure className=' modal-buttons'>
