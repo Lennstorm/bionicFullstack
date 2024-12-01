@@ -1,5 +1,8 @@
 //bionicBackend/src/services/getUser.js:
 
+// denna är eventuellt redundant
+
+
 const { db } = require("../services/index.js");
 
 const getUser = async (userid, email) => {
