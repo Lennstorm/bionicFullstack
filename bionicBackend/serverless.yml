@@ -64,6 +64,13 @@ functions:
           path: /api/basket
           method: post
 
+  getBasketFromDb:
+    handler: src/functions/getBasketFromDb/index.handler
+    events:
+      - httpApi:
+          path: /api/basket
+          method: get     
+
 
 resources:
   Resources:

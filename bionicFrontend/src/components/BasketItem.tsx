@@ -11,17 +11,25 @@ import Bin from '../assets/bin.svg';
 interface BasketItem {
     basketItemID: string;
     menuItem: string;
-    menuItemName: string;
+    item:item[]
+    articleName: string;
     price: number;
     image: string;
     count: number;
     specialRequest: string;
-    addedAt: string;
+    addedAt?: string;
 }
 
 interface BasketProps {
     userID: string;
+    basketItemID: string;
+    createdAt: string;
     basketItems: BasketItem[];
+}
+
+interface ApiResponse {
+    success: boolean;
+    data: BasketProps[];
 }
 
 interface BasketItemProps {
@@ -41,10 +49,23 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
         const fetchBasketItems = async (): Promise<void> => {
             setIsLoading(true);
             try {
-                const response = await axios.get('/data.json');
-                const data = response.data;
+                const response = await axios.get('https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/basket');
+                const{data: apiResponse} = response
+                console.log('API Response:',apiResponse)
 
-                const userBasket = data.baskets.find((basket: BasketProps) => basket.userID === userID);
+                const { success, data: baskets } = apiResponse as ApiResponse;
+
+                if (!success) {
+                    console.error('API call unsuccessful');
+                    return;
+                }
+
+                if(!Array.isArray(baskets)){
+                   console.log('Expected baskets to be an array, but got:', typeof baskets)
+                   return
+                }
+
+                const userBasket = baskets.find((basket: BasketProps) => basket.userID === userID);
                 if (userBasket) {
                     setItems(userBasket.basketItems);
                 } else {
@@ -111,7 +132,7 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
                     <section className="mainContent-container">
                         <section className="top-section">
                             <article className="item-article basketItem-text">
-                                {item.menuItemName}
+                                {item.articleName}
                             </article>
                             <article className="counter-article basketItem-text">
                                 <p>antal</p>

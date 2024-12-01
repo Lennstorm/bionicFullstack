@@ -58,7 +58,7 @@ function MenuItem({ item }: MenuItemProps) {
         </section>
       </section>
       {isModalOpen && (
-         <ModalInfo item={item} closeModal={closeModal} userID={'peter'} />
+         <ModalInfo item={item} closeModal={closeModal} userID={'AB123'} />
       )}
     </>
   )
