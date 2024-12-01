@@ -5,9 +5,11 @@ import companyLogo from '../assets/logo.svg';
 import textLogo from '../assets/hemkocken_text.svg'
 import basketLogo from '../assets/kundkorg.svg';
 import LoginButton from '../components/LoginButton';
+import LoginModal from './LoginModal';
 
 function Header() {
     const [isMini, setIsMini] = useState(false);
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,6 +26,7 @@ function Header() {
     }, []);
     
     return (
+        <>
         <div style={{
             background: `linear-gradient(to right, white 20%, rgba(255, 255, 255, 0) 70%), url(${headerImg})`,
             backgroundSize: 'cover',
@@ -36,11 +39,17 @@ function Header() {
 
             <LoginButton                 
                 text="logga in" 
-                onClick={() => console.log('Login Button!')} />
+                onClick={() => setIsLoginModalOpen(true)} />
 
             <img src={basketLogo} alt="basket symbol" className="kundkorg" />                
         </div>
-    )
+        {isLoginModalOpen && (
+            <LoginModal
+                onClose={() => setIsLoginModalOpen(false)}
+                />
+        )}
+        </>
+    );
 }
 
 export default Header
