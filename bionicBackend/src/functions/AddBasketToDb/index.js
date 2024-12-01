@@ -6,10 +6,10 @@ const { validateAddBasket } = require("../../middleware/validateAddBasket.js");
 
 const handler = async (event) => {
     try {
-        const { basket } = JSON.parse(event.body)
-        console.log('det här är basket i backend handlern',basket)
+        const { userID, basketItems } = JSON.parse(event.body);
+        console.log('Received data:', { userID, basketItems });
 
-        const result = await addBasketToDb({userID: basket.userID,basketItems:basket.basketItems});
+        const result = await addBasketToDb({userID,basketItems});
         console.log('det här är result i backend handlern',result)
 
         if (!result.success) {

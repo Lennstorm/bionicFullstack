@@ -48,26 +48,37 @@ const addToBasket = async () =>{
   
   try{
    const basketItemID = `basket-${userID}`
+   console.log('full item object', item)
+   
    const basketItem = {
     basketItemID: basketItemID, // Lägg till detta
-    userID: userID,                   // Lägg till detta
+    userID,                  // Lägg till detta
     menuItem: item.MenuItemID, // Använd MenuItemID som skickas till backend
+    count: count || 1,
     item: {
-      price: item.price,
-      quantity: item.quantity,
-      image: item.image,
-      articleName: item.articleName,
+      price: item.price || 0,
+      quantity: item.quantity ||1,
+      image: item.image || '',
+      articleName: item.articleName || '',
     },
-    count: count,
+   specialRequests:'',
+   orderStatus: '',
   };
   console.log('det här är basketitem', basketItem)
   await axios.post('https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/basket',
-  {userID,
-   basketItems: [basketItem]
-  })
+    {
+      userID,
+      basketItems: [basketItem]
+    }
+  
+  );
+  
+  
   navigate('/basket')
  }catch(error){
-  console.log('det blev fel när varorna skall läggas i varukorgen')
+  console.error('Error response:', error.response ? error.response.data : error.message)
+  console.log('Full error:', error);
+  console.log('det blev fel när varorna skall läggas i varukorgen');
   }
  }
  
@@ -112,7 +123,7 @@ const addToBasket = async () =>{
             <OrderButton
               onClick={() => {
                 orderFromModal();
-                setBtnDisabled(true);
+                // setBtnDisabled(true);
                 addToBasket()
               }}
               text="Lägg i Varukorgen"
