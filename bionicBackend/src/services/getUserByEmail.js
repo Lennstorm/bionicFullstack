@@ -1,3 +1,5 @@
+// bionicBackend/src/services/getUserByEmail.js:
+
 const { db } = require("../services/index.js");
 
 const getUserByEmail = async (email) => {

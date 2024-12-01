@@ -9,8 +9,10 @@ interface LoginModalProps {
 const LoginModal = ({ onClose }: LoginModalProps) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleLogin = async () => {
+        setErrorMessage('');
         try {
             const response = await fetch('https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/login', {
                 method: 'POST',
@@ -21,14 +23,18 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
             });
 
             const data = await response.json();
-            if (data.success) {
-                console.log('token', data.token);
+
+            if (response.ok) {
+                console.log('token:', data.token);
+                localStorage.setItem('authToken', data.token);
                 onClose();
+                window.location.reload();
             } else {
-                alert(data.message);
+                setErrorMessage(data.message || 'Inloggningen misslyckades');
             }
         } catch (error) {
-            console.error('Login failed:', error);
+            console.error('Login failed', error);
+            setErrorMessage('Tekniskt fel. Försök senare!');
         }
     };
 
@@ -50,13 +56,13 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-
                 <input
                     type="password"
                     placeholder="skriv lösenord"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
                 <div className="login-modal-buttons">
                     <button onClick={handleGuestLogin}>Logga in som gäst</button>
                     <button onClick={handleCreateAccount}>Skapa konto</button>
