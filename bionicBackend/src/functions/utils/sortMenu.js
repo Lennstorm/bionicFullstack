@@ -48,5 +48,10 @@ const { db } = require("../../services/index.js");
 
 module.exports = { sortMenuPrice }
 
-
-// ******** koden skriven av Peter ***********
+/* 
+*   Författare Peter
+*
+*   ändrad av Andreas - bytte namn på databas till menu-db
+*
+*
+ */

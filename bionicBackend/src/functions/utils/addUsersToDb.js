@@ -30,10 +30,10 @@ async function checkIfEmailExists(email) {
     try {
         const result = await db.query({
             TableName: 'user-db',
-            IndexName: 'email-index', // GSI måste specificeras här
+            IndexName: 'email-index',
             KeyConditionExpression: '#email = :email',
             ExpressionAttributeNames: {
-                '#email': 'email', // Eftersom "email" är reserverat
+                '#email': 'email',
             },
             ExpressionAttributeValues: {
                 ':email': email,

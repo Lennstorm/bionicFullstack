@@ -1,6 +1,21 @@
 const { db } = require("../../services");
 const { v4: uuid } = require("uuid");
-async function addMenuToDb(articleName, allergies, description,ingredience,visible,timeToCook,price,quantity, inStock,toDaysSpecial,healthyIndex,popularIndex,image) {
+
+async function addMenuToDb(
+    articleName,
+    allergies,
+    description,
+    fullDescription,
+    ingredience,
+    visible,
+    timeToCook,
+    price,
+    quantity,
+    inStock,
+    toDaysSpecial,
+    healthyIndex,
+    popularIndex,
+    image) {
 
     const MenuItemID = uuid().substring(0, 8)
     
@@ -15,6 +30,7 @@ async function addMenuToDb(articleName, allergies, description,ingredience,visib
                 articleName,
                 allergies,
                 description,
+                fullDescription,
                 ingredience,
                 visible,
                 timeToCook,
@@ -45,4 +61,9 @@ async function addMenuToDb(articleName, allergies, description,ingredience,visib
 
 module.exports = { addMenuToDb }
 
-// ******** koden skriven av Peter ***********
+/* 
+* Författare Peter
+*
+* Ändrad av Andreas: lagt till fullDescription och bytt namn på databasen.
+*
+*/
