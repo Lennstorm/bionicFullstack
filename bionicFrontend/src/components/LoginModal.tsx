@@ -1,5 +1,5 @@
 //bioonicFrontend/src/components/LoginModal.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './styles/loginModal.css';
 import LoginButton from "./LoginButton";
 
@@ -11,6 +11,35 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+
+    useEffect(() => {
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        
+        document.body.style.overflow = 'hidden';
+        if (scrollbarWidth >0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+        }
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                onClose();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [onClose]);
+
+    const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (event.target === event.currentTarget) {
+            onClose();
+        }
+    }
 
     const handleLogin = async () => {
         setErrorMessage('');
@@ -50,7 +79,7 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
         console.log('Redirecting to Create Account');
     };
     return (
-        <div className="login-modal-overlay">
+        <div className="login-modal-overlay" onClick={handleOverlayClick}>
             <div className="login-modal">
                 <button className="close-modal-btn" onClick={onClose}>X</button>
                 <input
@@ -66,9 +95,11 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
-                <div className="login-modal-buttons">
+                <div className="login-modal-btns">
                     <button onClick={handleGuestLogin}>Logga in som gäst</button>
                     <button onClick={handleCreateAccount}>Skapa konto</button>
+                </div>
+                <div className="login-modal-loginbtn">
                     <LoginButton text="logga in" onClick={handleLogin} />
                 </div>
 

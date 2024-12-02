@@ -1,5 +1,6 @@
 //bioonicFrontend/src/components/Header.tsx
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../components/styles/header.css';
 import headerImg from '../assets/headerImg.png';
 import companyLogo from '../assets/logo.svg';
@@ -46,7 +47,9 @@ function Header() {
                 backgroundPosition: 'center',
             }} className={`header-container ${isMini ? 'mini' : ''}`}>
 
+                <Link to="/">
                 <img className='header-logo' src={isMini ? textLogo : companyLogo} alt="company logo" />
+                </Link>
 
                 <h1 className="header-h1">TakeAway</h1>
 
@@ -59,7 +62,9 @@ function Header() {
                         text="logga in"
                         onClick={() => setIsLoginModalOpen(true)} />
                 )}
+                <Link to="/basket">
                 <img src={basketLogo} alt="basket symbol" className="kundkorg" />
+                </Link>
             </div>
             {isLoginModalOpen && (
                 <LoginModal
