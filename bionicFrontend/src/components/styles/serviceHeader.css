@@ -1,0 +1,26 @@
+.serviceHeader-container {
+    width: 100%;
+    min-height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-grey);
+    color: white;
+}
+
+.serviceHeader-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.service-h1 {
+    font-family: var(--h2-medium-font);
+    font-size: var(--h2-large-size);
+}
+
+.serviceHeader-text {
+    font-family: var(--h2-medium-font);
+    margin: .5rem;
+}
