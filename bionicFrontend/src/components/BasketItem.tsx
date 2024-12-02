@@ -11,7 +11,6 @@ import Bin from '../assets/bin.svg';
 interface BasketItem {
     basketItemID: string;
     menuItem: string;
-    
     articleName: string;
     price: number;
     image: string;
@@ -106,7 +105,7 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
         if (!itemToDelete) return;
 
         const confirmDelete = window.confirm(
-            `Är du säker på att du vill ta bort "${itemToDelete.menuItemName}" från korgen?`
+            `Är du säker på att du vill ta bort "${itemToDelete.articleName}" från korgen?`
         );
 
         if (confirmDelete) {
@@ -125,7 +124,7 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
     return (
         <div className="basketItems-container">
             {items.map((item) => {
-         const {item: menuItem} = item
+         const {item:menuItem} = item
         return (
        
                 <div key={item.basketItemID} className="basketItem-container">
@@ -145,7 +144,7 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
                                 />
                             </article>
                             <article className="price-article basketItem-text">
-                                Pris: {menuItem.price * menuItem.count} SEK
+                                Pris: {menuItem.price * item.count} SEK
                             </article>
                         </section>
 
