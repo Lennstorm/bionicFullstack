@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.40"
   }
 }
