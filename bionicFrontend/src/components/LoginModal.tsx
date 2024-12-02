@@ -1,3 +1,4 @@
+//bioonicFrontend/src/components/LoginModal.tsx
 import { useState } from "react";
 import './styles/loginModal.css';
 import LoginButton from "./LoginButton";
@@ -23,10 +24,12 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
             });
 
             const data = await response.json();
+            console.log('Response data:', data)
 
             if (response.ok) {
+                const token = data.token;
                 console.log('token:', data.token);
-                localStorage.setItem('authToken', data.token);
+                sessionStorage.setItem('authToken', token);
                 onClose();
                 window.location.reload();
             } else {

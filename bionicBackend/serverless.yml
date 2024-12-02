@@ -11,7 +11,7 @@ provider:
   deploymentMethod: direct
   iam:
     role: ${file(./local.yml):iamRole}
-      statements:
+    statements:
       - Effect: Allow
         Action:
           - dynamodb:GetItem
@@ -21,7 +21,7 @@ provider:
           - dynamodb:Query
         Resource:
           - arn:aws:dynamodb:eu-north-1:*:table/user-db
-          - arn:aws:dynamodb:eu-north-1:*:table/user-db/index/email-index    
+          - arn:aws:dynamodb:eu-north-1:*:table/user-db/index/email-index
   httpApi:
     cors: true
 

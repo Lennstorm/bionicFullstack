@@ -1,3 +1,4 @@
+//bioonicFrontend/src/components/Header.tsx
 import { useState, useEffect } from 'react';
 import '../components/styles/header.css';
 import headerImg from '../assets/headerImg.png';
@@ -28,12 +29,12 @@ function Header() {
     }, []);
 
     useEffect(() => {
-        const token = localStorage.getItem('authToken');
+        const token = sessionStorage.getItem('authToken');
         setIsLoggedIn(!!token);
     }, []);
 
     const handleLogout = () => {
-        localStorage.removeItem('authToken');
+        sessionStorage.removeItem('authToken');
         setIsLoggedIn(false);
     };
 

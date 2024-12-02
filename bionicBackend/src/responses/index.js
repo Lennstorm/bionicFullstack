@@ -21,17 +21,20 @@ function sendError(status, message) {
 }
 
 function sendResponseWithHeaders(statusCode, body, token) {
-  return {
+  const response = {
     statusCode: statusCode,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      //'Authorization': `Bearer ${token}`,
       // 'Set-Cookie': `token=${token}; Max-Age=3600, HttpOnly; Path=/`
     },
     body: JSON.stringify({
-      data: body
+      data: body,
+      token: token,
     }),
   };
+  console.log('Response not being sent:', response);
+  return response;
 };
 
 module.exports = { sendResponse, sendError, sendResponseWithHeaders };
