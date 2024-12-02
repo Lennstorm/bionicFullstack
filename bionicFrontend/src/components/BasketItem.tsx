@@ -11,7 +11,7 @@ import Bin from '../assets/bin.svg';
 interface BasketItem {
     basketItemID: string;
     menuItem: string;
-    item:item[]
+    
     articleName: string;
     price: number;
     image: string;
@@ -119,20 +119,22 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
         const total = calculateTotalPrice(items);
         onTotalPriceChange(total);
     }, [items, onTotalPriceChange]);
-
     if (isLoading) return <div>Laddar....</div>;
     if (items.length === 0) return <div className="cartEmpty-message">Din kundkorg är tom.</div>;
 
     return (
         <div className="basketItems-container">
-            {items.map((item) => (
+            {items.map((item) => {
+         const {item: menuItem} = item
+        return (
+       
                 <div key={item.basketItemID} className="basketItem-container">
-                    <img className="item-img" src={item.image} alt="menu item image" />
+                    <img className="item-img" src={menuItem.image} alt="menu item image" />
 
                     <section className="mainContent-container">
                         <section className="top-section">
                             <article className="item-article basketItem-text">
-                                {item.articleName}
+                                {menuItem.articleName}
                             </article>
                             <article className="counter-article basketItem-text">
                                 <p>antal</p>
@@ -143,7 +145,7 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
                                 />
                             </article>
                             <article className="price-article basketItem-text">
-                                Pris: {item.price * item.count} SEK
+                                Pris: {menuItem.price * menuItem.count} SEK
                             </article>
                         </section>
 
@@ -163,7 +165,8 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
                         onClick={() => handleRemoveItem(item.menuItem)}
                     />
                 </div>
-            ))}
+            )
+})}
         </div>
     );
 };
@@ -173,4 +176,5 @@ export default BasketItem;
 
 /*
 Alistair
+Peter
 */
