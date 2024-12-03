@@ -48,7 +48,7 @@ function MenuItem({ item }: MenuItemProps) {
         </section>
         <article className="menu-header-text">
           <h1>{item.articleName}</h1>
-          <h2>Pris : {item.price} Sek</h2>
+          <h2>Pris: {item.price} kr</h2>
         </article>
         <article className="menu-description">
           <h3>{item.description}</h3>
@@ -71,4 +71,10 @@ function MenuItem({ item }: MenuItemProps) {
 
 export default MenuItem
 
-// *********koden skriven av Peter**********
+/* Författare Peter
+*
+* ändringar av Andreas: Justerat h2 för utseende.
+*
+*
+*
+*/

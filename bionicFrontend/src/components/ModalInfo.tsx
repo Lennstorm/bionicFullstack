@@ -92,12 +92,12 @@ const addToBasket = async () =>{
           <img src={item.image} />
         </figure>
         <article className='modal-text'>
-          <h3>Pris: {item.price}</h3>
-          <p>innehåller:</p>
+          <h3>Pris: {item.price} kr</h3>
+          <p>innehåll:</p>
           <article className='modal-ingredience'>
           <p>{item.ingredience}</p>
           </article>
-          <h4>Allergi information:</h4>
+          <h4>Allergiinformation:</h4>
           <h4>{item.allergies}</h4>
         </article>
         <section className='modal-close'>
@@ -143,4 +143,10 @@ const addToBasket = async () =>{
 
 export default ModalInfo
 
-// koden skriven av Peter
+/* Författare Peter
+*
+* ändringar av Andreas: Lagt till "kr" i pris
+*
+*
+*
+*/
