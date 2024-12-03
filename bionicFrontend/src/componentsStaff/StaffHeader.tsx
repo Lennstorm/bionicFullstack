@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../components/styles/header.css';
 import LoginButton from '../components/LoginButton';
-import LoginModal from './LoginModal';
+import LoginModal from '../components/LoginModal';
 import LogoutButton from '../components/LogoutButton';
 import '../components/styles/serviceHeader.css';
 

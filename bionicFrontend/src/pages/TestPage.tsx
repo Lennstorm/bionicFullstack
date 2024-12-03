@@ -17,7 +17,7 @@ const TestPage = () => {
             <Header />
             <main className='content-container'>
                 <div className='test-wrapper'>
-                    <StaffNavComponent/>
+                    
                     <BigButton 
                         text="BigButton" 
                         onClick={() => console.log('Big Button!')}
