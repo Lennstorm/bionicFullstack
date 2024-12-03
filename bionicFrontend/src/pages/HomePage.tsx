@@ -21,6 +21,7 @@ const HomePage = () => {
     const fetchMenuItems = async () => {
       try {
         const response = await axios.get(url)
+        console.log('här är responsen från fetchMenus',response.data)
         console.log(response.data)
         setMenuItems(response.data.data)
       } catch (error) {
