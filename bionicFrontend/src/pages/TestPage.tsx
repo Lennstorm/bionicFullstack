@@ -8,7 +8,7 @@ import RoundedButton from '../components/RoundedButton';
 import OrderButton from '../components/OrderButton';
 import LoginButton from '../components/LoginButton';
 import Header from '../components/Header';
-import StaffNavComponent from '../components/StaffNavComponent';
+
 // import MenuSortComponent from '../components/MenuSortComponent';
 
 const TestPage = () => {
@@ -17,7 +17,7 @@ const TestPage = () => {
             <Header />
             <main className='content-container'>
                 <div className='test-wrapper'>
-                    <StaffNavComponent/>
+                    
                     <BigButton 
                         text="BigButton" 
                         onClick={() => console.log('Big Button!')}
