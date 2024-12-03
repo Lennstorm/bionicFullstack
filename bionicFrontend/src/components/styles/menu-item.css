@@ -13,7 +13,10 @@
     width: 330px;
     background-color: #D9D9D9;
     margin-bottom: 3rem;
-    padding-bottom:1rem
+    padding-bottom:1rem;
+    z-index:1;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
 }
 
 .menu-container img {
@@ -40,13 +43,13 @@
 }
 
 .menu-header-text h1 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin-left: 23px;
 }
 
 .menu-header-text h2 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin-right: 15px;
 }
@@ -54,16 +57,14 @@
 .menu-description h3 {
     font-size: 1rem;
     text-align: left;
+    font-weight: 500;
+    max-width: 280px;
+    margin-left:5px
 }
 
 .menu-description {
     margin-left: 1.3rem;
     margin-top: -3px;
-}
-
-.menu-description h3 {
-    font-weight: 500;
-
 }
 
 .menu-container button {
@@ -75,12 +76,14 @@
     margin-top: 8px;
     margin-left: 10px;
     font-family: var(--menuItem-h3-font);
+    cursor: pointer;
 }
 
 .menu-information-btn {
     margin-right: 10.5rem;
     margin-top:1rem;
     font-family: var(--menuItem-h3-font);
+    
 }
 
 .menu-order-buttons {
@@ -95,6 +98,7 @@
     margin-top: 15px;
     margin-left:1.2rem;
     font-family: var(--menuItem-h3-font);
+    
 }
 
 .menu-order-buttons .menu-order-button {
@@ -105,6 +109,7 @@
     border-radius: 20px;
     font-weight: 700;
     font-family: var(--menuItem-h3-font);
+    cursor:pointer;
 
 }
 
