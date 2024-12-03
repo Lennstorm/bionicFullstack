@@ -51,9 +51,9 @@ const addToBasket = async () =>{
    console.log('full item object', item)
    
    const basketItem = {
-    basketItemID: basketItemID, // Lägg till detta
-    userID,                  // Lägg till detta
-    menuItem: item.MenuItemID, // Använd MenuItemID som skickas till backend
+    basketItemID: basketItemID, 
+    userID,                 
+    menuItem: item.MenuItemID, 
     count: count || 1,
     item: {
       price: item.price || 0,
@@ -76,7 +76,7 @@ const addToBasket = async () =>{
   
   navigate('/basket')
  }catch(error){
-  console.error('Error response:', error.response ? error.response.data : error.message)
+  
   console.log('Full error:', error);
   console.log('det blev fel när varorna skall läggas i varukorgen');
   }

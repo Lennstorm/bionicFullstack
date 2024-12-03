@@ -16,12 +16,12 @@ const itemDetailsSchema = Joi.object({
 });
 
 const itemSchema = Joi.object({
-    basketItemID: Joi.string().optional().messages({
-        "string.base": "BasketItemID måste vara en text",
-    }),
-    userID: Joi.string().optional().messages({
-        "string.base": "UserID måste vara en text",
-    }),
+    // basketItemID: Joi.string().optional().messages({
+    //     "string.base": "BasketItemID måste vara en text",
+    // }),
+    // userID: Joi.string().optional().messages({
+    //     "string.base": "UserID måste vara en text",
+    // }),
     menuItem: Joi.string().required().messages({
         "string.empty": "Menyartikel behövs",
     }),
@@ -41,13 +41,13 @@ const itemSchema = Joi.object({
 });
 
 const schema = Joi.object({
-    userID: Joi.string().required().messages({
-        "string.empty": "AnvändarId behövs",
-    }),
-    basketItems: Joi.array().items(itemSchema).min(1).required().messages({
-        "array.base": "En lista av artiklar behövs",
-        "array.min": "Minst en artikel måste finnas",
-    }),
+    // userID: Joi.string().required().messages({
+    //     "string.empty": "AnvändarId behövs",
+    // }),
+    // basketItems: Joi.array().items(itemSchema).min(1).required().messages({
+    //     "array.base": "En lista av artiklar behövs",
+    //     "array.min": "Minst en artikel måste finnas",
+    // }),
 });
 
 module.exports = { schema };

@@ -3,6 +3,7 @@ import { MenuItems } from '../interfaces.ts';
 import { useState, useEffect} from 'react';
 import ModalInfo from './ModalInfo.tsx';
 import { userInfo } from 'os';
+import { useNavigate } from 'react-router-dom';
 
 interface MenuItemProps {
   item: MenuItems
@@ -11,7 +12,7 @@ interface MenuItemProps {
 
 function MenuItem({ item }: MenuItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = 'hidden'; // Förhindra skrollning
@@ -32,6 +33,10 @@ function MenuItem({ item }: MenuItemProps) {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  }
+
+  const showCart = () => {
+   navigate('/basket')
   }
    
   
@@ -54,7 +59,7 @@ function MenuItem({ item }: MenuItemProps) {
         </section>
         <section className='menu-order-buttons'>
           <button className="menu-option-button"> V    G     Ä</button>
-          <button className="menu-order-button">Beställ</button>
+          <button onClick ={showCart} className="menu-order-button">Beställ</button>
         </section>
       </section>
       {isModalOpen && (
