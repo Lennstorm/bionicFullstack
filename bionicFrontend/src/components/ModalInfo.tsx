@@ -65,7 +65,7 @@ const addToBasket = async () =>{
    orderStatus: '',
   };
   console.log('det här är basketitem', basketItem)
-  await axios.post('https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/basket',
+  await axios.post('https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket',
     {
       userID,
       basketItems: [basketItem]

@@ -8,10 +8,10 @@ import MenuItem from '../components/MenuItem.tsx';
 import MenuSortComponent from '../components/MenuSortComponent.tsx';
 import { Link } from 'react-router-dom';
 
-const url: string = 'https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/get-menu' //Peters url. 
+//const url: string = 'https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/get-menu' //Peters url. 
 // Det här skulle behöva importeras från en separat fil istället så vi enkelt kan ändra när man byter stack-adress!!
 
-/* const url: string = 'https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/get-menu' */
+const url: string = 'https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/get-menu' //Andreas url
 
 const HomePage = () => {
   const [menuItems, setMenuItems] = useState<MenuItems[]>([])

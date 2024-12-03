@@ -48,7 +48,7 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
         const fetchBasketItems = async (): Promise<void> => {
             setIsLoading(true);
             try {
-                const response = await axios.get('https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/basket');
+                const response = await axios.get('https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket');
                 const{data: apiResponse} = response
                 console.log('API Response:',apiResponse)
 
