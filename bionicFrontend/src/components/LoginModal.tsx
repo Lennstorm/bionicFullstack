@@ -110,3 +110,12 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
 };
 
 export default LoginModal;
+
+
+/* 
+*   Författare Andreas
+*
+*
+*
+*
+ */

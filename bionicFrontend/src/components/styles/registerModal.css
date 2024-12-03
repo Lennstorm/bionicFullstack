@@ -42,40 +42,19 @@
     max-width: 80%;
     width: 100%;
     padding: .8rem;
-    margin: .625rem 0;
+    margin: 1.2rem 0;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-/* 
-.login-modal-btns {
-    max-width: 80%;
-    width: 100%;
-    margin: 1rem 0;    
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-}
-.login-modal-btns button {
-    width: 100%;
-    height: 100%;
-    flex: 1;    
-    padding: 1.2rem .625rem;
-    border: none;
-    background: #B4B4B4;
-    color: #252424;
-    border-radius: 4px;
-    cursor: pointer;
-    
-    font-family: var(--login-button-textfont);
-    font-weight: 700;
-    font-size: 1rem;
-}
 
-.login-modal-loginbtn {
+.register-modal-loginbtn {
     margin: 1.2rem;
 }
 
-.login-modal-btns button:hover {
-    background: #666;
-}
+/* 
+*   Författare Andreas
+*
+*
+*
+*
  */

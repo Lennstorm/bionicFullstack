@@ -112,3 +112,12 @@ const RegisterModal = ({ onClose }: RegisterModalProps) => {
 };
 
 export default RegisterModal;
+
+
+/* 
+*   Författare Andreas
+*
+*
+*
+*
+ */
