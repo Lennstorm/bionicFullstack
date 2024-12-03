@@ -1,17 +1,23 @@
+//bioonicFrontend/src/components/Header.tsx
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../components/styles/header.css';
 import headerImg from '../assets/headerImg.png';
 import companyLogo from '../assets/logo.svg';
 import textLogo from '../assets/hemkocken_text.svg'
 import basketLogo from '../assets/kundkorg.svg';
 import LoginButton from '../components/LoginButton';
+import LoginModal from './LoginModal';
+import LogoutButton from '../components/LogoutButton';
 
 function Header() {
     const [isMini, setIsMini] = useState(false);
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY >50) {
+            if (window.scrollY > 50) {
                 setIsMini(true);
             } else {
                 setIsMini(false);
@@ -22,25 +28,51 @@ function Header() {
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-    
+
+    useEffect(() => {
+        const token = sessionStorage.getItem('authToken');
+        setIsLoggedIn(!!token);
+    }, []);
+
+    const handleLogout = () => {
+        sessionStorage.removeItem('authToken');
+        setIsLoggedIn(false);
+    };
+
     return (
-        <div style={{
-            background: `linear-gradient(to right, white 20%, rgba(255, 255, 255, 0) 70%), url(${headerImg})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-        }} className={`header-container ${isMini ? 'mini' : ''}`}>
+        <>
+            <div style={{
+                background: `linear-gradient(to right, white 20%, rgba(255, 255, 255, 0) 70%), url(${headerImg})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }} className={`header-container ${isMini ? 'mini' : ''}`}>
 
-            <img className='header-logo' src={isMini ? textLogo : companyLogo} alt="company logo" />
+                <Link to="/">
+                <img className='header-logo' src={isMini ? textLogo : companyLogo} alt="company logo" />
+                </Link>
 
-            <h1 className="header-h1">TakeAway</h1>
+                <h1 className="header-h1">TakeAway</h1>
 
-            <LoginButton                 
-                text="logga in" 
-                onClick={() => console.log('Login Button!')} />
-
-            <img src={basketLogo} alt="basket symbol" className="kundkorg" />                
-        </div>
-    )
+                {isLoggedIn ? (
+                    <LogoutButton
+                        text="Logga ut"
+                        onClick={handleLogout} />
+                ) : (
+                    <LoginButton
+                        text="logga in"
+                        onClick={() => setIsLoginModalOpen(true)} />
+                )}
+                <Link to="/basket">
+                <img src={basketLogo} alt="basket symbol" className="kundkorg" />
+                </Link>
+            </div>
+            {isLoginModalOpen && (
+                <LoginModal
+                    onClose={() => setIsLoginModalOpen(false)}
+                />
+            )}
+        </>
+    );
 }
 
 export default Header

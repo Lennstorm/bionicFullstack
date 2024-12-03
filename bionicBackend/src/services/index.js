@@ -1,3 +1,5 @@
+//bionicBackend/src/services/index.js
+
 const { DynamoDB } = require("@aws-sdk/client-dynamodb");
 const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
 

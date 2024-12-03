@@ -1,0 +1,37 @@
+[
+    {
+        "MenuItemID": "1",
+        "articleName": "Gravad Lax",
+        "allergies": "Fisk",
+        "description": "Klassisk gravad lax serverad med hovmästarsås och dill.",
+        "fullDescription": "Full description here.",
+        "image": "https://example.com/gravad-lax.jpg",
+        "ingredience": [
+            "Lax",
+            "Socker",
+            "Salt",
+            "Dill"
+        ],
+        "price": 12.99,
+        "inStock": 10,
+        "timeToCook": 20,
+        "visible": true
+    },
+    {
+        "MenuItemID": "2",
+        "articleName": "Kålpudding",
+        "allergies": "Inga kända allergener",
+        "description": "Ugnsbakad kålpudding med krämig fyllning.",
+        "fullDescription": "Full description here.",
+        "image": "https://example.com/kolpudding.jpg",
+        "ingredience": [
+            "Vitkål",
+            "Köttfärs",
+            "Lök"
+        ],
+        "price": 15.99,
+        "inStock": 5,
+        "timeToCook": 45,
+        "visible": true
+    }
+]

@@ -1,3 +1,4 @@
+//bioonicFrontend/src/routers/Routers.tsx
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import HomePage from "../pages/HomePage";
@@ -5,6 +6,7 @@ import AboutPage from "../pages/AboutPage";
 import TestPage from "../pages/TestPage";
 import BasketPage from "../pages/BasketPage";
 import CheckoutPage from "../pages/CheckoutPage";
+import ServicePage from '../pages/ServicePage';
 
 function Routers() {
     return (
@@ -14,6 +16,7 @@ function Routers() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/basket" element={<BasketPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/service" element={<ServicePage />} />
             <Route path="/test" element={<TestPage />} />
 
         </Routes>

@@ -78,6 +78,15 @@
     transition: all 0.3s ease;
 }
 
+.header-container .logout-btn {
+    position: absolute;
+    top: 85%;
+    right: 1rem;
+    font-size: 1rem;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+}
+
 .header-container.mini .login-btn {
     max-height: 45%;
     font-size: .9rem;
@@ -89,6 +98,20 @@
     transform: translateY(-50%) scale(.95);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.header-container.mini .logout-btn {
+    max-height: 45%;
+    font-size: .9rem;
+    top: 50%; 
+    right: calc(2rem + 2.5rem);
+}
+
+.header-container .logout-btn:active {
+    transform: translateY(-50%) scale(.95);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
 
 
 /* Författare: Ally

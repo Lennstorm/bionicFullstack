@@ -1,6 +1,6 @@
 const validateUser = (schema) => ({
-    before: (handler) => {
-        const { error } = schema.validate(handler.event.body);
+    before: (request) => {
+        const { error } = schema.validate(request.event.body);
         if (error) {
             throw new Error(JSON.stringify({ status: 400, message: error.details[0].message})); // Detta fångas och returneras som ett fel
         }
