@@ -1,7 +1,12 @@
 
 const { db } = require("../../services/index.js");
 
-async function addBasketToDb(userID, basketItems) {
+async function addBasketToDb({userID, basketItems}) {
+    
+    if (!userID || !basketItems || !basketItems.length) {
+        throw new Error('Missing required parameters');
+    }
+    
     try {
         const basketItemID = `basket-${userID}`;
 
@@ -15,6 +20,7 @@ async function addBasketToDb(userID, basketItems) {
 
         //finns det redan en korg?
         const existingBasket = await db.get(getParams);
+        console.log('det här är en log i utils om existingBasket',existingBasket)
 
         if (existingBasket.Item) {
             const existingItems = existingBasket.Item.basketItems;
@@ -64,7 +70,7 @@ async function addBasketToDb(userID, basketItems) {
                 basketItems,
                 createdAt: new Date().toISOString(),
             };
-
+             console.log('här är vi i utils och kollar på basketItems',basketItems)
             const putParams = {
                 TableName: "basket-db",
                 Item: newBasket,
