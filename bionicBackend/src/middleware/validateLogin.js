@@ -30,3 +30,12 @@ const validateLogin = () => ({
 });
 
 module.exports = { validateLogin };
+
+
+/* 
+*   Författare Andreas
+*
+*
+*
+*
+ */

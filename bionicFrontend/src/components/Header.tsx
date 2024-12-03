@@ -8,11 +8,13 @@ import textLogo from '../assets/hemkocken_text.svg'
 import basketLogo from '../assets/kundkorg.svg';
 import LoginButton from '../components/LoginButton';
 import LoginModal from './LoginModal';
+import RegisterModal from './RegisterModal';
 import LogoutButton from '../components/LogoutButton';
 
 function Header() {
     const [isMini, setIsMini] = useState(false);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
@@ -38,6 +40,11 @@ function Header() {
         sessionStorage.removeItem('authToken');
         setIsLoggedIn(false);
     };
+
+    const handleOpenRegisterModal = () => {
+        setIsLoginModalOpen(false);
+        setIsRegisterModalOpen(true);
+    }
 
     return (
         <>
@@ -69,6 +76,12 @@ function Header() {
             {isLoginModalOpen && (
                 <LoginModal
                     onClose={() => setIsLoginModalOpen(false)}
+                    onRegisterClick={handleOpenRegisterModal}
+                />
+            )}
+            {isRegisterModalOpen && (
+                <RegisterModal
+                    onClose={() => setIsRegisterModalOpen(false)}
                 />
             )}
         </>

@@ -1,16 +1,17 @@
-//bionicFrontend/src/components/LoginModal.tsx
+//bionicFrontend/src/components/RegisterModal.tsx
 import { useEffect, useState } from "react";
-import './styles/loginModal.css';
+import './styles/registerModal.css';
 import LoginButton from "./LoginButton";
 
-interface LoginModalProps {
+interface RegisterModalProps {
     onClose: () => void;
-    onRegisterClick: () => void;
 }
 
-const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
+const RegisterModal = ({ onClose }: RegisterModalProps) => {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');    
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
@@ -42,47 +43,46 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
         }
     }
 
-    const handleLogin = async () => {
+    const handleRegister = async () => {
         setErrorMessage('');
+
+        if (password !== confirmPassword) {
+            setErrorMessage('Lösenorder matchar inte!');
+            return;
+        }
         try {
-            const response = await fetch('https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/login', {
+            const response = await fetch('https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/add-user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ name, email, password }),
             });
 
             const data = await response.json();
             console.log('Response data:', data)
 
             if (response.ok) {
-                const token = data.token;
-                console.log('token:', data.token);
-                sessionStorage.setItem('authToken', token);
-                onClose();
-                window.location.reload();
+                console.log('Registreringen lyckades!') // här vill vi skriva ut ett meddelande på skärmen.
             } else {
-                setErrorMessage(data.message || 'Inloggningen misslyckades');
+                setErrorMessage(data.message || 'Registreringen misslyckades');
             }
         } catch (error) {
-            console.error('Login failed', error);
-            setErrorMessage('Tekniskt fel. Försök senare!');
+            console.error('Registration failed', error);
+            setErrorMessage('Tekniskt fel. Försök igen!');
         }
     };
 
-    const handleGuestLogin = () => {
-        console.log('Logging in as guest.');
-        onClose();
-    };
-
-    const handleCreateAccount = () => {
-        onRegisterClick();
-    };
     return (
-        <div className="login-modal-overlay" onClick={handleOverlayClick}>
-            <div className="login-modal">
+        <div className="register-modal-overlay" onClick={handleOverlayClick}>
+            <div className="register-modal">
                 <button className="close-modal-btn" onClick={onClose}>X</button>
+                <input
+                    type="name"
+                    placeholder="för- och efternamn"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
                 <input
                     type="email"
                     placeholder="skriv e-post"
@@ -95,21 +95,23 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <input
+                    type="password"
+                    placeholder="Bekräfta lösenord"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                />
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
-                <div className="login-modal-btns">
-                    <button onClick={handleGuestLogin}>Logga in som gäst</button>
-                    <button onClick={handleCreateAccount}>Skapa konto</button>
-                </div>
-                <div className="login-modal-loginbtn">
-                    <LoginButton text="logga in" onClick={handleLogin} />
-                </div>
 
+                <div className="register-modal-loginbtn">
+                    <LoginButton text="skapa konto!" onClick={handleRegister} />
+                </div>
             </div>
         </div>
     );
 };
 
-export default LoginModal;
+export default RegisterModal;
 
 
 /* 
