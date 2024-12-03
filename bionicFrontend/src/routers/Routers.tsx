@@ -5,12 +5,17 @@ import AboutPage from "../pages/AboutPage";
 import TestPage from "../pages/TestPage";
 import BasketPage from "../pages/BasketPage";
 import CheckoutPage from "../pages/CheckoutPage";
+
+
 import StaffPage from '../pagesStaff/StaffPage';
 
+//kommentera in när de ska användas!!
 
-import StaffHome from '../pagesStaff/StaffPage';
-//fixa import paths till de andra pages sen
-
+// import WaiterPage from '../pagesStaff/WaiterPage';
+// import LockedOrdersPage from '../pagesStaff/LockedOrdersPage';
+// import CookPage from '../pagesStaff/CookPage';
+// import OrderHistoryPage from '../pagesStaff/OrderHistoryPage';
+// import StockPage from '../pagesStaff/StockPage';
 
 function Routers() {
   return (
@@ -22,7 +27,14 @@ function Routers() {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="/staff" element={<StaffPage />}>
-          <Route path="staffhome" element={<StaffHome />} />
+
+          {/*
+          <Route path="waiterpage" element={<WaiterPage />} />
+          <Route path="lockedorders" element={<LockedOrdersPage />} />
+          <Route path="cook" element={<CookPage />} />
+          <Route path="orderhistory" element={<OrderHistoryPage />} />
+          <Route path="stock" element={<StockPage />} />
+          */}
         </Route>
       </Routes>
     </Router>
@@ -30,6 +42,8 @@ function Routers() {
 }
 
 export default Routers;
+
+
 
 
 

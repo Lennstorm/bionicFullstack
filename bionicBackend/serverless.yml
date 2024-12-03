@@ -11,17 +11,6 @@ provider:
   deploymentMethod: direct
   iam:
     role: ${file(./local.yml):iamRole}
-    statements:
-      - Effect: Allow
-        Action:
-          - dynamodb:GetItem
-          - dynamodb:PutItem
-          - dynamodb:UpdateItem
-          - dynamodb:DeleteItem
-          - dynamodb:Query
-        Resource:
-          - arn:aws:dynamodb:eu-north-1:*:table/user-db
-          - arn:aws:dynamodb:eu-north-1:*:table/user-db/index/email-index
   httpApi:
     cors: true
 
@@ -86,19 +75,26 @@ functions:
           path: /api/orders
           method: post
 
-  AddBasketToDb:
-    handler: src/functions/AddBasketToDb/index.handler
+  GetAllOrdersFromDb:
+    handler: src/functions/GetAllOrdersFromDb/index.handler
     events:
       - httpApi:
-          path: /api/basket
-          method: post
-  
+          path: /api/orders
+          method: get
+
   login:
     handler: src/functions/Login/index.handler
     events:
       - httpApi:
           path: /login
           method: post
+
+  AddBasketToDb:
+    handler: src/functions/AddBasketToDb/index.handler
+    events:
+      - httpApi:
+          path: /api/basket
+          method: post        
 
   getBasketFromDb:
     handler: src/functions/getBasketFromDb/index.handler
@@ -112,7 +108,7 @@ functions:
     events:
       - httpApi:
           path: /api/basket/{id}
-          method: delete    
+          method: delete 
 
 
 resources:
