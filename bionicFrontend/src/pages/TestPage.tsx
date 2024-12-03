@@ -8,7 +8,7 @@ import RoundedButton from '../components/RoundedButton';
 import OrderButton from '../components/OrderButton';
 import LoginButton from '../components/LoginButton';
 import Header from '../components/Header';
-import StaffNavComponent from '../components/StaffNavComponent';
+import StaffNavComponent from '../componentsStaff/StaffNavComponent';
 // import MenuSortComponent from '../components/MenuSortComponent';
 
 const TestPage = () => {
