@@ -8,6 +8,7 @@ import BasketPage from "../pages/BasketPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import ServicePage from '../pages/ServicePage';
 
+
 function Routers() {
     return (
       <Router>
@@ -18,6 +19,7 @@ function Routers() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/service" element={<ServicePage />} />
             <Route path="/test" element={<TestPage />} />
+            
 
         </Routes>
     </Router>
