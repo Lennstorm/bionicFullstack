@@ -1,3 +1,4 @@
+//bionicBackend/src/functions/getBasketFromDb/index.js
 const { sendError, sendResponse } = require("../../responses/index.js");
 const { db } = require("../../services");
 exports.handler = async (event) =>{
