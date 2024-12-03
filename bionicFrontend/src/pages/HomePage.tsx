@@ -35,13 +35,8 @@ const HomePage = () => {
   }, [])
 
   return (
- 
-    
-    <div className='homePage--wrapper'>
-
 
     <div className='page homePage--wrapper'>
-
       <Header />
 
       <main >
@@ -62,7 +57,7 @@ const HomePage = () => {
       </main>
       <Footer />
     </div>
-    </div>
+
   )
 }
 

@@ -100,6 +100,20 @@ functions:
           path: /login
           method: post
 
+  getBasketFromDb:
+    handler: src/functions/getBasketFromDb/index.handler
+    events:
+      - httpApi:
+          path: /api/basket
+          method: get     
+
+  DeleteBasketItem:
+    handler: src/functions/DeleteBasketItem/index.handler
+    events:
+      - httpApi:
+          path: /api/basket/{id}
+          method: delete    
+
 
 resources:
   Resources:

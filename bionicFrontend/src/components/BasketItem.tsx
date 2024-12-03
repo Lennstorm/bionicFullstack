@@ -11,17 +11,24 @@ import Bin from '../assets/bin.svg';
 interface BasketItem {
     basketItemID: string;
     menuItem: string;
-    menuItemName: string;
+    articleName: string;
     price: number;
     image: string;
     count: number;
     specialRequest: string;
-    addedAt: string;
+    addedAt?: string;
 }
 
 interface BasketProps {
     userID: string;
+    basketItemID: string;
+    createdAt: string;
     basketItems: BasketItem[];
+}
+
+interface ApiResponse {
+    success: boolean;
+    data: BasketProps[];
 }
 
 interface BasketItemProps {
@@ -41,10 +48,23 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
         const fetchBasketItems = async (): Promise<void> => {
             setIsLoading(true);
             try {
-                const response = await axios.get('/data.json');
-                const data = response.data;
+                const response = await axios.get('https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/basket');
+                const{data: apiResponse} = response
+                console.log('API Response:',apiResponse)
 
-                const userBasket = data.baskets.find((basket: BasketProps) => basket.userID === userID);
+                const { success, data: baskets } = apiResponse as ApiResponse;
+
+                if (!success) {
+                    console.error('API call unsuccessful');
+                    return;
+                }
+
+                if(!Array.isArray(baskets)){
+                   console.log('Expected baskets to be an array, but got:', typeof baskets)
+                   return
+                }
+
+                const userBasket = baskets.find((basket: BasketProps) => basket.userID === userID);
                 if (userBasket) {
                     setItems(userBasket.basketItems);
                 } else {
@@ -85,7 +105,7 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
         if (!itemToDelete) return;
 
         const confirmDelete = window.confirm(
-            `Är du säker på att du vill ta bort "${itemToDelete.menuItemName}" från korgen?`
+            `Är du säker på att du vill ta bort "${itemToDelete.articleName}" från korgen?`
         );
 
         if (confirmDelete) {
@@ -98,20 +118,22 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
         const total = calculateTotalPrice(items);
         onTotalPriceChange(total);
     }, [items, onTotalPriceChange]);
-
     if (isLoading) return <div>Laddar....</div>;
     if (items.length === 0) return <div className="cartEmpty-message">Din kundkorg är tom.</div>;
 
     return (
         <div className="basketItems-container">
-            {items.map((item) => (
+            {items.map((item) => {
+         const {item:menuItem} = item
+        return (
+       
                 <div key={item.basketItemID} className="basketItem-container">
-                    <img className="item-img" src={selectedItem.image} alt="menu item image" />
+                    <img className="item-img" src={menuItem.image} alt="menu item image" />
 
                     <section className="mainContent-container">
                         <section className="top-section">
                             <article className="item-article basketItem-text">
-                                {selectedItem.articleName}
+                                {menuItem.articleName}
                             </article>
                             <article className="counter-article basketItem-text">
                                 <p>antal</p>
@@ -122,7 +144,7 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
                                 />
                             </article>
                             <article className="price-article basketItem-text">
-                                Pris: {item.price * item.count} SEK
+                                Pris: {menuItem.price * item.count} SEK
                             </article>
                         </section>
 
@@ -142,7 +164,8 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
                         onClick={() => handleRemoveItem(item.menuItem)}
                     />
                 </div>
-            ))}
+            )
+})}
         </div>
     );
 };
@@ -152,4 +175,5 @@ export default BasketItem;
 
 /*
 Alistair
+Peter
 */

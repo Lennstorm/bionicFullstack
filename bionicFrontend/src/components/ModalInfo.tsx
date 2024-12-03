@@ -39,25 +39,46 @@ function ModalInfo({item, closeModal, userID}: ModalInfoProps) {
     console.log('så här många har beställts',count)
   }
 
- const addToBasket = async () =>{
-
+  
+const addToBasket = async () =>{
+  if (count <= 0) {
+    alert('Välj antal varor att lägga till');
+    return;
+  }
+  
   try{
-  const basketItem ={
-    menuItem: item.MenuItemID,
-    item:{
-
-      ...item,
+   const basketItemID = `basket-${userID}`
+   console.log('full item object', item)
+   
+   const basketItem = {
+    basketItemID: basketItemID, 
+    userID,                 
+    menuItem: item.MenuItemID, 
+    count: count || 1,
+    item: {
+      price: item.price || 0,
+      quantity: item.quantity ||1,
+      image: item.image || '',
+      articleName: item.articleName || '',
     },
-    count: count
-   }
-  console.log('det här är menuItem', item.MenuItemID)
+   specialRequests:'',
+   orderStatus: '',
+  };
+  console.log('det här är basketitem', basketItem)
   await axios.post('https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/basket',
-  {userID,
-   basketItems: [basketItem]
-  })
+    {
+      userID,
+      basketItems: [basketItem]
+    }
+  
+  );
+  
+  
   navigate('/basket')
  }catch(error){
-    console.error('Error when adding item to the basket',error)
+  
+  console.log('Full error:', error);
+  console.log('det blev fel när varorna skall läggas i varukorgen');
   }
  }
  
@@ -86,7 +107,7 @@ function ModalInfo({item, closeModal, userID}: ModalInfoProps) {
       </section>
       <section className='modal-description-container'>
         <article className='modal-description-text'>
-          <p>{item.fullDescripton}</p>
+          <p>{item.fullDescription}</p>
 
         </article>
         <figure className=' modal-buttons'>
@@ -102,7 +123,7 @@ function ModalInfo({item, closeModal, userID}: ModalInfoProps) {
             <OrderButton
               onClick={() => {
                 orderFromModal();
-                setBtnDisabled(true);
+                // setBtnDisabled(true);
                 addToBasket()
               }}
               text="Lägg i Varukorgen"
