@@ -39,7 +39,7 @@ package:
   individually: true
 
 functions:
-  CreateMenuD:
+  CreateMenuDb:
     handler: src/functions/CreateMenuDb/index.handler
     events:
       - httpApi:
@@ -68,6 +68,7 @@ functions:
       - httpApi:
           path: /api/add-user
           method: post
+          
   AddOrderToDb:
     handler: src/functions/AddOrderToDb/index.handler
     events:

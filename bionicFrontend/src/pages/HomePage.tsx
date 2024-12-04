@@ -7,11 +7,9 @@ import './styles/homePage.css';
 import MenuItem from '../components/MenuItem.tsx';
 import MenuSortComponent from '../components/MenuSortComponent.tsx';
 import { Link } from 'react-router-dom';
+import config from "../config";
 
-const url: string = 'https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/get-menu' //Peters url. 
-// Det här skulle behöva importeras från en separat fil istället så vi enkelt kan ändra när man byter stack-adress!!
-
-/* const url: string = 'https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/get-menu' */
+const url: string = config.endpoints.menu.get;
 
 const HomePage = () => {
   const [menuItems, setMenuItems] = useState<MenuItems[]>([])
@@ -21,7 +19,7 @@ const HomePage = () => {
     const fetchMenuItems = async () => {
       try {
         const response = await axios.get(url)
-        console.log('här är responsen från fetchMenus',response.data)
+        console.log('här är responsen från fetchMenus', response.data)
         console.log(response.data)
         setMenuItems(response.data.data)
       } catch (error) {
@@ -42,7 +40,7 @@ const HomePage = () => {
       <main >
         <h3 className='about-link
       '>
-          Läs mer om Hemkocken 
+          Läs mer om Hemkocken
           <Link className='link-text' to="/about">här</Link>
         </h3>
         <MenuSortComponent />
@@ -71,7 +69,7 @@ export default HomePage;
 /* Författare: Andreas
 * Alistair
 * Peter
-* 
+* Andreas lagt till funktion för att hantera url centralt
 * 
 * 
 */
