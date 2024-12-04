@@ -1,4 +1,3 @@
-//bioonicFrontend/src/routers/Routers.tsx
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import HomePage from "../pages/HomePage";
@@ -24,14 +23,18 @@ function Routers() {
         </Routes>
     </Router>
   );
+
 }
 
-export default Routers;            
+export default Routers;
+
+
+
 
 
 /* Författare: Andreas
 *
-* 
+* uppdaaterad av Ally. La till en outlet for en nested routing system med importer.
 * 
 * 
 * 
