@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import BasketItem from "../components/BasketItem";
 import BigButton from "../components/BigButton";
@@ -8,22 +8,25 @@ import './styles/basketPage.css';
 
 const BasketPage = () => {
     const [totalPrice, setTotalPrice] = useState<number>(0);
-    const [basketItems, setBasketItems] = useState<any[]>([]);
-    const userID = 'AB123';
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const storedUserID = localStorage.getItem('userID');
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+        if (!storedUserID || !isLoggedIn) {
+            alert('You need to be logged in to view the basket.');
+            navigate('/');
+            return;
+        }
+    }, [navigate]);
 
     const updateTotalPrice = (newTotalPrice: number) => {
         setTotalPrice(newTotalPrice);
     };
 
     const handleClick = () => {
-        navigate("/checkout", {
-            state: {
-                userID,
-                basketItems,
-                totalPrice,
-            },
-        });
+        navigate("/checkout");
     };
 
     return (
@@ -34,7 +37,7 @@ const BasketPage = () => {
 
                 <BasketItem
                     onTotalPriceChange={updateTotalPrice}
-                    onBasketItemsChange={setBasketItems}
+                    onBasketItemsChange={() => {}}
                 />
 
                 {totalPrice > 0 && (

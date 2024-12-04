@@ -1,24 +1,33 @@
-//bionicFrontend/src/components/LoginModal.tsx
+// bionicFrontend/src/components/LoginModal.tsx
+
 import { useEffect, useState } from "react";
 import './styles/loginModal.css';
 import LoginButton from "./LoginButton";
+import { useNavigate } from 'react-router-dom';
 
 interface LoginModalProps {
     onClose: () => void;
     onRegisterClick: () => void;
 }
 
+interface DecodedToken {
+    userid: string;
+    isAdmin: boolean;
+    iat: number;
+    exp: number;
+}
+
 const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-        
         document.body.style.overflow = 'hidden';
-        if (scrollbarWidth >0) {
-        document.body.style.paddingRight = `${scrollbarWidth}px`;
+        if (scrollbarWidth > 0) {
+            document.body.style.paddingRight = `${scrollbarWidth}px`;
         }
 
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -42,8 +51,21 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
         }
     }
 
+    //jwt_decode
+    const decodeJWT = (token: string): DecodedToken | null => {
+        try {
+            const payload = token.split('.')[1];
+            const decoded = JSON.parse(atob(payload));
+            return decoded;
+        } catch (error) {
+            console.error("Failed to decode JWT", error);
+            return null;
+        }
+    };
+
     const handleLogin = async () => {
         setErrorMessage('');
+        console.log("Attempting to login...");
         try {
             const response = await fetch('https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/login', {
                 method: 'POST',
@@ -53,15 +75,31 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
                 body: JSON.stringify({ email, password }),
             });
 
+            console.log('Raw response:', response);
             const data = await response.json();
-            console.log('Response data:', data)
+            console.log('Parsed response data:', data);
 
             if (response.ok) {
                 const token = data.token;
-                console.log('token:', data.token);
+                console.log('token:', token);
+
+                //------decode----
+                const decodedToken = decodeJWT(token);
+                console.log('Decoded Token:', decodedToken);
+
+                if (!decodedToken || !decodedToken.userid) {
+                    throw new Error("User ID is missing in the decoded token");
+                }
+
+                const userID = decodedToken.userid;
+                console.log('userID:', userID);
+                //---------localst.
                 sessionStorage.setItem('authToken', token);
+                localStorage.setItem('userID', userID);
+                localStorage.setItem('isLoggedIn', 'true');
+
                 onClose();
-                window.location.reload();
+                navigate('/');
             } else {
                 setErrorMessage(data.message || 'Inloggningen misslyckades');
             }
@@ -73,12 +111,15 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
 
     const handleGuestLogin = () => {
         console.log('Logging in as guest.');
+        localStorage.setItem('userID', 'guest');
+        localStorage.setItem('isLoggedIn', 'true');
         onClose();
     };
 
     const handleCreateAccount = () => {
         onRegisterClick();
     };
+
     return (
         <div className="login-modal-overlay" onClick={handleOverlayClick}>
             <div className="login-modal">
@@ -103,7 +144,6 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
                 <div className="login-modal-loginbtn">
                     <LoginButton text="logga in" onClick={handleLogin} />
                 </div>
-
             </div>
         </div>
     );
@@ -111,11 +151,10 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
 
 export default LoginModal;
 
-
 /* 
 *   Författare Andreas
 *
-*
+*Ally har lagt till funktionalitet för localstorage av userID och isLOggedIn och fick installera jwt_decode och lägga till funktionalitet för det.
 *
 *
  */
