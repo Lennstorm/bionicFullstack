@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import './styles/registerModal.css';
 import LoginButton from "./LoginButton";
-import config from "../config";
 
 interface RegisterModalProps {
     onClose: () => void;
@@ -52,7 +51,7 @@ const RegisterModal = ({ onClose }: RegisterModalProps) => {
             return;
         }
         try {
-            const response = await fetch(config.endpoints.user.add, {
+            const response = await fetch('https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/add-user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -118,7 +117,7 @@ export default RegisterModal;
 /* 
 *   Författare Andreas
 *
-*Andreas lagt till funktion för att hantera url centralt
+*
 *
 *
  */

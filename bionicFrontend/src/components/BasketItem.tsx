@@ -3,7 +3,6 @@ import axios from 'axios';
 import Counter from './Counter';
 import './styles/basketItem.css';
 import Bin from '../assets/bin.svg';
-import config from "../config";
 
 
 
@@ -49,7 +48,7 @@ const BasketItem = ({ onTotalPriceChange }: BasketItemProps) => {
         const fetchBasketItems = async (): Promise<void> => {
             setIsLoading(true);
             try {
-                const response = await axios.get(config.endpoints.basket.get);
+                const response = await axios.get('https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/basket');
                 const{data: apiResponse} = response
                 console.log('API Response:',apiResponse)
 
@@ -175,7 +174,6 @@ export default BasketItem;
 
 
 /*
-*Alistair
-*Peter
-*Andreas lagt till funktion för att hantera url centralt
+Alistair
+Peter
 */

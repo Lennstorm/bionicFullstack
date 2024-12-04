@@ -4,7 +4,6 @@ import './styles/staffPage.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // import axios from 'axios';
-// import config from "../config"; Avkommentera när nedanstående kommentering tas bort!
 
 interface OrderItem {
     menuItem: string;
@@ -29,7 +28,7 @@ function StaffPage() {
         const fetchOrders = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(config.endpoints.orders.getAll);
+                const response = await axios.get('https://ko5vh81cp7.execute-api.eu-north-1.amazonaws.com/api/orders');
 
                 // Assuming the API returns the data in the correct structure,
                 // if not, you may need to adjust the mapping below.
@@ -143,8 +142,7 @@ export default StaffPage;
 
 
 /*
-*Alistair
-*Andreas lagt till funktion för att hantera url centralt
+Alistair
 */
 
 

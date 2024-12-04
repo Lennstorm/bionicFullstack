@@ -2,6 +2,7 @@ import './styles/menu-item.css'
 import { MenuItems } from '../interfaces.ts';
 import { useState, useEffect} from 'react';
 import ModalInfo from './ModalInfo.tsx';
+import { userInfo } from 'os';
 import { useNavigate } from 'react-router-dom';
 
 interface MenuItemProps {

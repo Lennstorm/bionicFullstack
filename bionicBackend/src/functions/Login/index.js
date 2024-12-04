@@ -28,12 +28,3 @@ module.exports.handler = middy(handler)
     /* .use(validateKey()) */
     .use(validateLogin())
     .use(errorHandler());
-
-
-/*
-*   Författare Andreas
-*
-*
-*
-*
-*/
