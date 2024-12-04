@@ -2,7 +2,7 @@ import StaffHeader from "../componentsStaff/StaffHeader";
 import StaffNavComponent from "../componentsStaff/StaffNavComponent";
 import './styles/staffPage.css';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 // import axios from 'axios';
 
 interface OrderItem {
@@ -132,6 +132,7 @@ function StaffPage() {
                         </div>
                     ))}
                 </div>
+                <Outlet />
             </main>
         </div>
     );

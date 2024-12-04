@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import "./styles/checkoutPage.css";
@@ -10,76 +9,56 @@ import BigButton from "../components/BigButton";
 interface BasketItem {
     basketItemID: string;
     menuItem: string;
-    menuItemName: string;
-    price: number;
-    image: string;
     count: number;
     specialRequest: string;
-    addedAt: string;
+    item: {
+        price: number;
+        quantity: number;
+        image: string;
+        articleName: string;
+    };
 }
 
-//--- OBS! funktionalitet för delete av basket när en order har skapat måste läggas till. ---//
-
 const CheckoutPage = () => {
-    const location = useLocation();
     const navigate = useNavigate();
     const [basketItems, setBasketItems] = useState<BasketItem[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [orderConfirmed, setOrderConfirmed] = useState(false);
-    const [orderID, setOrderID] = useState<string | null>(null); // Store the order ID
-
-    const userID = location.state?.userID || "AB123";
+    const [orderID, setOrderID] = useState<string | null>(null);
 
     useEffect(() => {
-        const fetchBasketData = async () => {
-            console.log("Fetching basket data for userID:", userID);
-            setIsLoading(true);
-            try {
-                const response = await axios.get("/data.json");
-                console.log("Basket data fetched successfully:", response.data);
-
-                const userBasket = response.data.baskets.find(
-                    (basket: { userID: string }) => basket.userID === userID
-                );
-
-                if (userBasket) {
-                    console.log("User basket found:", userBasket);
-                    setBasketItems(userBasket.basketItems);
-                } else {
-                    console.warn("No basket found for the specified user:", userID);
-                    throw new Error("No basket found for the specified user.");
-                }
-            } catch (error) {
-                if (error instanceof Error) {
-                    console.error("Error fetching basket data:", error.message);
-                    setError(error.message);
-                } else {
-                    console.error("Unknown error occurred during fetch.");
-                    setError("An unknown error occurred.");
-                }
-            } finally {
-                setIsLoading(false);
-                console.log("Finished fetching basket data.");
+        console.log("Fetching basket data from localStorage");
+        setIsLoading(true);
+        try {
+            const storedBasket = localStorage.getItem('basket');
+            if (storedBasket) {
+                const basketItems: BasketItem[] = JSON.parse(storedBasket);
+                setBasketItems(basketItems);
+                console.log("Basket data retrieved successfully from localStorage:", basketItems);
+            } else {
+                console.warn("No basket found in localStorage.");
+                setBasketItems([]);
             }
-        };
+        } catch (error) {
+            console.error("Error fetching basket data from localStorage:", error);
+            setError("An error occurred while retrieving basket data.");
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
 
-        fetchBasketData();
-    }, [userID]);
-
-    // Calculate total price of all items in the basket
     const totalPrice = basketItems.reduce(
-        (acc, item) => acc + item.price * item.count,
+        (acc, item) => acc + item.item.price * item.count,
         0
     );
     console.log("Current total price:", totalPrice);
 
     const handleConfirmOrder = () => {
-        const orderItemID = uuidv4().substring(0, 5).toUpperCase(); // Generate a 5-character order ID
-        
+        const orderItemID = uuidv4().substring(0, 5).toUpperCase();
+
         const orderDetails = {
             orderItem: orderItemID,
-            userID,
             orderContents: basketItems,
             totalPrice,
             orderStatus: "väntande",
@@ -91,11 +70,12 @@ const CheckoutPage = () => {
         console.log("Order confirmation initiated.");
         console.log("Order details:", orderDetails);
 
-        // Store the generated order ID in the state
         setOrderID(orderItemID);
 
         console.log("Order confirmed successfully.");
-        setOrderConfirmed(true); // Mark the order as confirmed
+        setOrderConfirmed(true);
+
+        localStorage.removeItem('basket');
     };
 
     const handleGoBackToBasket = () => {
@@ -131,16 +111,16 @@ const CheckoutPage = () => {
                                     <div className="basketItem-container">
                                         <img
                                             className="item-img"
-                                            src={item.image}
+                                            src={item.item.image}
                                             alt="menu item image"
                                         />
                                         <section className="mainContent-container">
                                             <section className="top-section">
                                                 <article className="item-article basketItem-text">
-                                                    {item.menuItemName}
+                                                    {item.item.articleName}
                                                 </article>
                                                 <article className="price-article basketItem-text">
-                                                    Pris: {item.price * item.count} SEK
+                                                    Pris: {item.item.price * item.count} SEK
                                                 </article>
                                                 <article className="counter-article basketItem-text">
                                                     <p>Antal: {item.count}</p>
