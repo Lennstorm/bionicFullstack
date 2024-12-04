@@ -10,13 +10,13 @@ function WaiterPage() {
                         <label>
                             <h5>Redigera Maträtt</h5>
                         </label>
-                        <input type="text" id="edit-dish" className='edit-dish'></input>
+                        <input type="text" id="edit-dish" value='Fläsk med löksås' className='edit-dish'></input>
                     </section>
                     <section className='right-input'>
                         <label>
                             <h5>ordernummer</h5>
                         </label>
-                        <input type="text" id="order-number"className='order-number'></input>
+                        <input type="text" id="order-number" value="#884574587-8" className='order-number'></input>
                     </section>
                 </section>
                 <section className='form-row-two'>
@@ -24,13 +24,13 @@ function WaiterPage() {
                         <label>
                             <h5>Redigera antal</h5>
                         </label>
-                        <input type="text" id="edit-quantity" className='edit-quantity'></input>
+                        <input type="text" id="edit-quantity" value='1' className='edit-quantity'></input>
                     </section>
                     <section className='middle-column'>
                         <label>
                             <h5>Redigera pris</h5>
                         </label>
-                        <input type="text" id="edit-price" className='edit-price'></input>
+                        <input type="text" id="edit-price" value='120' className='edit-price'></input>
                     </section>
                     
                     <section className='right-column'>
@@ -47,7 +47,7 @@ function WaiterPage() {
                 <label>
                 <h5>Kommentar till kocken</h5>
                 </label>
-                <input type="text-area" id="comment-chef" className='comment-chef'></input>
+                <input type="text-area" id="comment-chef" value='Ingen lök i såsen' className='comment-chef'></input>
                 </section>
                </section>
             <section className='button-container'>
@@ -57,7 +57,17 @@ function WaiterPage() {
             <section className='order-container'>
             <h4>Order #65497</h4>
             <section className='order-window'>
-            
+            <section className='order-dishes'>
+             <h1># Maträtt</h1>
+             <p>1 Fisk med löksås</p>
+             <p>2 Pannkakor</p>
+             <p>3 Rårakor med lingon</p>
+             <p>4 Pannbiff med lök och potatis</p>
+             <p>5 Korv och Mos</p>
+             <p>6 Fisk med löksås</p>
+
+             <p></p>
+            </section>
 
             </section>
             <section className='send-to-kitchen-btn'>
