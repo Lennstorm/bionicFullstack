@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import './styles/loginModal.css';
 import LoginButton from "./LoginButton";
+import config from "../config";
 
 interface LoginModalProps {
     onClose: () => void;
@@ -45,7 +46,7 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
     const handleLogin = async () => {
         setErrorMessage('');
         try {
-            const response = await fetch('https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/login', {
+            const response = await fetch(config.endpoints.auth.login, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -115,7 +116,7 @@ export default LoginModal;
 /* 
 *   Författare Andreas
 *
-*
+* Andreas lagt till funktion för att hantera url centralt
 *
 *
  */
