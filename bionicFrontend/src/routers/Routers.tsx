@@ -27,7 +27,7 @@ function Routers() {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="/staff" element={<StaffPage />}>
-
+        
           {/*
           <Route path="waiterpage" element={<WaiterPage />} />
           <Route path="lockedorders" element={<LockedOrdersPage />} />
