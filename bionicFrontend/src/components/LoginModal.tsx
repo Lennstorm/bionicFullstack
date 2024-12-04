@@ -52,14 +52,22 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
                 },
                 body: JSON.stringify({ email, password }),
             });
-
+    
             const data = await response.json();
-            console.log('Response data:', data)
-
+            console.log('Response data:', data);
+    
             if (response.ok) {
                 const token = data.token;
-                console.log('token:', data.token);
+                const userID = data.userID;
+    
+                console.log('token:', token);
+                console.log('userID:', userID);
+    
                 sessionStorage.setItem('authToken', token);
+                //----------localstorgae
+                localStorage.setItem('userID', userID);
+                localStorage.setItem('isLoggedIn', 'true');
+    
                 onClose();
                 window.location.reload();
             } else {
@@ -70,9 +78,14 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
             setErrorMessage('Tekniskt fel. Försök senare!');
         }
     };
+    
 
     const handleGuestLogin = () => {
         console.log('Logging in as guest.');
+        //----------save guest as userID
+        localStorage.setItem('userID', 'guest');
+        localStorage.setItem('isLoggedIn', 'true');
+        //---------
         onClose();
     };
 
@@ -115,7 +128,7 @@ export default LoginModal;
 /* 
 *   Författare Andreas
 *
-*
+*Ally har lagt till funktionalitet för localstorage av userID och isLOggedIn
 *
 *
  */
