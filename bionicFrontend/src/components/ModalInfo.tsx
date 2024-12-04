@@ -3,7 +3,6 @@ import Counter from './Counter.tsx';
 import OrderButton from './OrderButton.tsx';
 import './styles/modal-info.css';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 interface BasketItem {
   basketItemID: string;
@@ -29,7 +28,6 @@ interface ModalInfoProps {
 function ModalInfo({ item, closeModal, userID }: ModalInfoProps) {
   const [count, setCount] = useState<number>(0);
   const [btndisabled, setBtnDisabled] = useState<boolean>(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     setCount(0);
@@ -54,51 +52,52 @@ function ModalInfo({ item, closeModal, userID }: ModalInfoProps) {
     const userID = localStorage.getItem('userID') || 'guest';
 
     if (!isLoggedIn) {
-        alert('You need to be logged in to add items to the basket.');
-        return;
+      alert('You need to be logged in to add items to the basket.');
+      return;
     }
 
     if (count <= 0) {
-        alert('Välj antal varor att lägga till');
-        return;
+      alert('Välj antal varor att lägga till');
+      return;
     }
 
     const basketItemID = `basket-${userID}`;
     console.log('Full item object:', item);
 
     const basketItem: BasketItem = {
-        basketItemID: basketItemID,
-        userID,
-        menuItem: item.MenuItemID,
-        count: count,
-        item: {
-            price: item.price || 0,
-            quantity: item.quantity || 1,
-            image: item.image || '',
-            articleName: item.articleName || '',
-        },
-        specialRequests: '',
-        orderStatus: '',
+      basketItemID: basketItemID,
+      userID,
+      menuItem: item.MenuItemID,
+      count: count,
+      item: {
+        price: item.price || 0,
+        quantity: item.quantity || 1,
+        image: item.image || '',
+        articleName: item.articleName || '',
+      },
+      specialRequests: '',
+      orderStatus: '',
     };
     console.log('det här är basketitem', basketItem);
-//----------localstorage
+
+    //---------------------
     const existingBasket = localStorage.getItem('basket');
     const basketItems: BasketItem[] = existingBasket ? JSON.parse(existingBasket) : [];
 
     const existingItemIndex = basketItems.findIndex(
-        (bi) => bi.menuItem === basketItem.menuItem
+      (bi) => bi.menuItem === basketItem.menuItem
     );
 
     if (existingItemIndex !== -1) {
-        basketItems[existingItemIndex].count += basketItem.count;
+      basketItems[existingItemIndex].count += basketItem.count;
     } else {
-        basketItems.push(basketItem);
+      basketItems.push(basketItem);
     }
 
     localStorage.setItem('basket', JSON.stringify(basketItems));
 
-    navigate('/');
-};
+    closeModal();
+  };
 
   return (
     <div className="modal-wrapper">
@@ -158,159 +157,6 @@ function ModalInfo({ item, closeModal, userID }: ModalInfoProps) {
 }
 
 export default ModalInfo;
-
-
-
-
-/*import { MenuItems } from '../interfaces.ts';
-import Counter from './Counter.tsx';
-import OrderButton from './OrderButton.tsx';
-import './styles/modal-info.css';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-interface BasketItem {
-  basketItemID: string;
-  userID: string;
-  menuItem: string;
-  count: number;
-  item: {
-    price: number;
-    quantity: number;
-    image: string;
-    articleName: string;
-  };
-  specialRequests: string;
-  orderStatus: string;
-}
-
-interface ModalInfoProps {
-  item: MenuItems;
-  closeModal: () => void;
-  userID: string;
-}
-
-function ModalInfo({ item, closeModal, userID }: ModalInfoProps) {
-  const [count, setCount] = useState<number>(0);
-  const [btndisabled, setBtnDisabled] = useState<boolean>(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setCount(0);
-    setBtnDisabled(false);
-  }, [item]);
-
-  const onIncrement = () => {
-    setCount((prevCount) => prevCount + 1);
-  };
-
-  const onDecrement = () => {
-    setCount((prevCount) => Math.max(prevCount - 1, 0));
-  };
-
-  const orderFromModal = () => {
-    console.log('det här är order from modal',item)
-    console.log('så här många har beställts',count)
-  };
-
-  const addToBasket = () => {
-    if (count <= 0) {
-      alert('Välj antal varor att lägga till');
-      return;
-    }
-
-    const basketItemID = `basket-${userID}`;
-    console.log('Full item object:', item);
-
-    const basketItem: BasketItem = {
-      basketItemID: basketItemID,
-      userID,
-      menuItem: item.MenuItemID,
-      count: count,
-      item: {
-        price: item.price || 0,
-        quantity: item.quantity || 1,
-        image: item.image || '',
-        articleName: item.articleName || '',
-      },
-      specialRequests: '',
-      orderStatus: '',
-    };
-    console.log('det här är basketitem', basketItem);
-//--------------
-    const existingBasket = localStorage.getItem('basket');
-    const basketItems: BasketItem[] = existingBasket ? JSON.parse(existingBasket) : [];
-
-    const existingItemIndex = basketItems.findIndex(
-      (bi) => bi.menuItem === basketItem.menuItem
-    );
-
-    if (existingItemIndex !== -1) {
-      basketItems[existingItemIndex].count += basketItem.count;
-    } else {
-      basketItems.push(basketItem);
-    }
-
-    localStorage.setItem('basket', JSON.stringify(basketItems));
-
-    navigate('/');
-  };
-//---------------
-  return (
-    <div className="modal-wrapper">
-      <section className="modal-container">
-        <section className="modal-container-inner">
-          <section className="modal-media">
-            <figure className="modal-image">
-              <img src={item.image} alt={item.articleName} />
-            </figure>
-            <article className="modal-text">
-              <h3>Pris: {item.price} kr</h3>
-              <p>Innehåll:</p>
-              <article className="modal-ingredience">
-                <p>{item.ingredience}</p>
-              </article>
-              <h4>Allergiinformation:</h4>
-              <h4>{item.allergies}</h4>
-            </article>
-            <section className="modal-close">
-              <h5 onClick={closeModal}>X</h5>
-            </section>
-          </section>
-          <section className="modal-description-container">
-            <article className="modal-description-text">
-              <p>{item.fullDescription}</p>
-            </article>
-            <figure className="modal-buttons">
-              <h3 className="modal-order-quantity">Antal beställda: {count}</h3>
-              <section className="count-button">
-                <Counter
-                  count={count}
-                  onDecrement={onDecrement}
-                  onIncrement={onIncrement}
-                />
-              </section>
-              <section className="order-button">
-                <OrderButton
-                  onClick={() => {
-                    orderFromModal();
-                    addToBasket();
-                  }}
-                  text="Lägg i Varukorgen"
-                  disabled={btndisabled}
-                  className="btn-order-button"
-                />
-              </section>
-            </figure>
-          </section>
-        </section>
-      </section>
-    </div>
-  );
-}
-
-export default ModalInfo;*/
-
 
 /* Författare Peter
 *
