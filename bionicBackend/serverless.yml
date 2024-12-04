@@ -68,6 +68,7 @@ functions:
       - httpApi:
           path: /api/add-user
           method: post
+          
   AddOrderToDb:
     handler: src/functions/AddOrderToDb/index.handler
     events:

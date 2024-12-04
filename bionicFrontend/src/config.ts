@@ -1,59 +1,46 @@
 let config: {
     endpoints: {
-        menu: {
-            create: string;
-            get: string;
-            sort: string;
-        };
-        user: {
-            add: string;
-        };
-        orders: {
-            create: string;
-            getAll: string;
-        };
-        auth: {
-            login: string;
-        };
-        basket: {
-            add: string;
-            get: string;
-            delete: string;
-        };
+      menu: { create: string; get: string; sort: string };
+      user: { add: string };
+      orders: { create: string; getAll: string };
+      auth: { login: string };
+      basket: { add: string; get: string; delete: string };
     };
-};
-
-try {
-    config = require('./localConfig.json');
-} catch (error) {
-    console.warn('localConfig.json saknas. Standardvärden används.');
+  };
+  
+  try {
+    config = await import('./localConfig.json');
+    console.log('localConfig hittad! Hämtar data.');
+  } catch (error) {
+    console.log('localConfig.json hittas inte. Standardvärden används.');
+    /* console.warn('localConfig.json saknas. Standardvärden används.'); */
     config = {
-        endpoints: {
-            menu: {
-                create: "https://fallback-frontend-url/api/create-menu",
-                get: "https://fallback-frontend-url/api/get-menu",
-                sort: "https://fallback-frontend-url/api/sort-menu"
-            },
-            user: {
-                add: "https://fallback-frontend-url/api/add-user"
-            },
-            orders: {
-                create: "https://fallback-frontend-url/api/orders",
-                getAll: "https://fallback-frontend-url/api/orders"
-            },
-            auth: {
-                login: "https://fallback-frontend-url/api/login"
-            },
-            basket: {
-                add: "https://fallback-frontend-url/api/basket",
-                get: "https://fallback-frontend-url/api/basket",
-                delete: "https://fallback-frontend-url/api/basket/{id}"
-            }
-        }
+      endpoints: {
+        menu: {
+          create: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/create-menu",
+          get: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/get-menu",
+          sort: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/sort-menu",
+        },
+        user: {
+          add: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/add-user",
+        },
+        orders: {
+          create: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
+          getAll: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
+        },
+        auth: {
+          login: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/login",
+        },
+        basket: {
+          add: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket",
+          get: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket",
+          delete: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket/{id}",
+        },
+      },
     };
-}
-
-export default config;
+  }
+  
+  export default config;
 
 
 /* 
