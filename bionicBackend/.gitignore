@@ -3,3 +3,4 @@ node_modules
 local.yml
 /bionicBackend/local.yml
 seed
+localconfig.json
