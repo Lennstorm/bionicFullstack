@@ -1,9 +1,14 @@
-
-import '../componentsStaff/styles/waiterPage.css'
+import '../pagesStaff/styles/waiterPage.css'
+import StaffHeader from "../componentsStaff/StaffHeader";
 
 function WaiterPage() {
     return (
+        <div className='waiter-container-wrapper'>
+        <section className='staff-header'>
+        <StaffHeader />
+        </section>
         <section className='waiter-container'>
+            
             <section className='form-container'>
                 <section className='form-row-one'>
                     <section className='left-input'>
@@ -65,18 +70,27 @@ function WaiterPage() {
              <p>4 Pannbiff med lök och potatis</p>
              <p>5 Korv och Mos</p>
              <p>6 Fisk med löksås</p>
-
-             <p></p>
             </section>
-
+            <section className='order-quantity'>
+            <h1>Antal</h1>
+            <p>2</p>
+            <p>1</p>
+            <p>4</p>
+            <p>1</p>
+            <p>1</p>
+            
+            </section>
             </section>
             <section className='send-to-kitchen-btn'>
             <button>Skicka till köket</button>    
             </section>               
             </section>
-        
-        </section>
-    )
+            </section>
+            </div>
+    
+    )  
 }
 
 export default WaiterPage
+
+// koden skriven av peter

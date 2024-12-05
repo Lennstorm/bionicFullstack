@@ -4,16 +4,20 @@ import LoginButton from '../components/LoginButton';
 import LoginModal from '../components/LoginModal';
 import LogoutButton from '../components/LogoutButton';
 import '../components/styles/serviceHeader.css';
+import RegisterModal from '../components/RegisterModal';
+import { Link } from 'react-router-dom';
 
 function ServiceHeader(): JSX.Element {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [userName, setUserName] = useState<string>('');
     const [currentTime, setCurrentTime] = useState<string>("");
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false)
 
     useEffect(() => {
         const token: string | null = sessionStorage.getItem('authToken');
         const storedUserName: string | null = sessionStorage.getItem('userName');
+
         setIsLoggedIn(!!token);
 
         if (storedUserName) {
@@ -27,6 +31,11 @@ function ServiceHeader(): JSX.Element {
         setIsLoggedIn(false);
         setUserName('');
     };
+
+    const handleOpenRegisterModal = (): void => {
+        setIsLoginModalOpen(false)
+        setIsRegisterModalOpen(true)
+    }
 
     useEffect(() => {
         const getCurrentSwedishTime = (): string => {
@@ -62,10 +71,16 @@ function ServiceHeader(): JSX.Element {
                 </section>
 
                 <section>
-                    <h1 className='service-h1'>Service</h1>
+                    <h1 className='service-h1'>Servitör</h1>
+
+
+
                 </section>
 
                 <section>
+
+
+
                     {isLoggedIn ? (
                         <LogoutButton
                             text="Logga ut"
@@ -83,8 +98,25 @@ function ServiceHeader(): JSX.Element {
             {isLoginModalOpen && (
                 <LoginModal
                     onClose={() => setIsLoginModalOpen(false)}
+                    onRegisterClick={handleOpenRegisterModal}
                 />
             )}
+            {isRegisterModalOpen && (
+                <RegisterModal
+                    onClose={() => setIsRegisterModalOpen(false)}
+                />
+            )}
+
+            
+                <ul className='staff-nav-links'>
+                    <li><Link to="#">Nya Ordrar</Link></li>
+                    <li><Link to="#">Låst Ordrar</Link></li>
+                    <li><Link to="#">Orderhistorik</Link></li>
+                    <li><Link to="#">Meny</Link></li>
+                    <li><Link to="#">Lager</Link></li>
+                </ul>
+
+           
         </>
     );
 }

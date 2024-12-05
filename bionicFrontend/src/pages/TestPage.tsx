@@ -10,7 +10,7 @@ import LoginButton from '../components/LoginButton';
 import Header from '../components/Header';
 
 import StaffNavComponent from '../componentsStaff/StaffNavComponent';
-import WaiterPage from '../componentsStaff/WaiterPage';
+
 
 
 
@@ -24,7 +24,7 @@ const TestPage = () => {
                 
                 <div className='test-wrapper'>
 
-                    <WaiterPage />
+                    
                     <StaffNavComponent/>
 
                     

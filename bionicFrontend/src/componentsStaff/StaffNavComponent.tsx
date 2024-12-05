@@ -5,7 +5,7 @@ const StaffNavComponent = () => {
     return (
         <nav className='staff-nav'>
             <Link to="/staff" className='staff-nav-btn'>Staff Home</Link>
-            <Link to="waiterpage" className='staff-nav-btn'>Servitörssidan</Link>
+            <Link to="/waiterpage" className='staff-nav-btn'>Servitörssidan</Link>
             <Link to="lockedorders" className='staff-nav-btn'>Låsta ordrar</Link>
             <Link to="orderhistory" className='staff-nav-btn'>Orderhistorik</Link>
             <Link to="cook" className='staff-nav-btn'>Meny</Link>
