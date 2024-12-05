@@ -12,7 +12,7 @@ const handler = async (event) => {
         const user = event.user;
 
         const token = generateJWT(user);
-        console.log('Generated token:', token);//bör inte loggas i slutprodukten! Känslig info!
+        console.log('Generated token i backend:', token);//bör inte loggas i slutprodukten! Känslig info!
 
         return sendResponseWithHeaders(200, {
             message: 'Login successful!'
@@ -28,3 +28,14 @@ module.exports.handler = middy(handler)
     /* .use(validateKey()) */
     .use(validateLogin())
     .use(errorHandler());
+
+
+/* 
+*Författare Andreas
+*
+* 
+* 
+* 
+*  
+*
+*/

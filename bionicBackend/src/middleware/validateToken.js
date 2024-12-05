@@ -26,3 +26,15 @@ const validateToken = () => ({
 });
 
 module.exports = { validateToken };
+
+
+
+/* 
+*Författare Andreas
+*
+* 
+* 
+* 
+*  
+*
+*/
