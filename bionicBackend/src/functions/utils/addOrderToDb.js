@@ -1,42 +1,37 @@
 const { v4: uuidv4 } = require('uuid');
-const { db } = require("../../services/index.js");
+const { db } = require('../../services');
 
-async function createOrUpdateOrder(userID, basketItems, { orderStatus, orderLocked }) {
+async function createOrUpdateOrder(userID, basketItems, { orderStatus, orderLocked, createdAt, editedAt }) {
     const orderItemID = uuidv4();
     const timestamp = new Date().toISOString();
 
-
     const newOrder = {
         orderItemID,
-        userid: userID.toLowerCase(),
-        orderContent: basketItems,
-        orderStatus: orderStatus || "väntande",
+        userID: userID.toLowerCase(),
+        orderContent: basketItems.map(item => ({
+            menuItemID: item.menuItem,
+            count: item.count,
+            specialRequest: item.specialRequest,
+        })),
+        orderStatus: orderStatus || 'väntande',
         orderLocked: orderLocked || false,
-        specialRequests: basketItems
-        .map(item => item.specialRequest)
-        .filter(request => request)
-        .join(', '),
-        createdAt: timestamp,
-        editedAt: timestamp,
+        createdAt: createdAt || timestamp,
+        editedAt: editedAt || timestamp,
     };
-    console.log("New Order to be inserted:", JSON.stringify(newOrder, null, 2));
 
-
-    const putParams = {
-        TableName: "orders-db-v3",
-        Item: newOrder,
-    };
-    console.log("New Order Object:", newOrder);
+    console.log("DynamoDB Table Name:", 'orders-db-v4');
 
     try {
-        await db.put(putParams);
-
+        await db.put({
+            TableName: 'orders-db-v4',
+            Item: newOrder,
+        });
         return {
             success: true,
-            message: "Order created successfully",
+            message: 'Order created successfully',
         };
     } catch (error) {
-        console.error("Error in createOrUpdateOrder:", error.message);
+        console.error('Error in createOrUpdateOrder:', error);
         return {
             success: false,
             message: error.message,
@@ -45,6 +40,9 @@ async function createOrUpdateOrder(userID, basketItems, { orderStatus, orderLock
 }
 
 module.exports = { createOrUpdateOrder };
+
+
+
 
 
 
@@ -99,3 +97,6 @@ async function addOrderToDb(customerID,orderContents,orderStatus,orderLocked,ext
 module.exports = { addOrderToDb }
 
 // ******** koden skriven av Peter ***********/
+/*
+Alistair ändrat det mesta
+*/

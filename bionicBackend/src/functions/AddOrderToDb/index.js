@@ -2,7 +2,6 @@ const middy = require('@middy/core');
 const { createOrUpdateOrder } = require("../utils/addOrderToDb.js");
 const { validateOrder } = require("../../middleware/validateAddOrder.js");
 
-//local error o response
 const sendError = (statusCode, errorMessage) => {
     return {
         statusCode,
@@ -19,7 +18,6 @@ const sendResponse = (statusCode, responseBody) => {
         body: JSON.stringify(responseBody),
     };
 };
-
 
 const orderHandler = async (event) => {
     console.log("Event body:", event.body);
@@ -52,54 +50,6 @@ const orderHandler = async (event) => {
 };
 
 exports.handler = middy(orderHandler).use(validateOrder());
-
-
-
-
-
-
-/*const middy = require('@middy/core');
-const { sendResponse, sendError } = require("../../services/index.js");
-const { checkIfOrderExists, createOrUpdateOrder } = require("../utils/addOrderToDb.js");
-const { validateOrder } = require("../../middleware/validateAddOrder.js");
-
-const orderHandler = async (event) => {
-    const { userID } = event;
-
-    try {
-        const orderExists = await checkIfOrderExists(userID);
-        if (orderExists) {
-            return sendError(400, "En order med existerar redan");
-        }
-
-        const basketItems = await fetchBasketItems(userID);
-        if (basketItems.length === 0) {
-            return sendError(400, "Vaurkorgen är tom.");
-        }
-
-        const result = await createOrUpdateOrder(userID, basketItems);
-
-        if (!result.success) {
-            return sendError(500, result.message || "Lyckades inte skapa ordern");
-        }
-
-        return sendResponse(200, {
-            message: result.message,
-        });
-    } catch (error) {
-        console.error("Fel i order handler:", error.message);
-        return sendError(500, error.message || "Internal server error.");
-    }
-};
-
-exports.handler = middy(orderHandler).use(validateOrder());*/
-
-
-
-
-
-
-
 
 
 
@@ -149,3 +99,6 @@ exports.handler = async (event) => {
 };*/
 
 // ******** koden skriven av Peter ***********//
+/*
+AListair ändrat mycket
+*/

@@ -4,7 +4,7 @@ const { db } = require("../../services");
 exports.handler = async (event) => {
     try {
         const { Items } = await db.scan({
-            TableName: "orders-db-v3",
+            TableName: process.env.ORDERS_TABLE_NAME,
         });
 
         const sortedItems = Items.sort((a, b) => {
@@ -13,10 +13,10 @@ exports.handler = async (event) => {
 
         return sendResponse(200, sortedItems);
     } catch (error) {
-        return sendError(500, { message: "Could not retrieve orders: " + error.message });
+        console.error("Error retrieving orders:", error);
+        return sendError(500, "Could not retrieve orders: " + error.message);
     }
 };
-
 
 
 /*
