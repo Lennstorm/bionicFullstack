@@ -68,6 +68,7 @@ const CheckoutPage = () => {
             userID,
             basketItems: basketItems.map(item => ({
                 menuItem: item.menuItem,
+                articleName: item.item.articleName,
                 count: item.count,
                 specialRequest: item.specialRequest || '',
             })),

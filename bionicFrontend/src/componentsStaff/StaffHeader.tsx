@@ -103,7 +103,6 @@ function ServiceHeader(): JSX.Element {
                     onClose={() => setIsRegisterModalOpen(false)}
                 />
             )}
-            <StaffNavComponent />
         </>
     );
 }
