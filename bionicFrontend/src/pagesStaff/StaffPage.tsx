@@ -2,8 +2,8 @@ import StaffHeader from "../componentsStaff/StaffHeader";
 import StaffNavComponent from "../componentsStaff/StaffNavComponent";
 import './styles/staffPage.css';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-// import axios from 'axios';
+import { Link, Outlet } from 'react-router-dom';
+import axios from 'axios';
 
 interface OrderItem {
     menuItem: string;
@@ -20,33 +20,28 @@ interface Order {
 function StaffPage() {
     const [orders, setOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null); //blir rätt när apianropet används!
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        // to bort kommentar för att använda, men ta bort eller kommentera ut mackdata istället.
-        /*
         const fetchOrders = async () => {
             try {
                 setLoading(true);
                 const response = await axios.get('https://ko5vh81cp7.execute-api.eu-north-1.amazonaws.com/api/orders');
 
-                // Assuming the API returns the data in the correct structure,
-                // if not, you may need to adjust the mapping below.
-                const parsedOrders: Order[] = response.data.map((order: any) => {
-                    return {
-                        orderItemID: order.orderItemID.S,
-                        createdAt: order.createdAt.S,
-                        orderContent: order.orderContent.L.map((item: any) => ({
-                            menuItem: item.M.menuItem.S,
-                            count: parseInt(item.M.count.N, 10),
-                            specialRequest: item.M.specialRequest?.S,
-                        })),
-                    };
-                });
+                const parsedOrders: Order[] = response.data.data.map((order: any) => ({
+                    orderItemID: order.orderItemID,
+                    createdAt: order.createdAt,
+                    orderContent: order.orderContent.map((item: any) => ({
+                        menuItem: item.menuItem,
+                        count: item.count,
+                        specialRequest: item.specialRequest,
+                    })),
+                }));
 
                 setOrders(parsedOrders);
                 setError(null);
             } catch (err) {
+                console.error("Error fetching orders:", err);
                 setError("Failed to fetch orders. Please try again later.");
             } finally {
                 setLoading(false);
@@ -54,39 +49,7 @@ function StaffPage() {
         };
 
         fetchOrders();
-        */
-
-        // Mock-data---------------------
-        const mockOrders: Order[] = [
-            {
-                orderItemID: '1',
-                createdAt: new Date('2024-12-01T10:30:00Z').toISOString(),
-                orderContent: [
-                    { menuItem: 'Pizza Margherita', count: 2, specialRequest: 'Extra ost på en tack!' },
-                    { menuItem: 'Spaghetti Carbonara', count: 1 },
-                ],
-            },
-            {
-                orderItemID: '2',
-                createdAt: new Date('2024-12-02T14:45:00Z').toISOString(),
-                orderContent: [
-                    { menuItem: 'Caesarsalad', count: 3 },
-                    { menuItem: 'Vitlöksbröd', count: 2, specialRequest: 'Extra vitlök.' },
-                ],
-            },
-            {
-                orderItemID: '3',
-                createdAt: new Date('2024-12-03T09:15:00Z').toISOString(),
-                orderContent: [
-                    { menuItem: 'Lasagna', count: 1, specialRequest: 'Ingen pasta tack!.' },
-                ],
-            }
-        ];
-
-        setOrders(mockOrders);
-        setLoading(false);
     }, []);
-    //----------------------------------
 
     return (
         <div>
@@ -132,13 +95,13 @@ function StaffPage() {
                         </div>
                     ))}
                 </div>
+                <Outlet />
             </main>
         </div>
     );
 }
 
 export default StaffPage;
-
 
 
 /*

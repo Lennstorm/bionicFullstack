@@ -1,4 +1,4 @@
-import './styles/staffNavComponent.css';
+import './styles/staffNavComponent.css'; 
 import { Link } from 'react-router-dom';
 
 const StaffNavComponent = () => {
@@ -15,6 +15,7 @@ const StaffNavComponent = () => {
 }
 
 export default StaffNavComponent;
+
 
 
 

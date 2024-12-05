@@ -27,9 +27,9 @@
 }
 
 .modal-text{
-    margin-right: 8rem;
-    
+    margin-right: 8rem;    
 }
+
 .modal-text,
 .modal-image{
     margin:2rem;
@@ -64,21 +64,26 @@ padding:2rem;
 font-weight:300
 }
 
-.modal-close:hover {
+.modal-close h5:hover {
     cursor: pointer;
 }
 
-.modal-text p{
-    font-size: 1.2rem;
+.modal-text p {
+    font-size: 1.5rem;
     margin-bottom:5px;
+    font-weight: 700;
     
 }
+
+.modal-ingredience p {
+    font-size: 1.2rem;
+    font-weight: 400;    
+}
+
 .modal-text .modal-ingredience{
     display:flex;
     flex-direction: column;
-    
-   
-    
+
 }
 .modal-text h4{
     font-size: 1.5rem;
@@ -146,7 +151,8 @@ font-weight:300
 
 /* Författare Peter
 *
-* ändringar av Andreas: Justerat CSS. hover på plus och minus samt X.
+* ändringar av Andreas: Justerat CSS. hover på plus och minus samt X. Ändrat lite storlek och weight på
+* "innehåll" för att skilja det från ingredienserna.
 *
 *
 *
