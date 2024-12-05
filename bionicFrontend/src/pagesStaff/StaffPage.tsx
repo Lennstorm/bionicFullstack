@@ -7,6 +7,7 @@ import axios from 'axios';
 
 interface OrderItem {
     menuItem: string;
+    articleName: string;
     count: number;
     specialRequest?: string;
 }
@@ -14,6 +15,8 @@ interface OrderItem {
 interface Order {
     orderItemID: string;
     createdAt: string;
+    orderStatus: string;    // Added
+    orderLocked: boolean;   // Added
     orderContent: OrderItem[];
 }
 
@@ -31,8 +34,11 @@ function StaffPage() {
                 const parsedOrders: Order[] = response.data.data.map((order: any) => ({
                     orderItemID: order.orderItemID,
                     createdAt: order.createdAt,
+                    orderStatus: order.orderStatus,      // Added
+                    orderLocked: order.orderLocked,      // Added
                     orderContent: order.orderContent.map((item: any) => ({
-                        menuItem: item.menuItem,
+                        menuItem: item.menuItemID,
+                        articleName: item.articleName,
                         count: item.count,
                         specialRequest: item.specialRequest,
                     })),
@@ -64,9 +70,9 @@ function StaffPage() {
 
                 <div className="orders-list">
                     {orders.map(order => (
-                        <div key={order.orderItemID} className="order">
+                        <div key={order.orderItemID} className="order-card">
                             <div className="order-header">
-                                <h3 className="orderLink-h3">
+                                <h3 className="order-number">
                                     <Link
                                         to={`/waiter/${order.orderItemID}`}
                                         className="order-link"
@@ -75,23 +81,38 @@ function StaffPage() {
                                         Order #: {order.orderItemID}
                                     </Link>
                                 </h3>
-                                <p><strong>Order Skapad:</strong> {new Date(order.createdAt).toLocaleString('sv-SE')}</p>
+                                <p className="order-date">
+                                    <strong>Skapad:</strong> {new Date(order.createdAt).toLocaleString('sv-SE')}
+                                </p>
                             </div>
-                            <ul>
-                                {order.orderContent.map((item, index) => (
-                                    <li key={index} className="order-item">
-                                        <div className="order-item-info">
-                                            <span className="item-name">{item.menuItem}</span>
-                                            <span className="item-quantity">x{item.count}</span>
-                                        </div>
-                                        {item.specialRequest && item.specialRequest.trim() !== "" && (
-                                            <div className="special-request">
-                                                <span>Special Request: {item.specialRequest}</span>
-                                            </div>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
+                            <div className="order-status">
+                                <span className={`status ${order.orderStatus.replace(/\s+/g, '-').toLowerCase()}`}>
+                                    <strong>Status:</strong> {order.orderStatus}
+                                </span>
+                                <span className={`locked ${order.orderLocked ? 'locked-yes' : 'locked-no'}`}>
+                                    <strong>Locked:</strong> {order.orderLocked ? 'JA' : 'NEJ'}
+                                </span>
+                            </div>
+                            <div className="order-items">
+                                <table className="items-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Artikel</th>
+                                            <th>Antal</th>
+                                            <th>Önskemål</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {order.orderContent.map((item, index) => (
+                                            <tr key={index} className="order-item">
+                                                <td>{item.articleName}</td>
+                                                <td>{item.count}</td>
+                                                <td>{item.specialRequest || '-'}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -102,6 +123,7 @@ function StaffPage() {
 }
 
 export default StaffPage;
+
 
 
 /*

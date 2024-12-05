@@ -2,7 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const { db } = require('../../services');
 
 async function createOrUpdateOrder(userID, basketItems, { orderStatus, orderLocked, createdAt, editedAt }) {
-    const orderItemID = uuidv4();
+    const orderItemID = uuidv4().substring(0, 5).toUpperCase();
     const timestamp = new Date().toISOString();
 
     const newOrder = {
@@ -10,6 +10,7 @@ async function createOrUpdateOrder(userID, basketItems, { orderStatus, orderLock
         userID: userID.toLowerCase(),
         orderContent: basketItems.map(item => ({
             menuItemID: item.menuItem,
+            articleName: item.articleName,
             count: item.count,
             specialRequest: item.specialRequest,
         })),

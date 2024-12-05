@@ -26,9 +26,10 @@ const validateOrder = () => {
             handler.event.validatedOrder = eventBody;
         }
     };
-};;
+};
 
 module.exports = { validateOrder };
+
 
 
 /*
