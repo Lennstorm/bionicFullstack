@@ -1,45 +1,103 @@
-/* Define CSS Variables for Consistent Styling */
-:root {
-    --primary-color: #007bff;      /* Blue */
-    --secondary-color: #6c757d;    /* Gray */
-    --success-color: #28a745;      /* Green */
-    --warning-color: #ffc107;      /* Yellow */
-    --danger-color: #dc3545;       /* Red */
-    --light-gray: #f8f9fa;         /* Light Gray Background */
-    --border-color: #dee2e6;       /* Border Color */
-    --font-family: 'Arial, sans-serif'; /* Font Family */
-}
-
-/* Container for All Orders */
-.orders-list {
+.outlet-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Space between order cards */
+    align-items: center;
     padding: 1rem;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
-/* Individual Order Card */
-.order-card {
-    background-color: var(--light-gray);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.staffHome-h2 {
+    margin: 1rem 0;
+    font-family: var(--h2-medium-font);
+    font-size: var(--h2-medium-size);
+    color: var(--text-medium-grey);
+    text-align: center;
 }
 
-/* Order Header */
-.order-header {
+.controls {
+    width: 100%;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
     margin-bottom: 1rem;
 }
 
+
+
+.search-bar {
+    width: 100%;
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    font-family: var(--font-inter);
+    font-size: 0.9rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-bar:focus {
+    border-color: var(--button-blue);
+    box-shadow: 0 0 0 2px rgba(27, 113, 211, 0.2);
+    outline: none;
+}
+
+.filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.filter-select {
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    font-family: var(--font-inter);
+    font-size: 0.9rem;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.filter-select:focus {
+    border-color: var(--button-blue);
+    box-shadow: 0 0 0 2px rgba(27, 113, 211, 0.2);
+    outline: none;
+}
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.order-card {
+    background-color: var(--light-grey);
+    border-radius: 2px;
+    padding: 0.6rem 0.8rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    min-height: 10rem;
+    width: 100%;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: left;
+}
+
+.order-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.4rem;
+}
+
 .order-number {
-    font-size: 1.5rem;
+    font-family: var(--font-inter);
+    font-size: 0.95rem;
     margin: 0;
-    color: var(--primary-color);
+    color: var(--button-blue);
 }
 
 .order-number .order-link {
@@ -52,174 +110,197 @@
 }
 
 .order-date {
-    font-size: 0.95rem;
-    color: var(--secondary-color);
-    margin-top: 0.5rem;
+    font-family: var(--font-inter);
+    font-size: 0.7rem;
+    color: var(--text-medium-grey);
+    margin-top: 0.2rem;
 }
 
-/* Order Status Section */
 .order-status {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .order-status .status,
 .order-status .locked {
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    padding: 0.2rem 0.4rem;
+    border-radius: 2px;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.75rem;
     color: #fff;
+    display: flex;
+    align-items: center;
 }
 
 .status.väntande {
-    background-color: var(--warning-color);
+    background-color: #FFC107;
 }
 
 .status.under-tillagning {
-    background-color: var(--primary-color);
+    background-color: #1B71D3;
 }
 
 .status.klar {
-    background-color: var(--success-color);
+    background-color: #3F9610;
 }
 
 .locked-yes {
-    background-color: var(--danger-color);
+    background-color: #F21919;
 }
 
 .locked-no {
-    background-color: var(--success-color);
+    background-color: #3F9610;
 }
 
-/* Order Items Table */
 .order-items {
-    overflow-x: auto; /* Enables horizontal scroll on small screens */
+    margin-top: 0.2rem;
+    overflow-y: auto;
 }
 
-.items-table {
-    width: 100%;
-    border-collapse: collapse;
+.items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.items-table th,
-.items-table td {
+.order-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.1rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.item-name {
+    font-family: var(--font-inter);
+    font-size: 0.8rem;
+    color: var(--dark-grey);
+    flex: 2;
+}
+
+.item-quantity {
+    font-family: var(--font-inter);
+    font-size: 0.75rem;
+    color: var(--text-medium-grey);
+    flex: 1;
+    text-align: center;
+}
+
+.item-request {
+    font-family: var(--font-inter);
+    font-size: 0.7rem;
+    color: var(--important-red);
+    flex: 2;
     text-align: left;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border-color);
-    font-family: var(--font-family);
+    margin-left: 0.2rem;
 }
 
-.items-table th {
-    background-color: #ffffff;
+.loading-message {
+    font-family: var(--font-inter);
+    font-size: 1rem;
+    color: var(--text-medium-grey);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.error-message {
+    color: var(--important-red);
     font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-.items-table tr:hover {
-    background-color: #e9ecef;
-}
-
-.items-table td:last-child {
-    width: 40%;
-}
-
-/* Responsive Design */
-
-/* Mobile Devices */
 @media (max-width: 600px) {
-    .order-header {
-        flex-direction: column;
-    }
-
-    .order-status {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .items-table th,
-    .items-table td {
-        padding: 0.5rem;
-    }
-
-    .items-table td:last-child {
-        width: 50%;
-    }
-
     .order-card {
-        padding: 1rem;
+        padding: 0.5rem 0.6rem;
+        min-height: 10rem;
     }
 
     .order-number {
-        font-size: 1.3rem;
+        font-size: 0.9rem;
+    }
+
+    .order-date {
+        font-size: 0.65rem;
     }
 
     .order-status .status,
     .order-status .locked {
-        font-size: 0.9rem;
-        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+        padding: 0.15rem 0.25rem;
+    }
+
+    .item-name {
+        font-size: 0.75rem;
+    }
+
+    .item-quantity {
+        font-size: 0.7rem;
+    }
+
+    .item-request {
+        font-size: 0.65rem;
+        margin-left: 0.15rem;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .filters {
+        flex-direction: column;
     }
 }
 
-/* Tablets and Small Screens */
-@media (min-width: 601px) and (max-width: 1024px) {
-    .order-header {
+@media (min-width: 601px) {
+    .order-card {
+        padding: 0.6rem 0.8rem;
+        min-height: 8rem;
+    }
+
+    .order-number {
+        font-size: 0.95rem;
+    }
+
+    .order-date {
+        font-size: 0.7rem;
+    }
+
+    .order-status .status,
+    .order-status .locked {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.4rem;
+    }
+
+    .item-name {
+        font-size: 0.8rem;
+    }
+
+    .item-quantity {
+        font-size: 0.75rem;
+    }
+
+    .item-request {
+        font-size: 0.7rem;
+        margin-left: 0.2rem;
+    }
+
+    .controls {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
 
-    .order-status {
+    .filters {
         flex-direction: row;
     }
-
-    .items-table th,
-    .items-table td {
-        padding: 0.75rem 1rem;
-    }
-
-    .order-card {
-        padding: 1.25rem;
-    }
 }
-
-/* Desktop */
-@media (min-width: 1025px) {
-    .orders-list {
-        padding: 2rem;
-    }
-
-    .order-card {
-        padding: 1.5rem 2rem;
-    }
-
-    .items-table th,
-    .items-table td {
-        padding: 1rem 1.5rem;
-    }
-}
-
-/* General Styles */
-.outlet-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.staffHome-h2 {
-    margin: 1rem 0;
-    font-family: var(--font-family);
-    color: var(--secondary-color);
-    text-align: center;
-}
-
-.error-message {
-    color: var(--danger-color);
-    font-weight: bold;
-    text-align: center;
-}
-
 
 
 /*
