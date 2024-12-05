@@ -13,3 +13,17 @@
     font-weight: 700;
     color: var(--button-text-color);
 }
+
+.staff-nav-links{
+    width: 100%;
+    display:flex;
+    padding:1rem;
+    background-color: #000;
+}
+
+.staff-nav-links li {
+   font-size:1.5rem;
+   color:var(--button-text-color);
+   text-decoration: none;
+   list-style:none;
+}
