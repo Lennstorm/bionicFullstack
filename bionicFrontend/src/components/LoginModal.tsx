@@ -5,6 +5,8 @@ import './styles/loginModal.css';
 import LoginButton from "./LoginButton";
 import { useNavigate } from 'react-router-dom';
 import config from "../config";
+import { jwtDecode } from 'jwt-decode';
+
 
 interface LoginModalProps {
     onClose: () => void;
@@ -12,7 +14,8 @@ interface LoginModalProps {
 }
 
 interface DecodedToken {
-    userid: string;
+    userid: string;    
+    role: string;
     isAdmin: boolean;
     iat: number;
     exp: number;
@@ -53,16 +56,16 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
     }
 
     //jwt_decode
-    const decodeJWT = (token: string): DecodedToken | null => {
-        try {
-            const payload = token.split('.')[1];
-            const decoded = JSON.parse(atob(payload));
-            return decoded;
-        } catch (error) {
-            console.error("Failed to decode JWT", error);
-            return null;
-        }
-    };
+//    const decodeJWT = (token: string): DecodedToken | null => {
+//        try {
+//            const payload = token.split('.')[1];
+//            const decoded = JSON.parse(atob(payload));
+//            return decoded;
+//        } catch (error) {
+//            console.error("Failed to decode JWT", error);
+//            return null;
+//        }
+//    };
 
     const handleLogin = async () => {
         setErrorMessage('');
@@ -85,7 +88,8 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
                 console.log('token:', token);
 
                 //------decode----
-                const decodedToken = decodeJWT(token);
+//                const decodedToken = decodeJWT(token);
+                const decodedToken: DecodedToken = jwtDecode(token);
                 console.log('Decoded Token:', decodedToken);
 
                 if (!decodedToken || !decodedToken.userid) {
@@ -93,14 +97,23 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
                 }
 
                 const userID = decodedToken.userid;
+                const userRole = decodedToken.role;
                 console.log('userID:', userID);
+                console.log('userRole:', userRole);
+                
+                
                 //---------localst.
                 sessionStorage.setItem('authToken', token);
                 localStorage.setItem('userID', userID);
                 localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userRole', userRole)
 
                 onClose();
+                if (userRole !== 'kund') {
+                    navigate('/staff');
+                } else {
                 navigate('/');
+                }
             } else {
                 setErrorMessage(data.message || 'Inloggningen misslyckades');
             }
@@ -156,6 +169,6 @@ export default LoginModal;
 *   Författare Andreas
 *
 *Ally har lagt till funktionalitet för localstorage av userID och isLOggedIn och fick installera jwt_decode och lägga till funktionalitet för det.
-*
+* Andreas har redigerat för att hämta role och skicka icke-kunder till personalsidan. Ändrade till annan variant av jwt decode.
 *
  */

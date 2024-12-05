@@ -20,9 +20,11 @@ const comparePasswords = async (password, storedPassword) => {
 const generateJWT = (user) => {
     const payload = {
         userid: user.userid,
+        role: user.role,
         isAdmin: user.role === "admin" || false,
     };
-
+    console.log('user role är:', user.role);
+    console.log('user id är:', user.userid);
     const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
     console.log('Generated JWT:', token);
     
@@ -40,3 +42,14 @@ const verifyJWT = (token) => {
 };
 
 module.exports = { hashPassword, comparePasswords, generateJWT, verifyJWT };
+
+
+/* 
+*Författare Andreas
+*
+* 
+* 
+* 
+*  
+*
+*/
