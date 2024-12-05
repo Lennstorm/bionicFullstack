@@ -5,9 +5,11 @@ import Header from "../components/Header";
 import "./styles/checkoutPage.css";
 import { v4 as uuidv4 } from 'uuid';
 import BigButton from "../components/BigButton";
+import axios from "axios";
 
 interface BasketItem {
     basketItemID: string;
+    userID: string;
     menuItem: string;
     count: number;
     specialRequest: string;
@@ -54,28 +56,50 @@ const CheckoutPage = () => {
     );
     console.log("Current total price:", totalPrice);
 
-    const handleConfirmOrder = () => {
+    const handleConfirmOrder = async () => {
+        basketItems.forEach((item, index) => {
+            console.log(`Basket Item ${index + 1}:`, item);
+        });
+
         const orderItemID = uuidv4().substring(0, 5).toUpperCase();
+        const userID = localStorage.getItem('userID') || 'guest';
 
         const orderDetails = {
-            orderItem: orderItemID,
-            orderContents: basketItems,
-            totalPrice,
-            orderStatus: "väntande",
+            userID,
+            basketItems: basketItems.map(item => ({
+                menuItem: item.menuItem,
+                count: item.count,
+                specialRequest: item.specialRequest || '',
+            })),
+            orderStatus: 'väntande',
             orderLocked: false,
             createdAt: new Date().toISOString(),
             editedAt: new Date().toISOString(),
         };
 
-        console.log("Order confirmation initiated.");
-        console.log("Order details:", orderDetails);
+        console.log('Order confirmation initiated.');
+        console.log('Order details:', JSON.stringify(orderDetails, null, 2));
 
-        setOrderID(orderItemID);
+        try {
+            const response = await axios.post(
+                'https://ko5vh81cp7.execute-api.eu-north-1.amazonaws.com/api/orders',
+                orderDetails,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
 
-        console.log("Order confirmed successfully.");
-        setOrderConfirmed(true);
+            console.log('Order confirmed successfully:', response.data);
 
-        localStorage.removeItem('basket');
+            setOrderID(orderItemID);
+            setOrderConfirmed(true);
+            localStorage.removeItem('basket');
+        } catch (error: any) {
+            console.error('Error sending order to server:', error.response?.data || error.message);
+            setError('An error occurred while sending the order to the server.');
+        }
     };
 
     const handleGoBackToBasket = () => {
@@ -150,7 +174,9 @@ const CheckoutPage = () => {
                 <section className="checkout-actions">
                     <BigButton
                         text="Tillbaka till Varukorgen"
-                        onClick={handleGoBackToBasket} className="goBack-btn" />
+                        onClick={handleGoBackToBasket}
+                        className="goBack-btn"
+                    />
                 </section>
 
                 <BigButton
@@ -165,7 +191,7 @@ const CheckoutPage = () => {
                         <div className="modal-content">
                             <h2 className="confirmation-h2">Beställning Bekräftad!</h2>
                             <p>
-                                Tack för din beställning. Din order är nu <strong>{`"väntande"`}</strong>.
+                                Tack för din beställning. Din order är nu <strong>"väntande"</strong>.
                             </p>
                             {orderID && (
                                 <p className="confirmation-text">
@@ -180,7 +206,6 @@ const CheckoutPage = () => {
                         </div>
                     </div>
                 )}
-
             </main>
 
             <Footer />
@@ -189,6 +214,9 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
+
+
+
 
 /*
 Alistair

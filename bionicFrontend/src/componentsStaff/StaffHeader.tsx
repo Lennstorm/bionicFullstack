@@ -5,6 +5,8 @@ import LoginModal from '../components/LoginModal';
 import LogoutButton from '../components/LogoutButton';
 import '../components/styles/serviceHeader.css';
 import RegisterModal from '../components/RegisterModal';
+import StaffNavComponent from './StaffNavComponent';
+
 
 function ServiceHeader(): JSX.Element {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
@@ -16,7 +18,7 @@ function ServiceHeader(): JSX.Element {
     useEffect(() => {
         const token: string | null = sessionStorage.getItem('authToken');
         const storedUserName: string | null = sessionStorage.getItem('userName');
-        
+
         setIsLoggedIn(!!token);
 
         if (storedUserName) {
@@ -31,7 +33,7 @@ function ServiceHeader(): JSX.Element {
         setUserName('');
     };
 
-    const handleOpenRegisterModal = (): void =>{
+    const handleOpenRegisterModal = (): void => {
         setIsLoginModalOpen(false)
         setIsRegisterModalOpen(true)
     }
@@ -70,10 +72,12 @@ function ServiceHeader(): JSX.Element {
                 </section>
 
                 <section>
-                    <h1 className='service-h1'>Service</h1>
+                    <h1 className='service-h1'>Servitör</h1>
+
                 </section>
 
                 <section>
+
                     {isLoggedIn ? (
                         <LogoutButton
                             text="Logga ut"
@@ -96,9 +100,10 @@ function ServiceHeader(): JSX.Element {
             )}
             {isRegisterModalOpen && (
                 <RegisterModal
-                onClose={() => setIsRegisterModalOpen(false)}
+                    onClose={() => setIsRegisterModalOpen(false)}
                 />
-            )} 
+            )}
+            <StaffNavComponent />
         </>
     );
 }

@@ -5,7 +5,7 @@ import AboutPage from "../pages/AboutPage";
 import TestPage from "../pages/TestPage";
 import BasketPage from "../pages/BasketPage";
 import CheckoutPage from "../pages/CheckoutPage";
-
+import WaiterPage from '../pagesStaff/WaiterPage.tsx';
 
 import StaffPage from '../pagesStaff/StaffPage';
 
@@ -26,26 +26,23 @@ function Routers() {
         <Route path="/basket" element={<BasketPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/test" element={<TestPage />} />
-        <Route path="/staff" element={<StaffPage />}>
-        
-          {/*
-          <Route path="waiterpage" element={<WaiterPage />} />
-          <Route path="lockedorders" element={<LockedOrdersPage />} />
-          <Route path="cook" element={<CookPage />} />
-          <Route path="orderhistory" element={<OrderHistoryPage />} />
-          <Route path="stock" element={<StockPage />} />
-          */}
-        </Route>
-      </Routes>
+        <Route path="/staff" element={<StaffPage />}/>
+        <Route path="/waiterpage" element={<WaiterPage />} />
+         
+        </Routes>
     </Router>
   );
 }
 
 export default Routers;
 
-
-
-
+ {/*
+          <Route path="waiterpage" element={<WaiterPage />} />
+          <Route path="lockedorders" element={<LockedOrdersPage />} />
+          <Route path="cook" element={<CookPage />} />
+          <Route path="orderhistory" element={<OrderHistoryPage />} />
+          <Route path="stock" element={<StockPage />} />
+          */}
 
 /* Författare: Andreas
 *
