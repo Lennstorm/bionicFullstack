@@ -67,7 +67,7 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
         setErrorMessage('');
         console.log("Attempting to login...");
         try {
-            const response = await fetch('https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/login', {
+            const response = await fetch('https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

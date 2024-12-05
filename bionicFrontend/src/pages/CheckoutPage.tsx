@@ -82,7 +82,7 @@ const CheckoutPage = () => {
 
         try {
             const response = await axios.post(
-                'https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/orders',
+                'https://ko5vh81cp7.execute-api.eu-north-1.amazonaws.com/api/orders',
                 orderDetails,
                 {
                     headers: {
