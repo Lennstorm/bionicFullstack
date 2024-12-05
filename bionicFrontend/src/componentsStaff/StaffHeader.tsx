@@ -5,7 +5,8 @@ import LoginModal from '../components/LoginModal';
 import LogoutButton from '../components/LogoutButton';
 import '../components/styles/serviceHeader.css';
 import RegisterModal from '../components/RegisterModal';
-import { Link } from 'react-router-dom';
+import StaffNavComponent from './StaffNavComponent';
+
 
 function ServiceHeader(): JSX.Element {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
@@ -73,13 +74,9 @@ function ServiceHeader(): JSX.Element {
                 <section>
                     <h1 className='service-h1'>Servitör</h1>
 
-
-
                 </section>
 
                 <section>
-
-
 
                     {isLoggedIn ? (
                         <LogoutButton
@@ -106,17 +103,7 @@ function ServiceHeader(): JSX.Element {
                     onClose={() => setIsRegisterModalOpen(false)}
                 />
             )}
-
-            
-                <ul className='staff-nav-links'>
-                    <li><Link to="#">Nya Ordrar</Link></li>
-                    <li><Link to="#">Låst Ordrar</Link></li>
-                    <li><Link to="#">Orderhistorik</Link></li>
-                    <li><Link to="#">Meny</Link></li>
-                    <li><Link to="#">Lager</Link></li>
-                </ul>
-
-           
+            <StaffNavComponent />
         </>
     );
 }

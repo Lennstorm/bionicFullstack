@@ -7,7 +7,6 @@ import BasketPage from "../pages/BasketPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import WaiterPage from '../pagesStaff/WaiterPage.tsx';
 
-
 import StaffPage from '../pagesStaff/StaffPage';
 
 //kommentera in när de ska användas!!
@@ -27,11 +26,10 @@ function Routers() {
         <Route path="/basket" element={<BasketPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/test" element={<TestPage />} />
-        <Route>
+        <Route path="/staff" element={<StaffPage />}/>
         <Route path="/waiterpage" element={<WaiterPage />} />
          
-        </Route>
-      </Routes>
+        </Routes>
     </Router>
   );
 }
