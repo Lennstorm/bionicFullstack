@@ -1,6 +1,7 @@
-/* .aboutPage--wrapper {    
-    
-} */
+.aboutPage--wrapper {    
+    display: flex;
+    flex-direction: column;
+}
 
 .aboutPage--infoArticle {
     margin: auto;
@@ -25,11 +26,11 @@
 }
 
 span {
-    padding: 0 8rem 0 4rem;
+    padding: 0 7rem 0 4rem;
 }
 
 
-/* Författare: Andreas(?)
+/* Författare: Andreas
 *
 * Ändrad av Andreas - tog bort main som istället läggs i app.css
 *

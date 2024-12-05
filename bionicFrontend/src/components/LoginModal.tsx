@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import './styles/loginModal.css';
 import LoginButton from "./LoginButton";
 import { useNavigate } from 'react-router-dom';
+import config from "../config";
 
 interface LoginModalProps {
     onClose: () => void;
@@ -67,7 +68,7 @@ const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
         setErrorMessage('');
         console.log("Attempting to login...");
         try {
-            const response = await fetch('https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/login', {
+            const response = await fetch(config.endpoints.auth.login, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
