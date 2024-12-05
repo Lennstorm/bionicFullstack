@@ -1,6 +1,11 @@
 .checkoutPage--wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;    
+}
+
+.checkout-main {
+    text-align: center;
+    font-family: var(--font-inter);
 }
 
 .basket-item {
@@ -51,5 +56,9 @@ p {
 }
 
 /*
-- Alistair
+* Författare Alistair
+* Andreas: lade till .checkout-main { text-align: center; font-family: var(--font-inter);} pga  borttagen * 
+* global selektor
+*    
+*
 */

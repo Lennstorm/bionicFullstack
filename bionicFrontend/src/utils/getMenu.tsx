@@ -1,8 +1,9 @@
 import axios from "axios";
 import { MenuItems } from "../interfaces.ts";
+import config from "../config";
 
 
-const url: string = 'https://xicc2u4jn5.execute-api.eu-north-1.amazonaws.com/api/get-menu'
+const url: string = config.endpoints.menu.get;
 
 const getMenu = async():Promise<MenuItems[]> =>{
    console.log('getMenu funktionen startar')

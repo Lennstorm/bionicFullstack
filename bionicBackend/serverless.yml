@@ -80,7 +80,7 @@ functions:
     handler: src/functions/GetOrdersFromDb/index.handler
     package:
       include:
-        - src/functions/GetAllOrdersFromDb/**
+        - src/functions/GetOrdersFromDb/**
         - src/responses/**
         - src/services/**
     environment:

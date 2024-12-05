@@ -1,6 +1,7 @@
 .homePage--wrapper {
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 .content-container{
@@ -32,9 +33,9 @@
 
 /* Författare:
 *
-* Ändrad av Andreas - tog bort main som istället läggs i app.css
-*
-Ally
+* Ändrad av:
+* Andreas - tog bort main som istället läggs i app.css
+* Ally
 *
 */
 
