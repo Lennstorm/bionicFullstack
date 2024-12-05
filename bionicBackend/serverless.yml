@@ -75,12 +75,23 @@ functions:
           path: /api/orders
           method: post
 
+  functions:
   GetAllOrdersFromDb:
-    handler: src/functions/GetAllOrdersFromDb/index.handler
+    handler: src/functions/GetOrdersFromDb/index.handler
+    package:
+      include:
+        - src/functions/GetAllOrdersFromDb/**
+        - src/responses/**
+        - src/services/**
+    environment:
+      ORDERS_TABLE_NAME:
+        Ref: OrdersTable
     events:
       - httpApi:
           path: /api/orders
           method: get
+          cors: true
+
 
   login:
     handler: src/functions/Login/index.handler
@@ -167,15 +178,15 @@ resources:
     OrdersTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: "orders-db-v3"
+        TableName: "orders-db-v4"
         AttributeDefinitions:
           - AttributeName: "orderItemID"
             AttributeType: "S"
-          - AttributeName: "userid"
+          - AttributeName: "userID"
             AttributeType: "S"
         KeySchema:
           - AttributeName: "orderItemID"
             KeyType: HASH
-          - AttributeName: "userid"
+          - AttributeName: "userID"
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
