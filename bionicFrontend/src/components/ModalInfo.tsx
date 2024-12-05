@@ -111,7 +111,13 @@ function ModalInfo({ item, closeModal, userID }: ModalInfoProps) {
               <h3>Pris: {item.price} kr</h3>
               <p>Innehåll:</p>
               <article className="modal-ingredience">
-                <p>{item.ingredience}</p>
+                {item.ingredience && item.ingredience.length > 0 ? (
+                  item.ingredience.map((ingredient, index) => (
+                    <p key={index}>{ingredient}</p>
+                  ))
+                ) : (
+                  <p>Inga ingredienser tillgängliga</p>
+                )}
               </article>
               <h4>Allergiinformation:</h4>
               <h4>{item.allergies}</h4>
@@ -160,8 +166,8 @@ export default ModalInfo;
 
 /* Författare Peter
 *
-* ändringar av Andreas: Lagt till "kr" i pris
+* Andreas: Lagt till "kr" i pris
 *
-*Ally har lagt till funktionalitet för localstorage av userID och isLOggedIn
-*
+* Ally har lagt till funktionalitet för localstorage av userID och isLOggedIn
+* Andreas: mappa ut ingredienser istället för att alla hamnar i samma p-tagg
 */

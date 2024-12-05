@@ -12,10 +12,8 @@ const AboutPage = () => {
                 <article className='aboutPage--infoArticle'>
                     <img src={companyLogo} alt="company logo" />
                     <span>
-                        <h1> Ursäkta röran!</h1>
-                        <h3> (Vi bygger upp.)</h3>
-                        <p>Här öppnar snart det senaste inom modern gammaldags husmanskost - Hemkocken!</p>
-                        <p>Från och med fredag 6/12 kommer du kunna beställa stans bästa hemburna käk.</p>
+                        <h1> Välkommen till Hemkocken!</h1>
+                        
                         <p>Snabbt och enkelt, med bara några klick, levererar vi förstklassig husmanskost.</p>
                         
                         <p>Hemkocken är den nya spännande take away-restaurangen som sätter svensk husmanskost i centrum. Med vårt motto "så gott som hemlagat" vill vi bjuda in dig till en värld av klassiska smaker, tillagade med kärlek och omtanke. Här hittar du allt från de robusta köttbullarna och det lena potatismoset till fläskpannkakor som påminner om barndomens trygghet. Vår filosofi är enkel: äkta smaker som smakar som hemma, men utan stressen att stå vid spisen själv.
