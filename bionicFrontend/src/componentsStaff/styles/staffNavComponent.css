@@ -4,6 +4,8 @@
     display: flex;
     justify-content:space-between;
     padding: 0 2rem;
+    background-color: var(--dark-grey);
+    font-family: var(--font-inter);
 }
 
 .staff-nav-btn {

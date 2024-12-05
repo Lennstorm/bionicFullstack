@@ -1,0 +1,102 @@
+:root {
+    --button-green: #3F9610;
+    --button-green-hover: #2e750b;
+    --button-blue: #1B71D3;
+    --button-blue-hover: #145aa1;
+    --dark-grey: #161515;
+    --text--medium-grey: #484646;
+    --light-grey: #D9D9D9;
+    --important-red: #F21919;
+    --button-text-color: #FFFFFF;
+  
+    /*Annie USe Your Telescope*/
+    --header-text: "Annie Use Your Telescope", cursive;
+    --header-text-size: 160px;
+    --header-text-stroke: 2px;
+    --header-stroke-color: white;
+  
+    /* Lalezar */
+    --h2-medium-font: "Lalezar", sans-serif;
+    --h2-medium-size: 40px;
+    --h2-large-font: "Lalezar", sans-serif;
+    --h2-large-size: 48px;
+  
+    /* Inter */
+    --font-inter: "Inter", sans-serif;
+    --footer-text-size: 32px;
+    --counter-text-size: 35px;
+    --menuItem-text-font: "Inter", sans-serif;
+    --menuItem-text-size: 12px;
+    --button-text-fontBold: "Inter Bold", sans-serif;
+    --login-button-textfont: "Inteer Medium", sans-serif;
+  
+    /* Jaini Purva */
+    --menuItem-h3-font: "Jaini Purva", serif;
+    --menuItem-h3-size: 22px;
+  
+    /* Khand */
+    --menuItem-btn-font: "Khand", sans-serif;
+    --menuItem-btn-size: 16px;
+  }
+
+
+.cookPage--wrapper {
+    min-height: 100vh;
+    padding: 0;
+}
+
+.cookPage--header {
+
+}
+
+.cookPage--nav {
+
+}
+
+.cookPage--main {
+    display: flex;
+    background-color: var(--light-grey);
+}
+
+.cookPage--aside-left {
+    background-color: beige;
+}
+
+.cookPage--left-row1 {
+
+}
+.cookPage--left-row2 {
+
+}
+.cookPage--left-row3 {
+
+}
+.cookPage--left-row3 button {
+
+}
+
+.cookPage--aside-right {
+    background-color: cadetblue;
+}
+
+.cookPage--right-heading {
+
+}
+
+.cookPage--right-orderTable {
+
+}
+
+.cookPage--aside-right button {
+
+}
+
+
+
+
+
+
+
+
+
+

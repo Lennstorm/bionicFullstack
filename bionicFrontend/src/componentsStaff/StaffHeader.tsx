@@ -12,17 +12,23 @@ function ServiceHeader(): JSX.Element {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [userName, setUserName] = useState<string>('');
+    const [userRole, setUserRole] = useState<string | null>(null);
     const [currentTime, setCurrentTime] = useState<string>("");
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false)
 
     useEffect(() => {
         const token: string | null = sessionStorage.getItem('authToken');
         const storedUserName: string | null = sessionStorage.getItem('userName');
+        const storedUserRole: string | null = localStorage.getItem('userRole');
 
         setIsLoggedIn(!!token);
 
         if (storedUserName) {
             setUserName(storedUserName);
+        }
+
+        if (storedUserRole) {
+            setUserRole(storedUserRole);
         }
     }, []);
 
@@ -72,7 +78,12 @@ function ServiceHeader(): JSX.Element {
                 </section>
 
                 <section>
-                    <h1 className='service-h1'>Servitör</h1>
+                    <h1 className='service-h1'>
+                        {userRole === 'cook' && 'Kock'}
+                        {userRole === 'waiter' && 'Servitör'}
+                        {userRole === 'admin' && 'Administratör '}
+                        {!userRole && 'Personal'}
+                    </h1>
 
                 </section>
 
@@ -112,5 +123,9 @@ export default ServiceHeader;
 
 
 /* 
-Alistair
+*Alistair
+*
+*Andreas lade in dynamisk h1 beroende på inloggad persons role
+*
+* 
 */
