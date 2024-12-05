@@ -3,7 +3,9 @@
     flex-direction: column;
 }
 
-
+.basket-main {
+    text-align: center;
+}
 
 .h2-basketPage {
     font-family: var(--font-inter);
@@ -20,5 +22,6 @@
 /*
 * Författare Alistair
 *
-* Ändrad av Andreas - tog bort main som istället läggs i app.css
+* Andreas - tog bort main som istället läggs i app.css
+*           lade till .basket-main { text-align: center;} pga  borttagen i app.css
 */

@@ -6,6 +6,7 @@ import "./styles/checkoutPage.css";
 import { v4 as uuidv4 } from 'uuid';
 import BigButton from "../components/BigButton";
 import axios from "axios";
+import config from "../config";
 
 interface BasketItem {
     basketItemID: string;
@@ -82,7 +83,7 @@ const CheckoutPage = () => {
 
         try {
             const response = await axios.post(
-                'https://ko5vh81cp7.execute-api.eu-north-1.amazonaws.com/api/orders',
+                config.endpoints.orders.create,
                 orderDetails,
                 {
                     headers: {

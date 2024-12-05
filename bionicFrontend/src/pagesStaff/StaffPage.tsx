@@ -4,6 +4,7 @@ import './styles/staffPage.css';
 import { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
+import config from "../config";
 
 interface OrderItem {
     menuItem: string;
@@ -26,7 +27,7 @@ function StaffPage() {
         const fetchOrders = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('https://ko5vh81cp7.execute-api.eu-north-1.amazonaws.com/api/orders');
+                const response = await axios.get(config.endpoints.orders.getAll);
 
                 const parsedOrders: Order[] = response.data.data.map((order: any) => ({
                     orderItemID: order.orderItemID,
