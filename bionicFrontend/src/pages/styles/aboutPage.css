@@ -1,0 +1,40 @@
+
+.aboutPage--wrapper {    
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.aboutPage--infoArticle {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3rem;
+}
+
+.aboutPage--infoArticle h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}    
+.aboutPage--infoArticle h3 {
+    font-size: .8rem;
+    margin-bottom: 1rem;
+}
+
+.aboutPage--infoArticle p {
+    margin-bottom: 1rem;
+}
+
+span {
+    padding: 0 7rem 0 4rem;
+}
+
+
+/* Författare: Andreas
+*
+* Ändrad av Andreas - tog bort main som istället läggs i app.css
+*
+*
+*/

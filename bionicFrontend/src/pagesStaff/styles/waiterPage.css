@@ -1,0 +1,270 @@
+.waiter-container {
+
+    width: 100%;
+    min-height: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+    padding-bottom:5rem;
+    padding-top:6rem;
+    
+
+}
+
+.waiter-container-wrapper{
+  max-width: 1440px;
+    width:100%;
+    margin: 0 auto;
+}
+
+.staff-header{
+    margin-top:2rem;
+}
+
+.form-container {
+    width: 40%;
+    height: 100%;
+    margin-left: 3rem;
+    padding-top: 1.5rem;
+
+}
+
+h5 {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+.form-row-one h5{
+margin-bottom:1rem;
+}
+.middle-column h5,
+.right-column h5,
+.left-column h5{
+   margin-bottom:1rem;
+}
+label {
+    color: #ffffff;
+   
+}
+
+label h5 {
+    text-align: left;
+}
+
+.waiter-container .form-row-two,
+.waiter-container .form-row-one {
+
+    display: flex;
+    margin-top: 1rem;
+}
+
+.form-row-one .left-input {
+    margin-right: 2rem;
+}
+
+.form-row-one .order-number,
+.form-row-one .edit-dish {
+    padding: .5rem 6rem;
+}
+
+.form-row-two .edit-price,
+.form-row-two .edit-quantity {
+    padding: .5rem 1px;
+}
+
+.form-row-two .edit-quantity {
+    margin-right: 2rem;
+}
+
+.form-row-two .edit-price {
+    margin-right: 5rem;
+    margin-left: 4rem;
+}
+
+.form-row-two .order-ready {
+
+    width:2.5rem;
+    height:2.5rem;
+    
+}
+
+.form-row-two {
+
+    padding-top: 2rem;
+}
+.middle-column h5{
+    margin-left:4rem;
+}
+
+.right-column{
+    margin-left:2rem;
+    
+    margin-top: -1.8rem;
+    
+    
+}
+
+.right-column h5 {
+    margin-left: -2.9rem;
+    margin-top:1.6rem
+}
+
+.right-column .order-ready {
+    margin-left: 3rem;
+    
+}
+
+
+.form-row-three .comment-chef {
+    padding: 5rem 10rem;
+
+}
+
+.form-row-three .comment-from-chef {
+    text-align: left;
+    margin-top: 2rem;
+}
+
+.form-row-three {
+    margin-top: 1rem;
+    margin-left: 1.8rem;
+}
+
+.button-container {
+
+    margin-top: 2rem;
+    margin-left: 1rem
+}
+
+.button-container button {
+    padding: .8rem 4rem;
+    border-radius: 30px;
+    background-color: var(--button-blue);
+    border: none;
+    color: var(--button-text-color);
+    margin-left: -1.6rem;
+    margin-top:1.5rem
+    
+}
+
+.order-container {
+ margin-top: 2.8rem;
+}
+.order-container h4{
+    font-weight: 300;
+}
+.order-window {
+    width: 26.25rem;
+    height: 30.25rem;
+    background-color: #FFFFFF;
+    margin-top: 1rem;
+    margin-left:8rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-window .order-dishes{
+    margin-left:1rem;
+}
+
+.order-window .order-dishes .red-circle{
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+
+}
+
+.order-window .order-dishes h1 {
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.order-window p {
+    text-align: left;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.order-window .order-quantity {
+
+    margin-right:1rem;
+}
+
+.order-quantity h1{
+    font-size:1.2rem;
+}
+
+.order-quantity p{
+    font-size:1.5rem;
+}
+
+.order-container h4 {
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+
+}
+
+.comment-from-chef {
+    margin-left: -2rem;
+}
+
+.comment-from-chef h5{
+    margin-bottom:1rem;
+}
+
+.send-to-kitchen-btn button {
+    padding: .6rem 5rem;
+    border-radius: 30px;
+    background-color: var(--button-green);
+    color: var(--button-text-color);
+    border: none;
+    margin-top: 4rem;
+    margin-left: 15rem;
+    font-size:1.3rem;
+
+}
+
+@media(max-width :765px){
+.waiter-container{
+    flex-direction: column;
+    padding:1rem;
+}
+.form-container{
+    margin-left: 1rem;
+}
+.waiter-container-wrapper{
+    
+    min-width:400px;
+    
+}
+
+.form-row-three {
+    margin-top: .1rem;
+    margin-left: 0.1rem;
+    width:70%;
+    border:3px solid red
+}
+
+.comment-from-chef{
+    min-width:80%;
+
+}
+.order-window{
+    margin-left:0;
+    width:80%;
+    height: 70%;
+}
+
+}
+
+/* koden skriven av peter */

@@ -1,3 +1,6 @@
 node_modules
 .serverless
 local.yml
+/bionicBackend/local.yml
+seed
+localConfig.json

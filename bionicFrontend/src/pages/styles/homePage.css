@@ -1,0 +1,41 @@
+.homePage--wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.content-container{
+    display:flex;
+    flex-wrap: wrap;
+    gap:10px;
+}
+
+.about-link {
+    font-family: var(--font-inter);
+    margin-bottom: 3rem;
+}
+
+.link-text {
+    font-family: var(--header-text);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: red;
+    display: inline-block;
+    transform: rotate(-15deg);
+    transition: transform 0.3s ease;
+    margin-left: 0.25em;
+}
+
+.link-text:hover {
+    transform: rotate(0deg);
+}
+
+
+/* Författare:
+*
+* Ändrad av:
+* Andreas - tog bort main som istället läggs i app.css
+* Ally
+*
+*/
+

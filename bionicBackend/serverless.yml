@@ -1,6 +1,5 @@
 # "org" ensures this Service is used with the correct Serverless Framework Access Key.
-# org: ${file(./local.yml):organisation}
-org: lennstorm
+org: ${file(./local.yml):organisation}
 # "service" is the name of this project. This will also be added to your AWS resource names.
 service: bionicBackend
 frameworkVersion: "4"
@@ -11,20 +10,183 @@ provider:
   region: eu-north-1
   deploymentMethod: direct
   iam:
-    role: arn:aws:iam::442042551476:role/LambdaDynamo
-    #role: ${file(./local.yml):iamRole}
+    role: ${file(./local.yml):iamRole}
+  httpApi:
+    cors: true
 
-build:
-  esbuild:
-    minify: true
+plugins:
+  - serverless-offline
+
+custom:
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      heapInitial: 200m
+      heapMax: 1g
+      migrate: true
+    seed:
+      userdb: # Seed namn
+        sources:
+          - table: user-db
+            data: ./seed/users.json
+    convertEmptyValues: true
+    debug: true
+    stages:
+      -dev
 
 package:
   individually: true
 
 functions:
-  hello:
-    handler: handler.hello
+  CreateMenuD:
+    handler: src/functions/CreateMenuDb/index.handler
     events:
       - httpApi:
-          path: /
+          path: /api/create-menu
+          method: post
+
+  
+  GetMenu:
+    handler: src/functions/GetMenu/index.handler
+    events:
+      - httpApi:
+          path: /api/get-menu
           method: get
+
+
+  SortMenu:
+    handler: src/functions/SortMenu/index.handler
+    events:
+      - httpApi:
+          path: /api/sort-menu
+          method: post       
+
+  AddUser:
+    handler: src/functions/AddUser/index.handler
+    events:
+      - httpApi:
+          path: /api/add-user
+          method: post
+  AddOrderToDb:
+    handler: src/functions/AddOrderToDb/index.handler
+    events:
+      - httpApi:
+          path: /api/orders
+          method: post
+
+  functions:
+  GetAllOrdersFromDb:
+    handler: src/functions/GetOrdersFromDb/index.handler
+    package:
+      include:
+        - src/functions/GetOrdersFromDb/**
+        - src/responses/**
+        - src/services/**
+    environment:
+      ORDERS_TABLE_NAME:
+        Ref: OrdersTable
+    events:
+      - httpApi:
+          path: /api/orders
+          method: get
+          cors: true
+
+
+  login:
+    handler: src/functions/Login/index.handler
+    events:
+      - httpApi:
+          path: /login
+          method: post
+
+  AddBasketToDb:
+    handler: src/functions/AddBasketToDb/index.handler
+    events:
+      - httpApi:
+          path: /api/basket
+          method: post        
+
+  getBasketFromDb:
+    handler: src/functions/getBasketFromDb/index.handler
+    events:
+      - httpApi:
+          path: /api/basket
+          method: get     
+
+  DeleteBasketItem:
+    handler: src/functions/DeleteBasketItem/index.handler
+    events:
+      - httpApi:
+          path: /api/basket/{id}
+          method: delete 
+
+
+resources:
+  Resources:
+    TestMenuTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "menu-db"
+        AttributeDefinitions:
+          - AttributeName: "MenuItemID"
+            AttributeType: "S" # S för sträng
+        KeySchema:
+          - AttributeName: "MenuItemID" # Partition key
+            KeyType: HASH # Detta är din PK (Partition Key)
+        BillingMode: PAY_PER_REQUEST # Betalning per användning       
+
+    UserDbTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "user-db"
+        AttributeDefinitions:
+          - AttributeName: "userid"
+            AttributeType: "S"
+          - AttributeName: "email"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "userid"
+            KeyType: HASH
+          - AttributeName: "email"
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        GlobalSecondaryIndexes:
+          - IndexName: "email-index"
+            KeySchema:
+              - AttributeName: "email"
+                KeyType: HASH
+            Projection:
+              ProjectionType: "ALL"
+
+    BasketTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "basket-db"
+        AttributeDefinitions:
+          - AttributeName: "basketItemID"
+            AttributeType: "S"
+          - AttributeName: "userID"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "basketItemID"
+            KeyType: "HASH"
+          - AttributeName: "userID"
+            KeyType: "RANGE"
+        BillingMode: PAY_PER_REQUEST
+    
+    OrdersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "orders-db-v4"
+        AttributeDefinitions:
+          - AttributeName: "orderItemID"
+            AttributeType: "S"
+          - AttributeName: "userID"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "orderItemID"
+            KeyType: HASH
+          - AttributeName: "userID"
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST

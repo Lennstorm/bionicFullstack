@@ -1,6 +1,32 @@
-#root {
-  max-width: 1280px;
+* {
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 0;    
+  box-sizing: border-box;
+  /* text-align: center; */
 }
+
+.page {
+  min-height: 100vh;
+}
+
+main {
+  padding: 3rem 3rem 3rem 3rem;
+  max-width: 100%;  
+  transition: padding .3s ease;
+  background-color: white;
+  flex-grow: 1;
+}
+
+.header-container.mini + main {  
+  padding: 15rem 3rem 3rem 3rem;
+  /* transition: padding .3s ease; */
+  /* min-height: calc(100vh - 5rem); */
+}
+
+
+/*
+* Författare Alistair
+*
+* Ändrad av Andreas. Tagit bort :root-delen som istället ligger i index.css
+*/
