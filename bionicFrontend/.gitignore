@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 src/localConfig.json
+public/order.json
+
 
 # Editor directories and files
 .vscode/*

@@ -40,6 +40,9 @@
   }
 
 
+.cookPage--wrapper * {
+    font-family: var(--font-inter);
+}
 .cookPage--wrapper {
     min-height: 100vh;
     padding: 0;
@@ -53,18 +56,30 @@
 
 }
 
+.cookPage--main *{
+    color: var(--text--medium-grey);
+}
 .cookPage--main {
     display: flex;
     background-color: var(--light-grey);
 }
 
 .cookPage--aside-left {
-    background-color: beige;
+        
 }
 
 .cookPage--left-row1 {
 
 }
+
+.cookPage--row1-field {
+    
+}
+
+.cookPage--row1-field label {
+
+}
+
 .cookPage--left-row2 {
 
 }
@@ -84,6 +99,10 @@
 }
 
 .cookPage--right-orderTable {
+
+}
+
+.cookPage--orderTable-row {
 
 }
 

@@ -7,8 +7,33 @@ let config: {
       basket: { add: string; get: string; delete: string };
     };
   };
+
+  config = {
+    endpoints: {
+      menu: {
+        create: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/create-menu",
+        get: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/get-menu",
+        sort: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/sort-menu",
+      },
+      user: {
+        add: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/add-user",
+      },
+      orders: {
+        create: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
+        getAll: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
+      },
+      auth: {
+        login: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/login",
+      },
+      basket: {
+        add: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket",
+        get: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket",
+        delete: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket/{id}",
+      },
+    },
+  };
   
-  try {
+  /* try {
     config = await import('./localConfig.json');
     console.log('localConfig hittad! Hämtar data.');
   } catch (error) {
@@ -39,7 +64,7 @@ let config: {
       },
     };
   }
-  
+   */
   export default config;
 
 
