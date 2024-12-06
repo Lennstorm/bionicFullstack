@@ -29,16 +29,16 @@
 
 }
 
-h5 {
+label {
     font-size: 1.2rem;
     font-weight: 300;
 }
-.form-row-one h5{
+.form-row-one label{
 margin-bottom:1rem;
 }
-.middle-column h5,
-.right-column h5,
-.left-column h5{
+.middle-column label,
+.right-column label,
+.left-column label{
    margin-bottom:1rem;
 }
 label {
@@ -46,7 +46,7 @@ label {
    
 }
 
-label h5 {
+label label {
     text-align: left;
 }
 
@@ -91,7 +91,7 @@ label h5 {
 
     padding-top: 2rem;
 }
-.middle-column h5{
+.middle-column label{
     margin-left:4rem;
 }
 
@@ -103,7 +103,7 @@ label h5 {
     
 }
 
-.right-column h5 {
+.right-column label {
     margin-left: -2.9rem;
     margin-top:1.6rem
 }
@@ -218,7 +218,7 @@ label h5 {
     margin-left: -2rem;
 }
 
-.comment-from-chef h5{
+.comment-from-chef label{
     margin-bottom:1rem;
 }
 

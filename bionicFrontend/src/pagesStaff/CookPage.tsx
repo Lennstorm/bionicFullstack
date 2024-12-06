@@ -1,8 +1,8 @@
 import './styles/cookPage.css';
-import ServiceHeader from '../componentsStaff/StaffHeader';
+import StaffHeader from '../componentsStaff/StaffHeader';
 import StaffNavComponent from '../componentsStaff/StaffNavComponent';
 import { useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../config';
 import RoundedButton from '../components/RoundedButton';
@@ -70,7 +70,7 @@ function cookPage() {
     return (
         <div className='page cookPage--wrapper'>
             <section className='cookPage--header'>
-                <ServiceHeader />
+                <StaffHeader />
             </section>
             <section className='cookPage--nav'>
                 <StaffNavComponent />

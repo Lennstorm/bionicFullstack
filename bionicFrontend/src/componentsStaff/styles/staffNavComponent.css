@@ -16,6 +16,10 @@
     color: var(--button-text-color);
 }
 
+.staff-nav-btn.active {
+    color: var(--button-blue-hover);
+}
+
 .staff-nav-links{
     width: 100%;
     display:flex;

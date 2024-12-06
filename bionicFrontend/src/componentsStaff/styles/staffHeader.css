@@ -1,4 +1,4 @@
-.serviceHeader-container {
+.staffHeader-container {
     width: 100%;
     min-height: 5rem;
     display: flex;
@@ -9,18 +9,18 @@
     color: white;
 }
 
-.serviceHeader-left {
+.staffHeader-left {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-.service-h1 {
+.staff-h1 {
     font-family: var(--h2-medium-font);
     font-size: var(--h2-large-size);
 }
 
-.serviceHeader-text {
+.staffHeader-text {
     font-family: var(--h2-medium-font);
     margin: .5rem;
 }

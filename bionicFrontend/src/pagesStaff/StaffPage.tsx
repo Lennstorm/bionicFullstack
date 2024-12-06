@@ -76,6 +76,8 @@ function StaffPage() {
         return matchesSearch && matchesStatus && matchesLocked;
     });
 
+    const userRole = localStorage.getItem('userRole') || 'waiter';
+
     return (
         <div>
             <StaffHeader />
@@ -129,7 +131,7 @@ function StaffPage() {
                             <div className="order-header">
                                 <h3 className="order-number">
                                     <Link
-                                        to={`/waiter/${order.orderItemID}`}
+                                        to={`/${userRole}`}
                                         className="order-link"
                                         state={{ order }}
                                         aria-label={`View details for order number ${order.orderItemID}`}

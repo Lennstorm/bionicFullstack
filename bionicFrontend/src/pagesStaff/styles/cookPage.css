@@ -49,11 +49,11 @@
 }
 
 .cookPage--header {
-
+    content: '';
 }
 
 .cookPage--nav {
-
+    content: '';
 }
 
 .cookPage--main *{
@@ -65,29 +65,30 @@
 }
 
 .cookPage--aside-left {
-        
+    content: '';        
 }
 
 .cookPage--left-row1 {
-
+    content: '';
 }
 
 .cookPage--row1-field {
+    content: '';
     
 }
 
 .cookPage--row1-field label {
-
+    content: '';
 }
 
 .cookPage--left-row2 {
-
+    content: '';
 }
 .cookPage--left-row3 {
-
+    content: '';
 }
 .cookPage--left-row3 button {
-
+    content: '';
 }
 
 .cookPage--aside-right {
@@ -95,19 +96,19 @@
 }
 
 .cookPage--right-heading {
-
+    content: '';
 }
 
 .cookPage--right-orderTable {
-
+    content: '';
 }
 
 .cookPage--orderTable-row {
-
+    content: '';
 }
 
 .cookPage--aside-right button {
-
+    content: '';
 }
 
 

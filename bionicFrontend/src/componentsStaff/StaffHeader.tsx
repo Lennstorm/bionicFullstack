@@ -3,12 +3,12 @@ import '../components/styles/header.css';
 import LoginButton from '../components/LoginButton';
 import LoginModal from '../components/LoginModal';
 import LogoutButton from '../components/LogoutButton';
-import '../components/styles/serviceHeader.css';
+import '../componentsStaff/styles/staffHeader.css';
 import RegisterModal from '../components/RegisterModal';
-import StaffNavComponent from './StaffNavComponent';
 
 
-function ServiceHeader(): JSX.Element {
+
+function StaffHeader(): JSX.Element {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [userName, setUserName] = useState<string>('');
@@ -67,21 +67,22 @@ function ServiceHeader(): JSX.Element {
 
     return (
         <>
-            <div className='serviceHeader-container'>
-                <section className='serviceHeader-left'>
-                    <article className='serviceHeader-text'>
+            <div className='staffHeader-container'>
+                <section className='staffHeader-left'>
+                    <article className='staffHeader-text'>
                         {isLoggedIn ? `Inloggad som: ${userName}` : 'Inte inloggad'}
                     </article>
-                    <article className='serviceHeader-text'>
+                    <article className='staffHeader-text'>
                         {currentTime}
                     </article>
                 </section>
 
                 <section>
-                    <h1 className='service-h1'>
+                    <h1 className='staff-h1'>
                         {userRole === 'cook' && 'Kock'}
                         {userRole === 'waiter' && 'Servitör'}
                         {userRole === 'admin' && 'Administratör '}
+                        {userRole === 'kund' && 'Här får du inte vara!!! '}
                         {!userRole && 'Personal'}
                     </h1>
 
@@ -118,7 +119,7 @@ function ServiceHeader(): JSX.Element {
     );
 }
 
-export default ServiceHeader;
+export default StaffHeader;
 
 
 
