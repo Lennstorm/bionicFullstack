@@ -1,3 +1,5 @@
+//bionicFrontend/src/pagesStaff/CookPage.tsx
+
 import './styles/cookPage.css';
 import StaffHeader from '../componentsStaff/StaffHeader';
 import StaffNavComponent from '../componentsStaff/StaffNavComponent';

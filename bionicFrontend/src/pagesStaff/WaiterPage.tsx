@@ -1,3 +1,5 @@
+//bionicFrontend/src/pagessStaff/WaiterPage.tsx
+
 import '../pagesStaff/styles/waiterPage.css'
 import StaffHeader from "../componentsStaff/StaffHeader";
 import StaffNavComponent from '../componentsStaff/StaffNavComponent';
@@ -31,10 +33,13 @@ function WaiterPage() {
     const [selectedDish, setSelectedDish] = useState<OrderItem | null>(null);
     const navigate = useNavigate();
 
+
     const handleLockClick = async () => {
+        console.log(order);
+
         if (!order) return;
         try {
-            await axios.put(`${config.endpoints.orders.updateDish}/${order.orderItemID}`, {
+            await axios.put(`${config.endpoints.orders.update}/${order.orderItemID}`, {
                 userID: order.userID,
                 orderStatus: "under tillagning",
                 orderLocked: true
@@ -45,6 +50,37 @@ function WaiterPage() {
             console.error('Misslyckades att uppdatera ordern', err);
         }
     };
+
+    const handleSaveClick = async () => {
+        console.log(order);
+    
+        if (!selectedDish) {
+            console.warn("Ingen dish vald att spara.");
+            return;
+        }
+    
+        // Bygg payload direkt från selectedDish
+        const payload = {
+            userID: order.userID,
+            menuItemID: selectedDish.menuItem, // Mappning till backend
+            specialRequest: selectedDish.specialRequest, // Uppdaterat värde från input-fältet
+        };
+    
+        console.log("Skickar data till backend", payload);
+    
+        try {
+            const url = config.endpoints.orders.updateRequest.replace(
+                "{orderItemID}",
+                order.orderItemID
+            );
+    
+            await axios.put(url, payload);
+            console.log("Uppdateringen lyckades!");
+        } catch (err) {
+            console.error("Ordern uppdaterades inte!", err.response?.data || err);
+        }
+    };
+
 
 
     if (!order) {
@@ -103,7 +139,7 @@ function WaiterPage() {
                                 className='waiterPage--leftColumn-quantity'
                                 id="edit-quantity"
                                 readOnly
-                                />
+                            />
                         </section>
                         <section className='waiterPage--rowTwo-middleColumn'>
                             <label>
@@ -143,33 +179,9 @@ function WaiterPage() {
                         </section>
                     </section>
                     <section className='button-container'>
-                        <button className='waiterPage--saveButton'
-                            onClick={async () => {
-                                if (!selectedDish) {
-                                    console.warn("Ingen dish vald att spara.");
-                                    return;
-                                }
-
-                                const payload = {
-                                    userID: order.userID,
-                                    updatedDish: {
-                                        menuItem: selectedDish.menuItem,
-                                        specialRequest: selectedDish.specialRequest
-                                    }
-                                };
-
-                                console.log('Skickar data till backend', payload);
-                                
-
-                                try {
-                                    await axios.put(`${config.endpoints.orders.update}/${order.orderItemID}`, payload);
-                                    console.log('Uppdateringen lyckades!');
-                                } catch (err) {
-                                    console.error('Ordern uppdaterades inte!', err);
-                                }
-                            }}
-                        >
-                            Spara Ändringarna</button>
+                        <button className="waiterPage--saveButton" onClick={handleSaveClick}>
+                            Spara Ändringarna
+                        </button>
                     </section>
                 </section>
 

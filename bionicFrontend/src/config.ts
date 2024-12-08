@@ -1,8 +1,10 @@
+// bionicFrontend/src/config.ts
+
 let config: {
     endpoints: {
       menu: { create: string; get: string; sort: string };
       user: { add: string };
-      orders: { create: string; getAll: string; update: string; updateDish: string };
+      orders: { create: string; getAll: string; update: string; updateRequest: string };
       auth: { login: string };
       basket: { add: string; get: string; delete: string };
     };
@@ -21,8 +23,8 @@ let config: {
       orders: {
         create: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
         getAll: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
-        update: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com//api/orders/{orderItemID}",
-        updateDish: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
+        update: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
+        updateRequest: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders/{orderItemID}/specialrequest",
       },
       auth: {
         login: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/login",
@@ -34,6 +36,8 @@ let config: {
       },
     },
   };
+
+  export default config;
   
   /* try {
     config = await import('./localConfig.json');
@@ -69,7 +73,7 @@ let config: {
     };
   }
    */
-  export default config;
+//  export default config;
 
 
 /* 

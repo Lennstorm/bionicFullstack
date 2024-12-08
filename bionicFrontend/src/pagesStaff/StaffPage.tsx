@@ -1,3 +1,5 @@
+//bionicFrontend/src/pagesStaff/StaffPage.tsx
+
 import StaffHeader from "../componentsStaff/StaffHeader";
 import StaffNavComponent from "../componentsStaff/StaffNavComponent";
 import './styles/staffPage.css';
