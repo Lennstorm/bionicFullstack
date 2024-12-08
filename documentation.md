@@ -2,17 +2,16 @@
 
 Välkommen till Hemkocken, husmanskost åt folket.
 
-Sidan
-
 Nedan kommer en kort instruktion om hur du ska använda sidan.
 
 ## Allmän hantering
-#### I config.ts finns alla endpoints som behövs i hela applikationen. Anropen länkas till configfilen.
+I config.ts finns alla endpoints som behövs i hela applikationen. Anropen länkas till configfilen.
 
 ## Login
-#### Det går att använda sidan som gäst, registrerad användare eller personal med särskilt roll. Prova att registrera dig!
+Det går att använda sidan som gäst, registrerad användare eller personal med särskilt roll. Prova att registrera dig som kund!
 
-### Några förprogrammerade inloggningsuppgifter finns att använda så ni kan testa. Beroende på roll så hamnar du på rätt startsida:
+## Forprogrammerade uppgifter
+ Några förprogrammerade inloggningsuppgifter finns att använda som ni kan testa. Beroende på roll så hamnar du på rätt startsida:
 
 ### kock: 
 johan@johansson.com 
