@@ -1,4 +1,4 @@
-# Hemkocken
+# Hemkocken v3.01
 
 Välkommen till Hemkocken, husmanskost åt folket.
 
@@ -26,5 +26,5 @@ nevergonna@give.com
 lösen 33333333
 
 
-## Det finns en del tillägg så det är viktigt att köra npm install och glöm inte att deploy från backenddelen.
+### Det finns en del tillägg så det är viktigt att köra npm install och glöm inte att deploy från backenddelen.
 
