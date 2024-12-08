@@ -4,6 +4,8 @@
     display: flex;
     justify-content:space-between;
     padding: 0 2rem;
+    background-color: var(--dark-grey);
+    font-family: var(--font-inter);
 }
 
 .staff-nav-btn {
@@ -12,6 +14,10 @@
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--button-text-color);
+}
+
+.staff-nav-btn.active {
+    color: var(--button-blue-hover);
 }
 
 .staff-nav-links{

@@ -92,6 +92,22 @@ functions:
           method: get
           cors: true
 
+  UpdateOrder:
+    handler: src/functions/UpdateOrder/index.handler
+    package:
+      include:
+        - src/functions/UpdateOrder/**
+        - src/responses/**
+        - src/services/**
+    environment:
+      ORDERS_TABLE_NAME:
+        Ref: OrdersTable
+    events:
+      - httpApi:
+          path: /api/orders/{orderItemID}
+          method: put
+          cors: true
+
 
   login:
     handler: src/functions/Login/index.handler
@@ -120,6 +136,7 @@ functions:
       - httpApi:
           path: /api/basket/{id}
           method: delete 
+          
 
 
 resources:
@@ -189,4 +206,4 @@ resources:
             KeyType: HASH
           - AttributeName: "userID"
             KeyType: RANGE
-        BillingMode: PAY_PER_REQUEST
+        BillingMode: PAY_PER_REQUEST     

@@ -23,13 +23,13 @@ const userSchema = Joi.object({
         .trim()
         .min(8)
         .max(128)
-        /* .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])')) */
+        .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])'))
         .required()
         .messages({
             'string.empty': 'Password is required',
             'string.min': "Password must be at least 8 characters",
             'string.max': "Password must be less than 129 characters",
-            /* 'string.pattern.base': "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*)", */
+            'string.pattern.base': "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*)",
         }),
 
 });

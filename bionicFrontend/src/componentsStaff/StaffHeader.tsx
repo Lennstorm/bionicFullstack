@@ -3,26 +3,34 @@ import '../components/styles/header.css';
 import LoginButton from '../components/LoginButton';
 import LoginModal from '../components/LoginModal';
 import LogoutButton from '../components/LogoutButton';
-import '../components/styles/serviceHeader.css';
+import '../componentsStaff/styles/staffHeader.css';
 import RegisterModal from '../components/RegisterModal';
-import StaffNavComponent from './StaffNavComponent';
+import { useNavigate } from 'react-router-dom';
 
 
-function ServiceHeader(): JSX.Element {
+
+function StaffHeader(): JSX.Element {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [userName, setUserName] = useState<string>('');
+    const [userRole, setUserRole] = useState<string | null>(null);
     const [currentTime, setCurrentTime] = useState<string>("");
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false)
+    const navigate = useNavigate();
 
     useEffect(() => {
         const token: string | null = sessionStorage.getItem('authToken');
         const storedUserName: string | null = sessionStorage.getItem('userName');
+        const storedUserRole: string | null = localStorage.getItem('userRole');
 
         setIsLoggedIn(!!token);
 
         if (storedUserName) {
             setUserName(storedUserName);
+        }
+
+        if (storedUserRole) {
+            setUserRole(storedUserRole);
         }
     }, []);
 
@@ -31,6 +39,7 @@ function ServiceHeader(): JSX.Element {
         sessionStorage.removeItem('userName');
         setIsLoggedIn(false);
         setUserName('');
+        navigate("/");
     };
 
     const handleOpenRegisterModal = (): void => {
@@ -61,18 +70,24 @@ function ServiceHeader(): JSX.Element {
 
     return (
         <>
-            <div className='serviceHeader-container'>
-                <section className='serviceHeader-left'>
-                    <article className='serviceHeader-text'>
+            <div className='staffHeader-container'>
+                <section className='staffHeader-left'>
+                    <article className='staffHeader-text'>
                         {isLoggedIn ? `Inloggad som: ${userName}` : 'Inte inloggad'}
                     </article>
-                    <article className='serviceHeader-text'>
+                    <article className='staffHeader-text'>
                         {currentTime}
                     </article>
                 </section>
 
                 <section>
-                    <h1 className='service-h1'>Servitör</h1>
+                    <h1 className='staff-h1'>
+                        {userRole === 'cook' && 'Kock'}
+                        {userRole === 'waiter' && 'Servitör'}
+                        {userRole === 'admin' && 'Administratör '}
+                        {userRole === 'kund' && 'Här får du inte vara!!! '}
+                        {!userRole && 'Personal'}
+                    </h1>
 
                 </section>
 
@@ -107,10 +122,14 @@ function ServiceHeader(): JSX.Element {
     );
 }
 
-export default ServiceHeader;
+export default StaffHeader;
 
 
 
 /* 
-Alistair
+*Alistair
+*
+*Andreas lade in dynamisk h1 beroende på inloggad persons role
+*
+* 
 */
