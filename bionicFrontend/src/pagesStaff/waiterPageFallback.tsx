@@ -7,48 +7,48 @@ interface WaiterPageFallbackProps {
 function WaiterPageFallback({ onBackToStaff }: WaiterPageFallbackProps) {
   return (
 
-      <section className='waiter-container'>
-        <section className='form-container'>
-          <section className='form-row-one'>
-            <section className='left-input'>
+      <section className='waiterPage--main'>
+        <section className='waiterPage--formContainer'>
+          <section className='waiterPage--form-rowOne'>
+            <section className='waiterPage--leftInput'>
               <label>Maträtt</label>
-              <input type="text" className='edit-dish' value='' readOnly />
+              <input type="text" className='waiterPage--leftInput-dish' value='' readOnly />
             </section>
-            <section className='right-input'>
+            <section className='waiterPage--rightInput'>
               <label>ordernummer</label>
-              <input type="text" value='' className='order-number' readOnly />
+              <input type="text" value='' className='waiterPage--orderNumber' readOnly />
             </section>
           </section>
-          <section className='form-row-two'>
-            <section className='left-column'>
+          <section className='waiterPage--form-rowTwo'>
+            <section className='waiterPage--rowTwo-leftColumn'>
               <label>Antal</label>
-              <input type="text" value='' className='edit-quantity' readOnly />
+              <input type="text" value='' className='waiterPage--leftColumn-quantity' readOnly />
             </section>
-            <section className='middle-column'>
+            <section className='waiterPage--rowTwo-middleColumn'>
               <label>Orderstatus</label>
-              <input type="text" value='' className='edit-price' readOnly />
+              <input type="text" value='' className='waiterPage--price' readOnly />
             </section>
-            <section className='right-column'></section>
+            <section className='waiterPage--rowTwo-rightColumn'></section>
           </section>
-          <section className='form-row-three'>
-            <section className='comment-from-chef'>
+          <section className='waiterPage--form-rowThree'>
+            <section className='waiterPage--rowThree-comment'>
               <label>Kommentar till kocken</label>
-              <input type="text" className='comment-chef' value='' readOnly />
+              <input type="text" className='waiterPage--chefComment' value='' readOnly />
             </section>
           </section>
           <section className='button-container'>
-            <button disabled>Spara Ändringarna</button>
+            <button className='waiterPage--saveButton' disabled >Spara Ändringarna</button>
           </section>
         </section>
         
-        <section className='order-container'>
+        <section className='waiterPage--orderContainer'>
           <h4>Ingen order vald</h4>
           <p>Vänligen gå tillbaka till staff-sidan och välj en order.</p>
-          <section className='send-to-kitchen-btn'>
-                        <button
+          
+                        <button className='waiterPage--sendButton'
                         onClick={onBackToStaff}
                         >Till Ordrar</button>
-                    </section>
+          
         </section>
       </section>
 

@@ -5,6 +5,7 @@ import LoginModal from '../components/LoginModal';
 import LogoutButton from '../components/LogoutButton';
 import '../componentsStaff/styles/staffHeader.css';
 import RegisterModal from '../components/RegisterModal';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -15,6 +16,7 @@ function StaffHeader(): JSX.Element {
     const [userRole, setUserRole] = useState<string | null>(null);
     const [currentTime, setCurrentTime] = useState<string>("");
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false)
+    const navigate = useNavigate();
 
     useEffect(() => {
         const token: string | null = sessionStorage.getItem('authToken');
@@ -37,6 +39,7 @@ function StaffHeader(): JSX.Element {
         sessionStorage.removeItem('userName');
         setIsLoggedIn(false);
         setUserName('');
+        navigate("/");
     };
 
     const handleOpenRegisterModal = (): void => {

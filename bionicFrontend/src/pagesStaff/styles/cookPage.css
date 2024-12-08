@@ -42,14 +42,17 @@
 
 .cookPage--wrapper * {
     font-family: var(--font-inter);
+    width: 100%;
 }
 .cookPage--wrapper {
-    min-height: 100vh;
+    height: 100vh;
     padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .cookPage--header {
-    content: '';
+    
 }
 
 .cookPage--nav {
@@ -60,8 +63,15 @@
     color: var(--text--medium-grey);
 }
 .cookPage--main {
-    display: flex;
-    background-color: var(--light-grey);
+    display: grid;
+    grid-template-columns: 60% 40%;
+    background-color: black;
+}
+
+.cookPage--main label,
+.cookPage--main button,
+.cookPage--main h4 {
+    color: var(--button-text-color);
 }
 
 .cookPage--aside-left {
@@ -69,11 +79,12 @@
 }
 
 .cookPage--left-row1 {
-    content: '';
+    display: flex;
 }
 
 .cookPage--row1-field {
-    content: '';
+    display: flex;
+    flex-direction: column;
     
 }
 
@@ -82,17 +93,31 @@
 }
 
 .cookPage--left-row2 {
-    content: '';
+    display: flex;
+}
+.cookPage--row2-field {
+    display: flex;
+    flex-direction: column;
 }
 .cookPage--left-row3 {
-    content: '';
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
+
+.cookPage--row3-field {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto 1rem 0;
+
+}
+
 .cookPage--left-row3 button {
-    content: '';
+    max-width: 30%;
 }
 
 .cookPage--aside-right {
-    background-color: cadetblue;
+    margin-left: 1rem;
 }
 
 .cookPage--right-heading {
@@ -100,17 +125,67 @@
 }
 
 .cookPage--right-orderTable {
-    content: '';
+    height: 50%;
+    background-color: #FFFFFF;    
+    display: flex;
+    justify-content: space-between;
 }
 
-.cookPage--orderTable-row {
-    content: '';
+.cookPage-orderWindow-itemsList {
+    min-width: 90%;
+    list-style-type: none;
+    padding-left: 0;
+    margin: 1rem 1rem;
 }
 
-.cookPage--aside-right button {
-    content: '';
+.cookPage--itemsList-orderItem {
+    padding: .2rem 0;    
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 5% 85% 10%;
+    align-items: center;    
+
 }
 
+.cookPage--orderWindow-redCircle {
+    background-color: red;
+    border-radius: 50%;
+    width: .5rem;
+    height: .5rem;
+    display: block;
+}
+
+.cookPage--orderItem-name {
+    display: block;
+    width: 100%;
+    justify-self: start;
+}
+
+.cookPage--orderItem-quantity {
+    width: 100%;
+    display: block;
+    justify-self: center;
+}
+
+
+.cookPage--main-leftBtnArea {
+    display: flex;
+    
+}
+.cookPage--main-leftBtnArea button {
+    max-width: 40%;
+    justify-self: center;
+}
+
+.cookPage--main-rightBtnArea {
+    display: flex;    
+}
+
+.cookPage--main-rightBtnArea button {
+    max-width: 50%;
+    
+    
+}
 
 
 

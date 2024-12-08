@@ -1,8 +1,9 @@
 import './styles/cookPage.css';
 import StaffHeader from '../componentsStaff/StaffHeader';
 import StaffNavComponent from '../componentsStaff/StaffNavComponent';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import CookPageFallback from './CookPageFallback';
 import axios from 'axios';
 import config from '../config';
 import RoundedButton from '../components/RoundedButton';
@@ -16,56 +17,47 @@ interface OrderItem {
 
 interface Order {
     orderItemID: string;
+    userID: string;
     createdAt: string;
     orderStatus: string;
     orderLocked: boolean;
     orderContent: OrderItem[];
 }
 
-function cookPage() {
-    const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+function CookPage() {
+
+    const location = useLocation();
+    const order = location.state?.order as Order | undefined;
+    console.log('har vi hämtat order???: ', order);
     const [selectedDish, setSelectedDish] = useState<OrderItem | null>(null);
+    const navigate = useNavigate();
 
+    const handleCookedClick = async () => {
+        if (!order) return;
+        try {
+            const response = await axios.put(`${config.endpoints.orders.update}/${order.orderItemID}`,{
+                userID: order.userID,
+                orderStatus: "klar",
+                orderLocked: true
+            });
+            console.log('Ordern tillagad och status uppdaterad till "klar"!', response);
+            navigate("/staff");
+        } catch (err) {
+            console.error('Misslyckades att uppdatera order', err);
+        }
+    };
 
-
-    const [orders, setOrders] = useState<Order[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [statusFilter, setStatusFilter] = useState('');
-    const [lockedFilter, setLockedFilter] = useState('');
-
-    useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                setLoading(true);
-                const response = await axios.get(config.endpoints.orders.getAll);
-
-                const parsedOrders: Order[] = response.data.data.map((order: any) => ({
-                    orderItemID: order.orderItemID,
-                    createdAt: order.createdAt,
-                    orderStatus: order.orderStatus,
-                    orderLocked: order.orderLocked,
-                    orderContent: order.orderContent.map((item: any) => ({
-                        menuItem: item.menuItemID,
-                        articleName: item.articleName,
-                        count: item.count,
-                        specialRequest: item.specialRequest,
-                    })),
-                }));
-
-                setOrders(parsedOrders);
-                setError(null);
-            } catch (err) {
-                console.error("Error fetching orders:", err);
-                setError("Failed to fetch orders. Please try again later.");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchOrders();
-    }, []);
+    if (!order) {
+        return (
+            <div className='cookPage--wrapper'>
+                <section className='cookPage--header'>
+                    <StaffHeader />
+                    <StaffNavComponent />
+                </section>
+                <CookPageFallback onBackToStaff={() => navigate('/staff')} />
+            </div>
+        );
+    }
 
     return (
         <div className='page cookPage--wrapper'>
@@ -84,18 +76,13 @@ function cookPage() {
                             <input
                                 type="text"
                                 value={selectedDish ? selectedDish.articleName : ''}
-                                onChange={(e) => {
-                                    if (selectedDish) {
-                                        setSelectedDish({ ...selectedDish, articleName: e.target.value });
-                                    }
-                                }}
                             />
                         </div>
                         <div className="cookPage--row1-field">
                             <label>Ordernummer</label>
                             <input
                                 type="text"
-                                value={selectedOrder ? selectedOrder.orderItemID : ''}
+                                value={order.orderItemID}
                                 readOnly
                             />
                         </div>
@@ -108,32 +95,15 @@ function cookPage() {
                             <input
                                 type="number"
                                 value={selectedDish ? selectedDish.count : 0}
-                                onChange={(e) => {
-                                    const newCount = parseInt(e.target.value, 10) || 0;
-                                    if (selectedDish) {
-                                        setSelectedDish({ ...selectedDish, count: newCount });
-                                    }
-                                }}
                             />
                         </div>
 
                         <div className='cookPage--row2-field'>
-                            <label>Pris</label>
+                            <label>Orderstatus</label>
                             <input
-                                type="number"
-                                value={selectedDish && selectedDish.item ? selectedDish.menuItem.price : 0}
-                                onChange={(e) => {
-                                    const newPrice = parseFloat(e.target.value) || 0;
-                                    if (selectedDish && selectedDish.item) {
-                                        setSelectedDish({
-                                            ...selectedDish,
-                                            item: {
-                                                ...selectedDish.item,
-                                                price: newPrice
-                                            }
-                                        });
-                                    }
-                                }}
+                                type="text"
+                                value={order.orderStatus}
+                               
                             />
                         </div>
                     </div>
@@ -142,11 +112,7 @@ function cookPage() {
                             <label>Kommentar till kocken</label>
                             <textarea
                                 value={selectedDish ? (selectedDish.specialRequest || '') : ''}
-                                onChange={(e) => {
-                                    if (selectedDish) {
-                                        setSelectedDish({ ...selectedDish, specialRequest: e.target.value });
-                                    }
-                                }}
+                                
                             />
                         </div>
                         <RoundedButton
@@ -160,38 +126,59 @@ function cookPage() {
 
 
                 <aside className='cookPage--aside-right'>
-                    <div className='cookPage--right-heading'></div>
+                    <div className='cookPage--right-heading'>
+                    <h4>Order #{order.orderItemID}</h4>
+
+                    </div>
 
                     <div className='cookPage--right-orderTable'>
-                        {selectedOrder && selectedOrder.orderContent.map((dish, index) => (
-                            <div
-                                key={index}
-                                className="cookPage--orderTable-row"
-                                onClick={() => setSelectedDish(dish)}
-                            >
-                                <p>{index + 1}. {dish.articleName} x {dish.count}</p>
-                            </div>
-                        ))}
+                    <ul className="cookPage--orderWindow-itemsList">
+                            {order.orderContent.map((item, index) => (
+                                <li
+                                    key={index}
+                                    className="cookPage--itemsList-orderItem"
+                                    onClick={() => setSelectedDish(item)}
+                                >
+                                    <span className="cookPage--orderWindow-redCircle" style={{ backgroundColor: item.specialRequest ? 'red' : 'transparent' }}></span>
+                                    <span className="cookPage--orderItem-name">{item.articleName}</span>
+                                    <span className="cookPage--orderItem-quantity">{item.count}</span>
+                                </li>
+                            ))}
+                        </ul>                        
                     </div>
 
 
                 </aside>
-                <RoundedButton
+                <aside className='cookPage--main-leftBtnArea'>
+
+{/*                 <RoundedButton
                     text="Matlagning påbörjad"
                     onClick={() => console.log('Rounded Button!')}
                     color="green"
                     fontStyle="bold"
-                />
+                    /> */}
+                    </aside>
+                    <aside className='cookPage--main-rightBtnArea'>
+
                 <RoundedButton
                     text="Ordern Tillagad!"
-                    onClick={() => console.log('Rounded Button!')}
+                    onClick={handleCookedClick}
                     color="green"
                     fontStyle="bold"
-                />
+                    />
+                    </aside>
 
             </main>
         </div >
     )
 }
 
-export default cookPage;
+export default CookPage;
+
+/* 
+* Författare Andreas
+*
+*
+* 
+* 
+*/

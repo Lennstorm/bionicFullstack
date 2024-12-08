@@ -15,6 +15,7 @@ interface OrderItem {
 
 interface Order {
     orderItemID: string;
+    userID: string;
     createdAt: string;
     orderStatus: string;
     orderLocked: boolean;
@@ -37,6 +38,7 @@ function StaffPage() {
 
                 const parsedOrders: Order[] = response.data.data.map((order: any) => ({
                     orderItemID: order.orderItemID,
+                    userID: order.userID,
                     createdAt: order.createdAt,
                     orderStatus: order.orderStatus,
                     orderLocked: order.orderLocked,
