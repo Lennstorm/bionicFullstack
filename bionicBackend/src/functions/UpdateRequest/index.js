@@ -61,3 +61,11 @@ exports.handler = async (event) => {
     return sendError(500, "Internt serverfel");
   }
 };
+
+/* 
+* Författare Andreas
+*
+*
+*
+*
+ */

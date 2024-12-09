@@ -24,5 +24,13 @@ lösen 22222222
 nevergonna@give.com
 lösen 33333333
 
+### Funktioner att testa:
+Lägg till mat i varukorgen. Läs information om maträtterna.
+Ändra antal eller ta bort maträtt i varukorgen.
 
-## Det finns en del tillägg så det är viktigt att köra npm install och glöm inte att deploy från backenddelen.
+Registrera en ny användare och testa logga ut och logga in igen med den.
+Logga in som servitör eller kock och surfa runt på personalsidan.
+Klicka på en order och se vad man kan göra med den.
+
+
+## Det finns en del tillägg så det är viktigt att köra npm install.

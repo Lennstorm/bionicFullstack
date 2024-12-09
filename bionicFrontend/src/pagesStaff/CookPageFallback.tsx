@@ -1,10 +1,5 @@
 import './styles/cookPage.css';
-import StaffHeader from '../componentsStaff/StaffHeader';
-import StaffNavComponent from '../componentsStaff/StaffNavComponent';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import config from '../config';
+import { useState } from 'react';
 import RoundedButton from '../components/RoundedButton';
 
 
@@ -14,55 +9,99 @@ interface CookPageFallbackProps {
 
 function CookPageFallback({ onBackToStaff }: CookPageFallbackProps) {
     return (
-        <section className='cookPage--main'>
-            <section className='cookPage--formContainer'>
-                <section className='cookPage--form-rowOne'>
-                    <section className='cookPage--leftInput'>
+        <main className='cookPage--main'>
+            <aside className='cookPage--aside-left'>
+                <div className='cookPage--left-row1'>
+                    <div className='cookPage--row1-field'>
                         <label>Maträtt</label>
-                        <input type="text" className='cookPage--leftInput-dish' value='' readOnly />
-                    </section>
-                    <section className='cookPage--rightInput'>
-                        <label>ordernummer</label>
-                        <input type="text" value='' className='cookPage--orderNumber' readOnly />
-                    </section>
-                </section>
-                <section className='cookPage--form-rowTwo'>
-                    <section className='cookPage--rowTwo-leftColumn'>
-                        <label>Antal</label>
-                        <input type="text" value='' className='cookPage--leftColumn-quantity' readOnly />
-                    </section>
-                    <section className='cookPage--rowTwo-middleColumn'>
-                        <label>Orderstatus</label>
-                        <input type="text" value='' className='cookPage--price' readOnly />
-                    </section>
-                    <section className='cookPage--rowTwo-rightColumn'></section>
-                </section>
-                <section className='cookPage--form-rowThree'>
-                    <section className='cookPage--rowThree-comment'>
-                        <label>Kommentar till kocken</label>
-                        <textarea className='cookPage--chefComment' value='' readOnly />
-                    </section>
-                </section>
-                <section className='button-container'>
-                    <button className='cookPage--saveButton' disabled>
-                        Spara Ändringarna
-                    </button>
-                </section>
-            </section>
+                        <input
+                            type="text"
+                            value=""
+                        />
+                    </div>
+                    <div className="cookPage--row1-field">
+                        <label>Ordernummer</label>
+                        <input
+                            type="text"
+                            value=""
+                            readOnly
+                        />
+                    </div>
+                </div>
 
-            <section className='cookPage--orderContainer'>
-                <h4>Ingen order vald</h4>
-                <p>Vänligen gå tillbaka till staff-sidan och välj en order.</p>
+                <div className='cookPage--left-row2'>
+                    <div className='cookPage--row2-field'>
+                        <label>Antal</label>
+                        <input
+                            type="number"
+                            value=""
+                        />
+                    </div>
+
+                    <div className='cookPage--row2-field'>
+                        <label>Orderstatus</label>
+                        <input
+                            type="text"
+                            value=""
+                        />
+                    </div>
+                </div>
+
+                <div className='cookPage--left-row3'>
+                    <div className='cookPage--row3-field'>
+                        <label>Kommentar till kocken</label>
+                        <textarea
+                            value=""
+                        />
+                    </div>
+                    <RoundedButton
+                        text="Läst!"
+                        onClick={() => console.log('Rounded Button!')}
+                        color="blue"
+                        fontStyle="bold"
+                    />
+                </div>
+            </aside>
+
+            <aside className='cookPage--aside-right'>
+                <div className='cookPage--right-heading'>
+                    <h4>Order #</h4>
+                </div>
+
+                <div className='cookPage--right-orderTable'>
+                    <ul className="cookPage--orderWindow-itemsList">
+                        {/* Lista med artiklar tas bort */}
+                    </ul>
+                </div>
+            </aside>
+
+            <aside className='cookPage--main-leftBtnArea'>
+                {/* Kommenterad knapp */}
+                {/* <RoundedButton
+            text="Matlagning påbörjad"
+            onClick={() => console.log('Rounded Button!')}
+            color="green"
+            fontStyle="bold"
+        /> */}
+            </aside>
+            <aside className='cookPage--main-rightBtnArea'>
                 <RoundedButton
-                    text="Till ordrar!"
-                    onClick={onBackToStaff}
+                    text="Ordern Tillagad!"
+                    onClick={() => console.log('Order tillagad!')}
                     color="green"
                     fontStyle="bold"
-                   />
+                />
+            </aside>
+        </main>
 
-            </section>
-        </section>
     );
 }
 
 export default CookPageFallback;
+
+/* 
+*   Författare Andreas
+*
+* 
+* 
+*/
