@@ -1,0 +1,22 @@
+{
+    "orderItemID": "372C8",
+    "editedAt": "2024-12-05T13:14:07.324Z",
+    "orderLocked": false,
+    "orderStatus": "väntande",
+    "userID": "c810a407",
+    "createdAt": "2024-12-05T13:14:07.324Z",
+    "orderContent": [
+        {
+            "count": 1,
+            "specialRequest": "",
+            "articleName": "Pannkakor",
+            "menuItemID": "4ac2e17d"
+        },
+        {
+            "count": 1,
+            "specialRequest": "",
+            "articleName": "Gravad Lax",
+            "menuItemID": "cc42399a"
+        }
+    ]
+}

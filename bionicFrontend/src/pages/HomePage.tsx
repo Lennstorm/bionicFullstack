@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import axios from 'axios';
 import './styles/homePage.css';
 import MenuItem from '../components/MenuItem.tsx';
-import MenuSortComponent from '../components/MenuSortComponent.tsx';
+//import MenuSortComponent from '../components/MenuSortComponent.tsx';
 import { Link } from 'react-router-dom';
 import config from "../config";
 
@@ -46,7 +46,7 @@ const HomePage = () => {
           Läs mer om Hemkocken 
           <Link className='link-text' to="/about">här</Link>
         </h3>
-        <MenuSortComponent />
+{/*         <MenuSortComponent /> */}
         <section className='content-container'>
           {menuItems.map((item) => (
 
