@@ -21,3 +21,10 @@ const errorHandler = () => ({
   });
   
   module.exports = { errorHandler };
+
+  /* 
+  * Författare Andreas
+  *
+  * 
+  * 
+  *  */

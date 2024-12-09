@@ -1,3 +1,5 @@
+//bionicFrontend/src/pagesStaff/StaffPage.tsx
+
 import StaffHeader from "../componentsStaff/StaffHeader";
 import StaffNavComponent from "../componentsStaff/StaffNavComponent";
 import './styles/staffPage.css';
@@ -15,6 +17,7 @@ interface OrderItem {
 
 interface Order {
     orderItemID: string;
+    userID: string;
     createdAt: string;
     orderStatus: string;
     orderLocked: boolean;
@@ -37,6 +40,7 @@ function StaffPage() {
 
                 const parsedOrders: Order[] = response.data.data.map((order: any) => ({
                     orderItemID: order.orderItemID,
+                    userID: order.userID,
                     createdAt: order.createdAt,
                     orderStatus: order.orderStatus,
                     orderLocked: order.orderLocked,
@@ -75,6 +79,8 @@ function StaffPage() {
 
         return matchesSearch && matchesStatus && matchesLocked;
     });
+
+    const userRole = localStorage.getItem('userRole') || 'waiter';
 
     return (
         <div>
@@ -129,7 +135,7 @@ function StaffPage() {
                             <div className="order-header">
                                 <h3 className="order-number">
                                     <Link
-                                        to={`/waiter/${order.orderItemID}`}
+                                        to={`/${userRole}`}
                                         className="order-link"
                                         state={{ order }}
                                         aria-label={`View details for order number ${order.orderItemID}`}

@@ -11,7 +11,7 @@ const AboutPage = () => {
             <main className='aboutPage--main'>
                 <article className='aboutPage--infoArticle'>
                     <img src={companyLogo} alt="company logo" />
-                    <span>
+                    <span className='aboutPage--infoArticle-aboutText'>
                         <h1> Välkommen till Hemkocken!</h1>
                         
                         <p>Snabbt och enkelt, med bara några klick, levererar vi förstklassig husmanskost.</p>

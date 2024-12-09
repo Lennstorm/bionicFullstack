@@ -24,3 +24,11 @@ const getUserByEmail = async (email) => {
 };
 
 module.exports = { getUserByEmail };
+
+
+
+/* 
+* Författare Andreas
+*
+*
+ */

@@ -5,6 +5,9 @@ function sendResponse(status, data) {
     statusCode: status,
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*", // Tillåter alla domäner
+      "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE", // Tillåtna metoder
+      "Access-Control-Allow-Headers": "Content-Type", // Tillåtna headers
     },
     body: JSON.stringify({ success: true, data }),
   };
@@ -15,6 +18,9 @@ function sendError(status, message) {
     statusCode: status,
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,GET,POST,PUT,DELETE",
+      "Access-Control-Allow-Headers": "Content-Type",
     },
     body: JSON.stringify({ success: false, message: message }),
   };

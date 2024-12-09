@@ -1,96 +1,227 @@
+//bionicFrontend/src/pagessStaff/WaiterPage.tsx
+
 import '../pagesStaff/styles/waiterPage.css'
 import StaffHeader from "../componentsStaff/StaffHeader";
+import StaffNavComponent from '../componentsStaff/StaffNavComponent';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import WaiterPageFallback from './waiterPageFallback';
+import axios from 'axios';
+import config from '../config';
+
+
+interface OrderItem {
+    menuItem: string;
+    articleName: string;
+    count: number;
+    specialRequest?: string;
+}
+
+interface Order {
+    orderItemID: string;
+    userID: string;
+    createdAt: string;
+    orderStatus: string;
+    orderLocked: boolean;
+    orderContent: OrderItem[];
+}
 
 function WaiterPage() {
-    return (
-        <div className='waiter-container-wrapper'>
-        <section className='staff-header'>
-        <StaffHeader />
-        </section>
-        <section className='waiter-container'>
-            
-            <section className='form-container'>
-                <section className='form-row-one'>
-                    <section className='left-input'>
-                        <label>
-                            <h5>Redigera Maträtt</h5>
-                        </label>
-                        <input type="text" id="edit-dish" value='Fläsk med löksås' className='edit-dish'></input>
-                    </section>
-                    <section className='right-input'>
-                        <label>
-                            <h5>ordernummer</h5>
-                        </label>
-                        <input type="text" id="order-number" value="#884574587-8" className='order-number'></input>
-                    </section>
-                </section>
-                <section className='form-row-two'>
-                    <section className='left-column'>
-                        <label>
-                            <h5>Redigera antal</h5>
-                        </label>
-                        <input type="text" id="edit-quantity" value='1' className='edit-quantity'></input>
-                    </section>
-                    <section className='middle-column'>
-                        <label>
-                            <h5>Redigera pris</h5>
-                        </label>
-                        <input type="text" id="edit-price" value='120' className='edit-price'></input>
-                    </section>
-                    
-                    <section className='right-column'>
-                    <label>
-                        <h5>Beställning Klar</h5>
-                    </label>
-                    <input type="text" id="order-ready" className='order-ready'></input>
-                    </section>
-                </section>
+    const location = useLocation();
+    const order = location.state?.order as Order | undefined;
+    console.log('har vi hämtat order???: ', order);
+    const [selectedDish, setSelectedDish] = useState<OrderItem | null>(null);
+    const navigate = useNavigate();
 
 
-                <section className='form-row-three'>
-                <section className='comment-from-chef'>
-                <label>
-                <h5>Kommentar till kocken</h5>
-                </label>
-                <input type="text-area" id="comment-chef" value='Ingen lök i såsen' className='comment-chef'></input>
-                </section>
-               </section>
-            <section className='button-container'>
-            <button>Spara Ändringarna</button>
-            </section>
-            </section>
-            <section className='order-container'>
-            <h4>Order #65497</h4>
-            <section className='order-window'>
-            <section className='order-dishes'>
-             <h1># Maträtt</h1>
-             <p>1 Fisk med löksås</p>
-             <p>2 Pannkakor</p>
-             <p>3 Rårakor med lingon</p>
-             <p>4 Pannbiff med lök och potatis</p>
-             <p>5 Korv och Mos</p>
-             <p>6 Fisk med löksås</p>
-            </section>
-            <section className='order-quantity'>
-            <h1>Antal</h1>
-            <p>2</p>
-            <p>1</p>
-            <p>4</p>
-            <p>1</p>
-            <p>1</p>
-            
-            </section>
-            </section>
-            <section className='send-to-kitchen-btn'>
-            <button>Skicka till köket</button>    
-            </section>               
-            </section>
-            </section>
-            </div>
+    const handleLockClick = async () => {
+        console.log(order);
+
+        if (!order) return;
+        try {
+            await axios.put(`${config.endpoints.orders.update}/${order.orderItemID}`, {
+                userID: order.userID,
+                orderStatus: "under tillagning",
+                orderLocked: true
+            });
+            console.log('Ordern låst och status uppdaterad!');
+            navigate("/staff");
+        } catch (err) {
+            console.error('Misslyckades att uppdatera ordern', err);
+        }
+    };
+
+    const handleSaveClick = async () => {
+        console.log(order);
     
-    )  
+        if (!selectedDish) {
+            console.warn("Ingen dish vald att spara.");
+            return;
+        }
+    
+        // Bygg payload direkt från selectedDish
+        const payload = {
+            userID: order.userID,
+            menuItemID: selectedDish.menuItem, // Mappning till backend
+            specialRequest: selectedDish.specialRequest, // Uppdaterat värde från input-fältet
+        };
+    
+        console.log("Skickar data till backend", payload);
+    
+        try {
+            const url = config.endpoints.orders.updateRequest.replace(
+                "{orderItemID}",
+                order.orderItemID
+            );
+    
+            await axios.put(url, payload);
+            console.log("Uppdateringen lyckades!");
+        } catch (err) {
+            console.error("Ordern uppdaterades inte!", err.response?.data || err);
+        }
+    };
+
+
+
+    if (!order) {
+        return (
+            <div className='waiterPage--wrapper'>
+                <section className='waiterPage--header'>
+                    <StaffHeader />
+                    <StaffNavComponent />
+                </section>
+                <WaiterPageFallback onBackToStaff={() => navigate('/staff')} />
+            </div>
+        );
+    }
+
+    return (
+        <div className='waiterPage--wrapper'>
+            <section className='waiterPage--header'>
+                <StaffHeader />
+                <StaffNavComponent />
+            </section>
+            <section className='waiterPage--main'>
+
+                <section className='waiterPage--formContainer'>
+                    <section className='waiterPage--form-rowOne'>
+                        <section className='waiterPage--leftInput'>
+                            <label>
+                                Maträtt
+                            </label>
+                            <input
+                                type="text"
+                                className='waiterPage--leftInput-dish'
+                                value={selectedDish ? selectedDish.articleName : ''}
+                                id="waiterPage--editDish"
+                                readOnly
+                            ></input>
+                        </section>
+                        <section className='waiterPage--rightInput'>
+                            <label>
+                                ordernummer
+                            </label>
+                            <input
+                                type="text"
+                                value={order.orderItemID}
+                                className='waiterPage--orderNumber'
+                                id="order-number"
+                                readOnly
+                            ></input>
+                        </section>
+                    </section>
+                    <section className='waiterPage--form-rowTwo'>
+                        <section className='waiterPage--rowTwo-leftColumn'>
+                            <label>Antal</label>
+                            <input
+                                type="text"
+                                value={selectedDish ? String(selectedDish.count) : ''}
+                                className='waiterPage--leftColumn-quantity'
+                                id="edit-quantity"
+                                readOnly
+                            />
+                        </section>
+                        <section className='waiterPage--rowTwo-middleColumn'>
+                            <label>
+                                Orderstatus
+                            </label>
+                            <input
+                                type="text"
+                                value={order.orderStatus}
+                                className='waiterPage--price'
+                                id="edit-price"
+                                readOnly
+                            ></input>
+                        </section>
+
+                        <section className='waiterPage--rowTwo-rightColumn'>
+
+                        </section>
+                    </section>
+
+
+                    <section className='waiterPage--form-rowThree'>
+                        <section className='waiterPage--rowThree-comment'>
+                            <label>
+                                Kommentar till kocken
+                            </label>
+                            <input
+                                type="text"
+                                className='waiterPage--chefComment'
+                                value={selectedDish ? (selectedDish.specialRequest || '') : ''}
+                                onChange={(e) => {
+                                    if (selectedDish) {
+                                        setSelectedDish({ ...selectedDish, specialRequest: e.target.value })
+                                    }
+                                }}
+                                id="comment-chef"
+                            ></input>
+                        </section>
+                    </section>
+                    <section className='button-container'>
+                        <button className="waiterPage--saveButton" onClick={handleSaveClick}>
+                            Spara Ändringarna
+                        </button>
+                    </section>
+                </section>
+
+                <section className='waiterPage--orderContainer'>
+                    <h4>Order #{order.orderItemID}</h4>
+                    <section className='waiterPage--orderWindow'>
+
+                        <ul className="waiterPage--orderWindow-itemsList">
+                            {order.orderContent.map((item, index) => (
+                                <li
+                                    key={index}
+                                    className="waiterPage--itemsList-orderItem"
+                                    onClick={() => setSelectedDish(item)}
+                                >
+                                    <span className="waiterPage--orderWindow-redCircle" style={{ backgroundColor: item.specialRequest ? 'red' : 'transparent' }}></span>
+                                    <span className="waiterPage--orderItem-name">{item.articleName}</span>
+                                    <span className="waiterPage--orderItem-quantity">{item.count}</span>
+                                </li>
+                            ))}
+                        </ul>
+
+                    </section>
+
+                    <button className='waiterPage--sendButton'
+                        onClick={handleLockClick}
+                    >Skicka till köket</button>
+
+                </section>
+            </section>
+        </div>
+
+    )
 }
 
 export default WaiterPage
 
-// koden skriven av peter
+/*
+* Författare Peter
+*
+* Ally, Andreas & Peter: omarbetning.
+*
+*
+*/
