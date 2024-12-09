@@ -1,8 +1,10 @@
+// bionicFrontend/src/config.ts
+
 let config: {
     endpoints: {
       menu: { create: string; get: string; sort: string };
       user: { add: string };
-      orders: { create: string; getAll: string };
+      orders: { create: string; getAll: string; update: string; updateRequest: string };
       auth: { login: string };
       basket: { add: string; get: string; delete: string };
     };
@@ -21,6 +23,8 @@ let config: {
       orders: {
         create: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
         getAll: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
+        update: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
+        updateRequest: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders/{orderItemID}/specialrequest",
       },
       auth: {
         login: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/login",
@@ -33,9 +37,9 @@ let config: {
     },
   };
 
+  export default config;
   
-  /* 
-  try {
+  /* try {
     config = await import('./localConfig.json');
     console.log('localConfig hittad! Hämtar data.');
   } catch (error) {
@@ -44,30 +48,32 @@ let config: {
     config = {
       endpoints: {
         menu: {
-          create: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/create-menu",
-          get: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/get-menu",
-          sort: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/sort-menu",
-        },
-        user: {
-          add: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/add-user",
-        },
-        orders: {
-          create: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
-          getAll: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
-        },
-        auth: {
-          login: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/login",
-        },
-        basket: {
-          add: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket",
-          get: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket",
-          delete: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket/{id}",
+        create: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/create-menu",
+        get: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/get-menu",
+        sort: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/sort-menu",
+      },
+      user: {
+        add: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/add-user",
+      },
+      orders: {
+        create: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
+        getAll: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
+        update: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com//api/orders/{orderItemID}",
+        updateDish: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
+      },
+      auth: {
+        login: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/login",
+      },
+      basket: {
+        add: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket",
+        get: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket",
+        delete: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/basket/{id}",
         },
       },
     };
-  } */
-  
-  export default config;
+  }
+   */
+//  export default config;
 
 
 /* 

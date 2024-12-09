@@ -1,5 +1,5 @@
-# "org" ensures this Service is used with the correct Serverless Framework Access Key.
-org: ${file(./local.yml):organisation}
+# bionicBackend/serverless.yml
+org: lennstorm
 # "service" is the name of this project. This will also be added to your AWS resource names.
 service: bionicBackend
 frameworkVersion: "4"
@@ -10,7 +10,7 @@ provider:
   region: eu-north-1
   deploymentMethod: direct
   iam:
-    role: ${file(./local.yml):iamRole}
+    role: arn:aws:iam::442042551476:role/LambdaDynamo
   httpApi:
     cors: true
 
@@ -92,6 +92,35 @@ functions:
           method: get
           cors: true
 
+  UpdateOrder:
+    handler: src/functions/UpdateOrder/index.handler
+    package:
+      include:
+        - src/functions/UpdateOrder/**
+        - src/responses/**
+        - src/services/**
+    environment:
+      ORDERS_TABLE_NAME:
+        Ref: OrdersTable
+    events:
+      - httpApi:
+          path: /api/orders/{orderItemID}
+          method: put
+
+  UpdateSpecialRequest:
+    handler: src/functions/UpdateRequest/index.handler
+    package:
+      include:
+        - src/functions/UpdateRequest/**
+        - src/responses/**
+        - src/services/**
+    environment:
+      ORDERS_TABLE_NAME:
+        Ref: OrdersTable
+    events:
+      - httpApi:
+          path: /api/orders/{orderItemID}/specialrequest
+          method: put
 
   login:
     handler: src/functions/Login/index.handler
@@ -120,6 +149,7 @@ functions:
       - httpApi:
           path: /api/basket/{id}
           method: delete 
+          
 
 
 resources:
@@ -189,4 +219,4 @@ resources:
             KeyType: HASH
           - AttributeName: "userID"
             KeyType: RANGE
-        BillingMode: PAY_PER_REQUEST
+        BillingMode: PAY_PER_REQUEST     
