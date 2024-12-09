@@ -1,4 +1,5 @@
-import '../pagesStaff/styles/waiterPage.css'
+// WaiterPage.tsx
+import '../pagesStaff/styles/waiterPage.css';
 import StaffHeader from "../componentsStaff/StaffHeader";
 import StaffNavComponent from '../componentsStaff/StaffNavComponent';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -6,7 +7,6 @@ import { useState } from 'react';
 import WaiterPageFallback from './waiterPageFallback';
 import axios from 'axios';
 import config from '../config';
-
 
 interface OrderItem {
     menuItem: string;
@@ -27,14 +27,18 @@ interface Order {
 function WaiterPage() {
     const location = useLocation();
     const order = location.state?.order as Order | undefined;
-    console.log('har vi hämtat order???: ', order);
+    console.log('Har vi hämtat order???: ', order);
     const [selectedDish, setSelectedDish] = useState<OrderItem | null>(null);
     const navigate = useNavigate();
 
     const handleLockClick = async () => {
         if (!order) return;
         try {
-            await axios.put(`${config.endpoints.orders.updateDish}/${order.orderItemID}`, {
+            // Loggar för felsökning
+            console.log('Update endpoint:', config.endpoints.orders.update);
+            console.log('Full PUT URL:', `${config.endpoints.orders.update}/${order.orderItemID}`);
+
+            await axios.put(`${config.endpoints.orders.update}/${order.orderItemID}`, {
                 userID: order.userID,
                 orderStatus: "under tillagning",
                 orderLocked: true
@@ -45,7 +49,6 @@ function WaiterPage() {
             console.error('Misslyckades att uppdatera ordern', err);
         }
     };
-
 
     if (!order) {
         return (
@@ -70,28 +73,24 @@ function WaiterPage() {
                 <section className='waiterPage--formContainer'>
                     <section className='waiterPage--form-rowOne'>
                         <section className='waiterPage--leftInput'>
-                            <label>
-                                Maträtt
-                            </label>
+                            <label>Maträtt</label>
                             <input
                                 type="text"
                                 className='waiterPage--leftInput-dish'
-                                value={selectedDish ? selectedDish.articleName : ''}
+                                value={selectedDish?.articleName || ''}
                                 id="waiterPage--editDish"
                                 readOnly
-                            ></input>
+                            />
                         </section>
                         <section className='waiterPage--rightInput'>
-                            <label>
-                                ordernummer
-                            </label>
+                            <label>ordernummer</label>
                             <input
                                 type="text"
                                 value={order.orderItemID}
                                 className='waiterPage--orderNumber'
                                 id="order-number"
                                 readOnly
-                            ></input>
+                            />
                         </section>
                     </section>
                     <section className='waiterPage--form-rowTwo'>
@@ -103,43 +102,38 @@ function WaiterPage() {
                                 className='waiterPage--leftColumn-quantity'
                                 id="edit-quantity"
                                 readOnly
-                                />
+                            />
                         </section>
                         <section className='waiterPage--rowTwo-middleColumn'>
-                            <label>
-                                Orderstatus
-                            </label>
+                            <label>Orderstatus</label>
                             <input
                                 type="text"
                                 value={order.orderStatus}
                                 className='waiterPage--price'
                                 id="edit-price"
                                 readOnly
-                            ></input>
+                            />
                         </section>
 
                         <section className='waiterPage--rowTwo-rightColumn'>
-
+                            {/* Lägg till andra element om nödvändigt */}
                         </section>
                     </section>
 
-
                     <section className='waiterPage--form-rowThree'>
                         <section className='waiterPage--rowThree-comment'>
-                            <label>
-                                Kommentar till kocken
-                            </label>
+                            <label>Kommentar till kocken</label>
                             <input
                                 type="text"
                                 className='waiterPage--chefComment'
-                                value={selectedDish ? (selectedDish.specialRequest || '') : ''}
+                                value={selectedDish?.specialRequest || ''}
                                 onChange={(e) => {
                                     if (selectedDish) {
                                         setSelectedDish({ ...selectedDish, specialRequest: e.target.value })
                                     }
                                 }}
                                 id="comment-chef"
-                            ></input>
+                            />
                         </section>
                     </section>
                     <section className='button-container'>
@@ -159,9 +153,12 @@ function WaiterPage() {
                                 };
 
                                 console.log('Skickar data till backend', payload);
-                                
+
 
                                 try {
+                                    console.log('Update endpoint:', config.endpoints.orders.update);
+                                    console.log('Full PUT URL:', `${config.endpoints.orders.update}/${order.orderItemID}`);
+
                                     await axios.put(`${config.endpoints.orders.update}/${order.orderItemID}`, payload);
                                     console.log('Uppdateringen lyckades!');
                                 } catch (err) {
@@ -169,7 +166,8 @@ function WaiterPage() {
                                 }
                             }}
                         >
-                            Spara Ändringarna</button>
+                            Spara Ändringarna
+                        </button>
                     </section>
                 </section>
 
@@ -178,9 +176,9 @@ function WaiterPage() {
                     <section className='waiterPage--orderWindow'>
 
                         <ul className="waiterPage--orderWindow-itemsList">
-                            {order.orderContent.map((item, index) => (
+                            {order.orderContent.map((item) => (
                                 <li
-                                    key={index}
+                                    key={item.menuItem} // Använd unikt värde istället för index
                                     className="waiterPage--itemsList-orderItem"
                                     onClick={() => setSelectedDish(item)}
                                 >
@@ -200,11 +198,12 @@ function WaiterPage() {
                 </section>
             </section>
         </div>
-
     )
 }
 
-export default WaiterPage
+export default WaiterPage;
+
+
 
 /*
 * Författare Peter

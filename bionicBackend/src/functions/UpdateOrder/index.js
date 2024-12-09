@@ -1,4 +1,4 @@
-//bionicBackend/src/functions/UpdateOrder/index.js
+// src/functions/UpdateOrder/index.js
 
 const { db } = require("../../services/index.js");
 const { sendError, sendResponse } = require("../../responses/index.js");
@@ -25,7 +25,7 @@ exports.handler = async (event) => {
     const { Item } = await db.get(getParams);
 
     if (!Item) {
-      return sendError(404, "ingen order hittades att uppdatera");
+      return sendError(404, "Ingen order hittades att uppdatera");
     }
 
     let updatedOrder = { ...Item };
@@ -51,7 +51,6 @@ exports.handler = async (event) => {
       if (updatedDish.specialRequest !== undefined) {
         updatedOrder.orderContent[dishIndex].specialRequest = updatedDish.specialRequest;
       }
-      
     }
 
     const putParams = {
@@ -61,12 +60,14 @@ exports.handler = async (event) => {
 
     await db.put(putParams);
 
-    return sendResponse(200, {message: "order uppdaterad", order: updatedOrder});
+    return sendResponse(200, {message: "Order uppdaterad", order: updatedOrder});
   } catch (error) {
     console.error("Fel vid uppdatering av order", error);
     return sendError(500, "Internt serverfel");
   }
 };
+
+
 
 /*     
     let UpdateExpression = "set";

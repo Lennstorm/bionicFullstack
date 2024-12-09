@@ -21,7 +21,7 @@ let config: {
       orders: {
         create: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
         getAll: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
-        update: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com//api/orders/{orderItemID}",
+        update: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders/{orderItemID}",
         updateDish: "https://zzpn054sg0.execute-api.eu-north-1.amazonaws.com/api/orders",
       },
       auth: {
