@@ -1,45 +1,3 @@
-:root {
-    --button-green: #3F9610;
-    --button-green-hover: #2e750b;
-    --button-blue: #1B71D3;
-    --button-blue-hover: #145aa1;
-    --dark-grey: #161515;
-    --text--medium-grey: #484646;
-    --light-grey: #D9D9D9;
-    --important-red: #F21919;
-    --button-text-color: #FFFFFF;
-  
-    /*Annie USe Your Telescope*/
-    --header-text: "Annie Use Your Telescope", cursive;
-    --header-text-size: 160px;
-    --header-text-stroke: 2px;
-    --header-stroke-color: white;
-  
-    /* Lalezar */
-    --h2-medium-font: "Lalezar", sans-serif;
-    --h2-medium-size: 40px;
-    --h2-large-font: "Lalezar", sans-serif;
-    --h2-large-size: 48px;
-  
-    /* Inter */
-    --font-inter: "Inter", sans-serif;
-    --footer-text-size: 32px;
-    --counter-text-size: 35px;
-    --menuItem-text-font: "Inter", sans-serif;
-    --menuItem-text-size: 12px;
-    --button-text-fontBold: "Inter Bold", sans-serif;
-    --login-button-textfont: "Inteer Medium", sans-serif;
-  
-    /* Jaini Purva */
-    --menuItem-h3-font: "Jaini Purva", serif;
-    --menuItem-h3-size: 22px;
-  
-    /* Khand */
-    --menuItem-btn-font: "Khand", sans-serif;
-    --menuItem-btn-size: 16px;
-  }
-
-
 .cookPage--wrapper * {
     font-family: var(--font-inter);
     width: 100%;
@@ -51,8 +9,26 @@
     flex-direction: column;
 }
 
-.cookPage--header {
-    
+.staffHeader-container {
+    width: 100%;
+    min-height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--dark-grey);
+    color: white;
+    padding: 1rem 3rem;
+}
+
+.staffHeader-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.cookPage--header button {
+    max-width: 50%;
 }
 
 .cookPage--nav {
@@ -63,6 +39,7 @@
     color: var(--text--medium-grey);
 }
 .cookPage--main {
+    flex-grow: 1;
     display: grid;
     grid-template-columns: 60% 40%;
     background-color: black;
@@ -75,7 +52,11 @@
 }
 
 .cookPage--aside-left {
-    content: '';        
+    padding: .5rem 2rem 0 0;
+}
+
+.cookPage--aside-left input {
+    padding: .4rem;
 }
 
 .cookPage--left-row1 {
@@ -85,7 +66,7 @@
 .cookPage--row1-field {
     display: flex;
     flex-direction: column;
-    
+    margin: 1rem;
 }
 
 .cookPage--row1-field label {
@@ -98,18 +79,25 @@
 .cookPage--row2-field {
     display: flex;
     flex-direction: column;
+    margin: 1rem;
 }
 .cookPage--left-row3 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    padding-right: 2rem;
 }
 
 .cookPage--row3-field {
     display: flex;
     flex-direction: column;
-    margin: 1rem auto 1rem 0;
+    margin: 1rem;
+}
 
+.cookPage--row3-field textarea {
+    min-height: 10rem;
+    padding: 1rem;
+    font-size: 1.2rem;
 }
 
 .cookPage--left-row3 button {
@@ -121,14 +109,14 @@
 }
 
 .cookPage--right-heading {
-    content: '';
+    margin: 1rem;
 }
 
 .cookPage--right-orderTable {
-    height: 50%;
+    height: 80%;
     background-color: #FFFFFF;    
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;    
 }
 
 .cookPage-orderWindow-itemsList {
@@ -143,7 +131,8 @@
     cursor: pointer;
     display: grid;
     grid-template-columns: 5% 85% 10%;
-    align-items: center;    
+    align-items: center;
+    margin: .5rem 0;
 
 }
 

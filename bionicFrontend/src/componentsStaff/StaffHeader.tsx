@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../components/styles/header.css';
+/* import './styles/staffHeader.css' */
 import LoginButton from '../components/LoginButton';
 import LoginModal from '../components/LoginModal';
 import LogoutButton from '../components/LogoutButton';

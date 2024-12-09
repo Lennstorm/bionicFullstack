@@ -65,10 +65,8 @@ function CookPage() {
         <div className='page cookPage--wrapper'>
             <section className='cookPage--header'>
                 <StaffHeader />
-            </section>
-            <section className='cookPage--nav'>
                 <StaffNavComponent />
-            </section>
+            </section>            
             <main className='cookPage--main'>
                 <aside className='cookPage--aside-left'>
                     <div className='cookPage--left-row1'>
