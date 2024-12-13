@@ -32,11 +32,22 @@ function WaiterPage() {
     console.log('har vi hämtat order???: ', order);
     const [selectedDish, setSelectedDish] = useState<OrderItem | null>(null);
     const navigate = useNavigate();
+    const [error, setError] = useState<string | null>(null);
 
+
+    if (!order) {
+        return (
+            <div className='waiterPage--wrapper'>
+                <section className='waiterPage--header'>
+                    <StaffHeader />
+                    <StaffNavComponent />
+                </section>
+                <WaiterPageFallback onBackToStaff={() => navigate('/staff')} />
+            </div>
+        );
+    }
 
     const handleLockClick = async () => {
-        console.log(order);
-
         if (!order) return;
         try {
             await axios.put(`${config.endpoints.orders.update}/${order.orderItemID}`, {
@@ -46,10 +57,12 @@ function WaiterPage() {
             });
             console.log('Ordern låst och status uppdaterad!');
             navigate("/staff");
-        } catch (err) {
-            console.error('Misslyckades att uppdatera ordern', err);
+        } catch (error) {
+            console.error('Misslyckades att uppdatera ordern', error);
         }
     };
+
+    
 
     const handleSaveClick = async () => {
         console.log(order);
@@ -76,31 +89,20 @@ function WaiterPage() {
     
             await axios.put(url, payload);
             console.log("Uppdateringen lyckades!");
-        } catch (err) {
-            console.error("Ordern uppdaterades inte!", err.response?.data || err);
+        } catch (error) {
+            console.error("Ordern uppdaterades inte!", setError("Kunde inte hämta beställningar"));
         }
     };
-
-
-
-    if (!order) {
-        return (
-            <div className='waiterPage--wrapper'>
-                <section className='waiterPage--header'>
-                    <StaffHeader />
-                    <StaffNavComponent />
-                </section>
-                <WaiterPageFallback onBackToStaff={() => navigate('/staff')} />
-            </div>
-        );
-    }
-
+    
     return (
         <div className='waiterPage--wrapper'>
             <section className='waiterPage--header'>
                 <StaffHeader />
                 <StaffNavComponent />
             </section>
+
+            {error && <div className="error-message">{error}</div>}
+
             <section className='waiterPage--main'>
 
                 <section className='waiterPage--formContainer'>

@@ -1,5 +1,4 @@
 import './styles/cookPage.css';
-import { useState } from 'react';
 import RoundedButton from '../components/RoundedButton';
 
 
@@ -54,12 +53,7 @@ function CookPageFallback({ onBackToStaff }: CookPageFallbackProps) {
                             value=""
                         />
                     </div>
-                    <RoundedButton
-                        text="Läst!"
-                        onClick={() => console.log('Rounded Button!')}
-                        color="blue"
-                        fontStyle="bold"
-                    />
+
                 </div>
             </aside>
 
@@ -69,25 +63,19 @@ function CookPageFallback({ onBackToStaff }: CookPageFallbackProps) {
                 </div>
 
                 <div className='cookPage--right-orderTable'>
-                    <ul className="cookPage--orderWindow-itemsList">
-                        {/* Lista med artiklar tas bort */}
-                    </ul>
+                    <p className="cookPage--orderWindow-itemsList">
+                       Ingen order vald. 
+                    </p>
                 </div>
             </aside>
 
             <aside className='cookPage--main-leftBtnArea'>
-                {/* Kommenterad knapp */}
-                {/* <RoundedButton
-            text="Matlagning påbörjad"
-            onClick={() => console.log('Rounded Button!')}
-            color="green"
-            fontStyle="bold"
-        /> */}
+
             </aside>
             <aside className='cookPage--main-rightBtnArea'>
                 <RoundedButton
-                    text="Ordern Tillagad!"
-                    onClick={() => console.log('Order tillagad!')}
+                    text="Till ordrar"
+                    onClick={onBackToStaff}
                     color="green"
                     fontStyle="bold"
                 />
