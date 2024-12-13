@@ -90,7 +90,6 @@ functions:
       - httpApi:
           path: /api/orders
           method: get
-          cors: true
 
   UpdateOrder:
     handler: src/functions/UpdateOrder/index.handler
