@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import Counter from './Counter';
 import './styles/basketItem.css';
 import Bin from '../assets/bin.svg';
+import { BasketItem } from '../../interface/interface'
 
-interface BasketItem {
+// flyttat till interface.tsx
+// 
+/*interface BasketItem {
     basketItemID: string;
     menuItem: string;
     articleName?: string;
@@ -18,7 +21,7 @@ interface BasketItem {
         image: string;
         articleName: string;
     };
-}
+}*/
 
 interface BasketItemProps {
     onTotalPriceChange: (total: number) => void;
@@ -137,6 +140,8 @@ export default BasketItemComponent;
 
 
 /*
-Alistair
+Alistair: Hanterar och renderar ut basket items. la till localstorage funktionalitet
 Peter
+
+18/12 Ally flyttat interface till interface.tsx
 */

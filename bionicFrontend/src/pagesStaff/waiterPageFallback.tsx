@@ -1,8 +1,11 @@
 import '../pagesStaff/styles/waiterPage.css'
+import { WaiterPageFallbackProps } from '../../interface/interface';
 
-interface WaiterPageFallbackProps {
+// flyttat till interface.tsx
+// 9
+/*interface WaiterPageFallbackProps {
   onBackToStaff: () => void;
-}
+}*/
 
 function WaiterPageFallback({ onBackToStaff }: WaiterPageFallbackProps) {
   return (
@@ -56,3 +59,9 @@ function WaiterPageFallback({ onBackToStaff }: WaiterPageFallbackProps) {
 }
 
 export default WaiterPageFallback;
+
+/*
+Vem gjorrde detta?? Var inte jag (Ally)
+
+18/12 Ally har varit inne och flyttat interfaces till interface.tsx
+*/

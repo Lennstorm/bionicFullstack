@@ -6,20 +6,23 @@ import LoginButton from "./LoginButton";
 import { useNavigate } from 'react-router-dom';
 import config from "../config";
 import { jwtDecode } from 'jwt-decode';
+import { LoginModalProps, DecodedToken } from '../../interface/interface'
 
-
-interface LoginModalProps {
+// flyttat till interface.tsx
+// 15
+/*interface LoginModalProps {
     onClose: () => void;
     onRegisterClick: () => void;
-}
+}*/
 
-interface DecodedToken {
+//16
+/*interface DecodedToken {
     userid: string;    
     role: string;
     isAdmin: boolean;
     iat: number;
     exp: number;
-}
+}*/
 
 const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
     const [email, setEmail] = useState('');
@@ -170,5 +173,5 @@ export default LoginModal;
 *
 *Ally har lagt till funktionalitet för localstorage av userID och isLOggedIn och fick installera jwt_decode och lägga till funktionalitet för det.
 * Andreas har redigerat för att hämta role och skicka icke-kunder till personalsidan. Ändrade till annan variant av jwt decode.
-*
+* 18/12 Ally flyttat interface till interface.tsx
  */

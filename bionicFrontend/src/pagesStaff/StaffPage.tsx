@@ -7,22 +7,26 @@ import { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import config from "../config";
+import { OrderItem, Order } from '../../interface/interface'
 
-interface OrderItem {
+// flyttat till interface.tsx
+// 5 OrderItem används ej dock
+/*interface OrderItem {
     menuItem: string;
     articleName: string;
     count: number;
     specialRequest?: string;
-}
+}*/
 
-interface Order {
+// 6
+/*interface Order {
     orderItemID: string;
     userID: string;
     createdAt: string;
     orderStatus: string;
     orderLocked: boolean;
     orderContent: OrderItem[];
-}
+}*/
 
 function StaffPage() {
     const [orders, setOrders] = useState<Order[]>([]);
@@ -184,7 +188,9 @@ export default StaffPage;
 
 
 /*
-Alistair
+Alistair: samling av functioner som visar vilka ordrar som finns i ordning äldst till yngst. Finns funktioner för att sortera och hitta ordrar. Funktionalitet för att tydlig visa status.
+
+18/12 Ally har varit inne och flyttat interfaces till interface.tsx
 */
 
 

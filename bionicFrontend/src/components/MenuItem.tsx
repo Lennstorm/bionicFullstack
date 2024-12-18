@@ -3,7 +3,10 @@ import { MenuItems } from '../interfaces.ts';
 import { useState, useEffect } from 'react';
 import ModalInfo from './ModalInfo.tsx';
 import { useNavigate } from 'react-router-dom';
+//import { BasketItem } from '../../interface/interface.tsx'
 
+// ej flyttat till interface.tsx, funkade inte. Måste felsöka?
+// 18
 interface BasketItem {
   basketItemID: string;
   userID: string | null;
@@ -19,6 +22,7 @@ interface BasketItem {
   orderStatus: string;
 }
 
+// 19
 interface MenuItemProps {
   item: MenuItems
 }
@@ -127,6 +131,6 @@ export default MenuItem;
 *
 * ändringar av Andreas: Justerat h2 för utseende.
 *
-*Ally har lagt till funktionalitet för localstorage av userID och isLOggedIn
-*
+*Ally har lagt till funktionalitet för localstorage av userID och isLOggedIn.
+* ally 18/12 försökte flytta interface till interface.tsx men fick en massa fel.
 */

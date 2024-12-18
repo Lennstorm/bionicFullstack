@@ -8,23 +8,26 @@ import { useState } from 'react';
 import WaiterPageFallback from './waiterPageFallback';
 import axios from 'axios';
 import config from '../config';
+import { OrderItem, Order } from '../../interface/interface'
 
-
-interface OrderItem {
+// flyttat till interface.tsx
+// 7
+/*interface OrderItem {
     menuItem: string;
     articleName: string;
     count: number;
     specialRequest?: string;
-}
+}*/
 
-interface Order {
+// 8
+/*interface Order {
     orderItemID: string;
     userID: string;
     createdAt: string;
     orderStatus: string;
     orderLocked: boolean;
     orderContent: OrderItem[];
-}
+}*/
 
 function WaiterPage() {
     const location = useLocation();
@@ -225,5 +228,5 @@ export default WaiterPage
 *
 * Ally, Andreas & Peter: omarbetning.
 *
-*
+*18/12 Ally har varit inne och flyttat interfaces till interface.tsx
 */

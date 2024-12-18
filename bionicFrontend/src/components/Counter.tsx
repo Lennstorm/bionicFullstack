@@ -1,11 +1,14 @@
 
 import './styles/counter.css';
+import { CounterProps } from '../../interface/interface'
 
-interface CounterProps {
+// flyttat till interface.tsx
+// 13
+/*interface CounterProps {
     count: number;
     onIncrement: () => void;
     onDecrement: () => void;
-}
+}*/
 
 const Counter = ({ count, onIncrement, onDecrement }: CounterProps) => {
 
@@ -31,6 +34,9 @@ const Counter = ({ count, onIncrement, onDecrement }: CounterProps) => {
 export default Counter
 
 /*
-Alistair
+Alistair: a counter
+
+18/12 Ally flyttat interface till interface.tsx
+
 */
 
