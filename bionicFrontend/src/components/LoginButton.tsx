@@ -1,14 +1,6 @@
 import './styles/button.css';
 import { ButtonProps } from '../../interface/interface'
 
-// flyttat till interface.tsx
-// 14
-/*interface ButtonProps {
-    text: string;
-    onClick: () => void;
-    disabled?: boolean;
-    className?: string;
-}*/
 
 const LoginButton = ({ text, onClick, disabled = false, className }: ButtonProps ) => {
     return (

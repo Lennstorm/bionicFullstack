@@ -7,26 +7,8 @@ import { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import config from "../config";
-import { OrderItem, Order } from '../../interface/interface'
+import { Order } from '../../interface/interface'
 
-// flyttat till interface.tsx
-// 5 OrderItem används ej dock
-/*interface OrderItem {
-    menuItem: string;
-    articleName: string;
-    count: number;
-    specialRequest?: string;
-}*/
-
-// 6
-/*interface Order {
-    orderItemID: string;
-    userID: string;
-    createdAt: string;
-    orderStatus: string;
-    orderLocked: boolean;
-    orderContent: OrderItem[];
-}*/
 
 function StaffPage() {
     const [orders, setOrders] = useState<Order[]>([]);

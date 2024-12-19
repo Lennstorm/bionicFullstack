@@ -8,21 +8,6 @@ import config from "../config";
 import { jwtDecode } from 'jwt-decode';
 import { LoginModalProps, DecodedToken } from '../../interface/interface'
 
-// flyttat till interface.tsx
-// 15
-/*interface LoginModalProps {
-    onClose: () => void;
-    onRegisterClick: () => void;
-}*/
-
-//16
-/*interface DecodedToken {
-    userid: string;    
-    role: string;
-    isAdmin: boolean;
-    iat: number;
-    exp: number;
-}*/
 
 const LoginModal = ({ onClose, onRegisterClick }: LoginModalProps) => {
     const [email, setEmail] = useState('');

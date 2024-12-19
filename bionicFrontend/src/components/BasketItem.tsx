@@ -2,31 +2,7 @@ import { useEffect, useState } from 'react';
 import Counter from './Counter';
 import './styles/basketItem.css';
 import Bin from '../assets/bin.svg';
-import { BasketItem } from '../../interface/interface'
-
-// flyttat till interface.tsx
-// 
-/*interface BasketItem {
-    basketItemID: string;
-    menuItem: string;
-    articleName?: string;
-    price?: number;
-    image?: string;
-    count: number;
-    specialRequest: string;
-    addedAt?: string;
-    item: {
-        price: number;
-        quantity: number;
-        image: string;
-        articleName: string;
-    };
-}*/
-
-interface BasketItemProps {
-    onTotalPriceChange: (total: number) => void;
-    onBasketItemsChange: (items: BasketItem[]) => void;
-}
+import { BasketItem, BasketItemProps } from '../../interface/interface'
 
 const BasketItemComponent = ({ onTotalPriceChange }: BasketItemProps) => {
     const [items, setItems] = useState<BasketItem[]>([]);

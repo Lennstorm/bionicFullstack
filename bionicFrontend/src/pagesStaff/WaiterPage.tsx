@@ -10,24 +10,6 @@ import axios from 'axios';
 import config from '../config';
 import { OrderItem, Order } from '../../interface/interface'
 
-// flyttat till interface.tsx
-// 7
-/*interface OrderItem {
-    menuItem: string;
-    articleName: string;
-    count: number;
-    specialRequest?: string;
-}*/
-
-// 8
-/*interface Order {
-    orderItemID: string;
-    userID: string;
-    createdAt: string;
-    orderStatus: string;
-    orderLocked: boolean;
-    orderContent: OrderItem[];
-}*/
 
 function WaiterPage() {
     const location = useLocation();

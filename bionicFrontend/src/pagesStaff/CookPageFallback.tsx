@@ -2,11 +2,6 @@ import './styles/cookPage.css';
 import RoundedButton from '../components/RoundedButton';
 import { CookPageFallbackProps } from '../../interface/interface'
 
-// flyttat till interface.tsx
-// 4
-/*interface CookPageFallbackProps {
-    onBackToStaff: () => void;
-}*/
 
 function CookPageFallback({ onBackToStaff }: CookPageFallbackProps) {
     return (

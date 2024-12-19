@@ -2,13 +2,6 @@
 import './styles/counter.css';
 import { CounterProps } from '../../interface/interface'
 
-// flyttat till interface.tsx
-// 13
-/*interface CounterProps {
-    count: number;
-    onIncrement: () => void;
-    onDecrement: () => void;
-}*/
 
 const Counter = ({ count, onIncrement, onDecrement }: CounterProps) => {
 

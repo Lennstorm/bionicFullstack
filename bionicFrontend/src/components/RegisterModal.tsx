@@ -5,10 +5,6 @@ import LoginButton from "./LoginButton";
 import config from "../config";
 import { RegisterModalProps } from '../../interface/interface'
 
-//flyttat till interface.tsx
-/*interface RegisterModalProps {
-    onClose: () => void;
-}*/
 
 const RegisterModal = ({ onClose }: RegisterModalProps) => {
     const [name, setName] = useState('');

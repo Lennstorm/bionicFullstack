@@ -2,24 +2,6 @@ import { useEffect, useState } from 'react';
 import './styles/checkoutBasketItem.css';
 import { BasketItem } from '../../interface/interface'
 
-// flyttat till interface.tsx
-// 12
-/*interface BasketItem {
-    basketItemID: string;
-    menuItem: string;
-    menuItemName?: string;
-    price?: number;
-    image?: string;
-    count: number;
-    specialRequest: string;
-    addedAt?: string;
-    item: {
-        price: number;
-        quantity: number;
-        image: string;
-        articleName: string;
-    };
-}*/
 
 interface CheckoutBasketProps {
     userID: string;

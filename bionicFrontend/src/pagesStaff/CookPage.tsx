@@ -11,23 +11,6 @@ import config from '../config';
 import RoundedButton from '../components/RoundedButton';
 import { OrderItem, Order } from '../../interface/interface'
 
-// flyttat till interface.tsx
-//2
-/*interface OrderItem {
-    menuItem: string;
-    articleName: string;
-    count: number;
-    specialRequest?: string;
-}*/
-//3
-/*interface Order {
-    orderItemID: string;
-    userID: string;
-    createdAt: string;
-    orderStatus: string;
-    orderLocked: boolean;
-    orderContent: OrderItem[];
-}*/
 
 function CookPage() {
 

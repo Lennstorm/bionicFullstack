@@ -9,21 +9,6 @@ import axios from "axios";
 import config from "../config";
 import { BasketItem } from '../../interface/interface'
 
-// 1
-// flyttat till interface.tsx
-/*interface BasketItem {
-    basketItemID: string;
-    userID: string;
-    menuItem: string;
-    count: number;
-    specialRequest: string;
-    item: {
-        price: number;
-        quantity: number;
-        image: string;
-        articleName: string;
-    };
-}*/
 
 const CheckoutPage = () => {
     const navigate = useNavigate();

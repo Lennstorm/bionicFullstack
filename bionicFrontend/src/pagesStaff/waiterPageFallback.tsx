@@ -1,11 +1,6 @@
 import '../pagesStaff/styles/waiterPage.css'
 import { WaiterPageFallbackProps } from '../../interface/interface';
 
-// flyttat till interface.tsx
-// 9
-/*interface WaiterPageFallbackProps {
-  onBackToStaff: () => void;
-}*/
 
 function WaiterPageFallback({ onBackToStaff }: WaiterPageFallbackProps) {
   return (
