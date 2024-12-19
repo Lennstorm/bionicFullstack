@@ -170,4 +170,6 @@ export default ModalInfo;
 *
 * Ally har lagt till funktionalitet för localstorage av userID och isLOggedIn
 * Andreas: mappa ut ingredienser istället för att alla hamnar i samma p-tagg
+* 
+* Ally 18/12 har inte flyttat interface pga problem med structur interface som inte överensstämmer med BasketItem interface som finns.
 */

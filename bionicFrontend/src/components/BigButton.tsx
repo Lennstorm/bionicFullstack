@@ -1,11 +1,6 @@
 import './styles/button.css';
+import { ButtonProps } from '../../interface/interface'
 
-interface ButtonProps {
-    text: string;
-    onClick: () => void;
-    disabled?: boolean;
-    className?: string;
-}
 
 const BigButton = ({ text, onClick, disabled = false, className }: ButtonProps) => {
     return (
@@ -24,7 +19,7 @@ export default BigButton;
 
 /* Författare: Andreas
 *
-* 
+* 18/12 Ally flyttat interface till interface.tsx
 * 
 * 
 * 
