@@ -1,11 +1,6 @@
 import './styles/button.css';
+import { ButtonProps } from '../../interface/interface'
 
-interface ButtonProps {
-    text: string;
-    onClick: () => void;
-    disabled?: boolean;
-    className?: string;
-}
 
 const LogoutButton = ({ text, onClick, disabled = false, className }: ButtonProps) => {
     const handleLogout = () => {

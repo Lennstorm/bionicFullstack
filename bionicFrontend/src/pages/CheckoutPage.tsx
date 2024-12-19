@@ -7,20 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 import BigButton from "../components/BigButton";
 import axios from "axios";
 import config from "../config";
+import { BasketItem } from '../../interface/interface'
 
-interface BasketItem {
-    basketItemID: string;
-    userID: string;
-    menuItem: string;
-    count: number;
-    specialRequest: string;
-    item: {
-        price: number;
-        quantity: number;
-        image: string;
-        articleName: string;
-    };
-}
 
 const CheckoutPage = () => {
     const navigate = useNavigate();
@@ -222,4 +210,6 @@ export default CheckoutPage;
 
 /*
 Alistair
+- Samling av functioner som hanterar sista steget för kunden med localstorage data som sen görs om till en order i orders-db-v4.
+- Flyttat ut interface till interface.tsx
 */

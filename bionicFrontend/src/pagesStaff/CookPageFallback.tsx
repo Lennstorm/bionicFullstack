@@ -1,10 +1,7 @@
 import './styles/cookPage.css';
 import RoundedButton from '../components/RoundedButton';
+import { CookPageFallbackProps } from '../../interface/interface'
 
-
-interface CookPageFallbackProps {
-    onBackToStaff: () => void;
-}
 
 function CookPageFallback({ onBackToStaff }: CookPageFallbackProps) {
     return (
@@ -90,6 +87,6 @@ export default CookPageFallback;
 /* 
 *   Författare Andreas
 *
-* 
+* 18/12 Ally har varit inne och flyttat interfaces till interface.tsx
 * 
 */

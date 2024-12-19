@@ -3,10 +3,8 @@ import { useEffect, useState } from "react";
 import './styles/registerModal.css';
 import LoginButton from "./LoginButton";
 import config from "../config";
+import { RegisterModalProps } from '../../interface/interface'
 
-interface RegisterModalProps {
-    onClose: () => void;
-}
 
 const RegisterModal = ({ onClose }: RegisterModalProps) => {
     const [name, setName] = useState('');
@@ -118,7 +116,7 @@ export default RegisterModal;
 /* 
 *   Författare Andreas
 *
-*
+* 18/12 Ally flyttat interface till interface.tsx
 *
 *
  */
